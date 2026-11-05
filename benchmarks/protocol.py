@@ -186,10 +186,12 @@ def _registry() -> Dict[str, SplitSpec]:
         ),
         SplitSpec(
             name="split-imagenet-r", n_classes=200, n_tasks=10,
-            classes_per_task=20, resize=224, papers=("A", "B"),
+            classes_per_task=20, resize=224, papers=("A",),
             note="G03 SPEC 8 open integrity flag + L879: T = 10 x 20; "
-                 "paper-A quartet member (G02 S2) and paper-B "
-                 "rate-validation; ~30k images, no local copy (G04).",
+                 "paper-A quartet member (G02 S2); ~30k images, no local "
+                 "copy (G04). The paper-B camera-ready names four datasets "
+                 "(CIFAR-100, ImageNet-100, ImageNet-1K, DomainNet); "
+                 "ImageNet-R is a paper-A dataset only (RX4, 2026-11-05).",
         ),
         SplitSpec(
             name="split-cub-200", n_classes=200, n_tasks=10,
@@ -683,9 +685,13 @@ PAPER_A_DATASETS: Tuple[str, ...] = (
     "split-cifar100", "split-imagenet-r", "split-cub-200", "split-omnibenchmark",
 )
 #: Paper-B benchmark datasets (G03 SPEC 8; DomainNet = shared-label stress).
+#: The camera-ready names four: CIFAR-100, ImageNet-100, ImageNet-1K,
+#: DomainNet (change summary row 5; ImageNet-R carries zero mentions in
+#: 12500_final.pdf, verified 2026-11-05 -- RX4). "split-imagenet-r" was
+#: removed from this tuple by RX4 (2026-11-05) to match the paper.
 PAPER_B_DATASETS: Tuple[str, ...] = (
     "split-cifar100", "split-imagenet-100", "split-imagenet-1k",
-    "split-imagenet-r", "domainnet",
+    "domainnet",
 )
 
 

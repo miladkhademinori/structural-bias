@@ -64,3 +64,77 @@ the suites would reproduce the stored bytes (seed policy: SHA-256 over
   this note plus the `ledger_close` fields are the store-side record of the
   closes, and `docs/REPLICATION.md` carries the same status in the coverage
   matrix.
+
+## 2026-11-05, agent RX4: Paper B withdrawal ledger (change-summary rows 1-3)
+
+The Paper B camera-ready (12500) states the outcome of its verification pass
+in its change summary; rows 1-3 are the withdrawals. This entry records them
+in this ledger in the paper's own disclosure wording (rows quoted from the
+greenpass-staged change-summary block; every number verified against
+`freeze_packs/B/12500_final.pdf`, pymupdf extraction, 2026-11-05). No suite
+verdict is flipped and no measurement rewritten; each row names the
+withdrawn claim and what replaces it.
+
+### Row 1: gap-recovery range withdrawn
+
+- Before: the accepted abstract and introduction state that the correction
+  recovers 82 to 94 percent of the joint-training gap (mean 90.5).
+- After (paper's wording): "Under the released protocol this range is not
+  reproduced: only 4 of the 10 benchmark rows regenerate, and on CIFAR-100
+  the corrected head lands 46.2 to 62.5 against the accepted 85.7 to 86.5,
+  below the uncorrected head, while on DomainNet the ordering uncorrected,
+  corrected, joint-training holds (50.6 < 53.1 < 68.3 on DINOv2; 53.8 <
+  62.9 < 71.5 on CLIP)." The camera-ready reports the benchmark per row
+  with per-row provenance; the accepted values of the rows that do not
+  regenerate are withdrawn to the provenance ledger -- the four ImageNet-100
+  rows because the dataset root is not distributed with the released code,
+  and the two ImageNet-1K rows because the released code has no builder for
+  that dataset. The scale-matched recovery result enters as an appendix
+  addition with its own provenance: recovery is backbone-conditional,
+  holding on 1 of 3 backbones on DomainNet (DINOv2, 93%), and the withdrawn
+  blanket recovery claim it replaces is named as withdrawn; the
+  scale-matched correction was not computed on the CIFAR-100 rows and is
+  reported as such.
+- Store side: no released payload carries the accepted benchmark values
+  (the shipped `tables/out/B/` fragments are synthetic selftest previews
+  marked NOT A PAPER NUMBER), so nothing in the store needs striking; this
+  row is the ledger the README points at. The `figures/figure8_gap_recovery.png`
+  asset, which asserted the withdrawn 82-94% range with no withdrawal
+  marking, was removed from the release the same day (README Figure 8 is a
+  text notice).
+
+### Row 2: bias-direction agreement withdrawn
+
+- Before: the accepted version reports a bias-direction cosine of at least
+  0.92.
+- After (paper's wording): "the accepted cosine of at least 0.92 corresponds
+  to neither regenerated statistic family: the pair-averaged cosine is 0.986
+  to 0.9997 and is a gauge identity (at any head satisfying the softmax
+  gauge it equals 1 by construction, so it checks the gauge, not the
+  theorem), and the per-pair cosine is 0.22 to 0.35 with cross-pair
+  coefficient of variation 0.21 to 0.32." Direction agreement is reported
+  per pair; the averaged-cosine exhibit of the accepted version no longer
+  appears; the appendix table prints its accepted ranges named as withdrawn
+  beside the regenerated statistics. The definition behind the accepted
+  values could not be established and is stated as such.
+
+### Row 3: rate agreement withdrawn
+
+- Before: the accepted version states that the predicted exponential rate
+  matches the OLS slopes within 5 percent.
+- After (paper's wording): "the regenerated slopes are negative on every
+  backbone and shallower than the kappa-derived prediction by factors of 1.7
+  to 3.3 (CLIP -0.045 against -0.0755; ViT -0.053 against -0.176; R^2 0.32
+  to 0.81, about 900 pairs each), so prediction and measurement are
+  reported side by side. The pooled pair (empirical -0.208 against
+  predicted -0.192) prints as the accepted exhibit's bootstrap inset, named
+  as the accepted values, and the agreement sentence is withdrawn; a
+  per-pair comparison, each pair at its own kappa, is stated in its place."
+
+### What was NOT changed
+
+- No suite verdict was flipped, no measurement rewritten, no withdrawn value
+  re-asserted. The rows above are the paper's own disclosures, quoted; the
+  theory spine (theorems 3.3, 4.1, 5.1, 5.2, 6.2, 7.2 and the finite-sample
+  restatement) is untouched by these verdicts and stands as reviewed.
+
