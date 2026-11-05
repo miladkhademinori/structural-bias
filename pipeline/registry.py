@@ -79,8 +79,8 @@ class Dataset:
 DATASETS: Dict[str, Dataset] = {
     "cifar100": Dataset("cifar100", "CIFAR-100", 100, 10, 10, ("A", "B"),
                         note="torchvision CIFAR100; 32x32 resized to 224"),
-    "imagenet_r": Dataset("imagenet_r", "ImageNet-R", 200, 10, 20, ("A", "B"),
-                          note="Hendrycks ImageNet-R (30k images); 80/20 stratified train/test split, seed 0 (the RevisitingCIL split is 24k/6k)"),
+    "imagenet_r": Dataset("imagenet_r", "ImageNet-R", 200, 10, 20, ("A",),
+                          note="Hendrycks ImageNet-R (30k images); 80/20 stratified train/test split, seed 0 (the RevisitingCIL split is 24k/6k); paper A only"),
     "cub200": Dataset("cub200", "CUB-200", 200, 10, 20, ("A",),
                       note="CUB_200_2011 official train/test lists"),
     "omnibenchmark": Dataset("omnibenchmark", "OmniBenchmark", 300, 10, 30, ("A",),
@@ -95,7 +95,9 @@ DATASETS: Dict[str, Dataset] = {
 }
 
 PAPER_A_DATASETS = ("cifar100", "imagenet_r", "cub200", "omnibenchmark")
-PAPER_B_DATASETS = ("cifar100", "imagenet100", "imagenet_r", "domainnet")   # imagenet1k descoped
+# The camera-ready four (change-summary row 5; zero ImageNet-R mentions in the paper, RX4-verified);
+# matches benchmarks/protocol.py's PAPER_B_DATASETS. ImageNet-R is a paper-A dataset only.
+PAPER_B_DATASETS = ("cifar100", "imagenet100", "imagenet1k", "domainnet")
 
 # Paper B's tab:fix-benchmark rows (backbone, dataset), in print order.
 PAPER_B_BENCHMARK_ROWS: Tuple[Tuple[str, str], ...] = (

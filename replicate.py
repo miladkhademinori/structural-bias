@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """replicate.py -- one entry point for the whole replication.
 
-  python replicate.py features  --backbones vit_in21k,dinov2_b14,clip_b16,random_vit --datasets cifar100,imagenet_r,cub200,omnibenchmark
   python replicate.py features  --paper B                 # the Paper B set (adds mae_b16, resnet50; imagenet100 needs --imagenet100-root)
   python replicate.py analyze   --paper A|B|AB [--optimizer adamw|lbfgs] [--seeds 0,1,2,3,4]
   python replicate.py tables                               # LaTeX rows + DIFF.md from results/paper{A,B}_results.json
@@ -180,7 +179,7 @@ def cmd_selftest(a):
         paper_a = None
     root = ROOT / "results" / "_selftest_features"; out = ROOT / "results" / "_selftest"
     for b in ("vit_in21k", "dinov2_b14", "clip_b16", "random_vit"):
-        for d in ("cifar100", "imagenet_r"):
+        for d in ("cifar100", "imagenet100"):
             F.write_synthetic_cache(b, d, root, d=32, n_train_per_class=30, n_test_per_class=10, sep=(0.9 if b != "random_vit" else 0.3))
     for b in ("mae_b16", "resnet50"):
         F.write_synthetic_cache(b, "cifar100", root, d=32, n_train_per_class=30, n_test_per_class=10, sep=0.9)
@@ -192,7 +191,7 @@ def cmd_selftest(a):
     else:
         A = None; _log("[selftest] paper A driver not included (B-only release; shared helpers only); A leg skipped")
     B = paper_b.run_all(root, out, seeds=(0, 1), optimizer=a.optimizer, rows=(("dinov2_b14", "cifar100"), ("clip_b16", "cifar100"), ("mae_b16", "cifar100"), ("resnet50", "cifar100")),
-                        all_datasets=("cifar100", "imagenet_r"), device=a.device, protocol=proto_b, log=_log)
+                        all_backbones=("vit_in21k", "dinov2_b14", "clip_b16"), all_datasets=("cifar100", "imagenet100"), device=a.device, protocol=proto_b, log=_log)
     for p in tables.write_all(out / "tables", A, B):
         _log(f"[selftest] {p}")
     assert (A is None or (A["slopes"] and A["predictor"])) and B["rate_fits"], "selftest produced no fits"

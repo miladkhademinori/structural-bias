@@ -253,7 +253,7 @@ class ClassStats:
 
     def condition_S_pair_metric(self, i: int, j: int, X=None, y=None) -> dict:
         """Step 3 of Lemma 3.5 redone in the task-pair metric M_ij = (Sigma^(i) + Sigma^(j))/2 that defines gamma_ij
-        in the main text (docs/THEORY_NOTES.md, section 2): no isotropic detour, hence no delta clause.
+        in the main text: no isotropic detour, hence no delta clause.
 
           nu_pair     2 (max_k ||mu_k - mu^(i)||_{M} + max_l ||mu_l - mu^(j)||_{M}) / sqrt(gamma^M_ij)
           kappa_cls   max over classes k of the two tasks of lambda_max(Sigma^(t)^{-1/2} Sigma_k Sigma^(t)^{-1/2}),

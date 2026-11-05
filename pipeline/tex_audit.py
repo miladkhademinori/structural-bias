@@ -14,7 +14,7 @@ regenerated CI), and a note.  Tables without a mapping are still listed, so the 
 claims (the pooled slope, the 0.998, the 90.5 percent, the cosine floor) are matched by regular
 expressions and reported the same way.
 
-The ledger is the accepted-versus-camera-ready claim register for numeric content: it says, cell by cell,
+The ledger is the printed-versus-regenerated claim register for numeric content: it says, cell by cell,
 which printed numbers the released code reproduces and which it does not.  It never edits the TeX.
 """
 from __future__ import annotations

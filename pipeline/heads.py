@@ -358,8 +358,9 @@ def prop51_schedule(K, alpha, sigma, mu, beta, schedule: str = "printed"):
     """Algorithm 1 stage 0, two schedules:
 
       printed      eta = min{1/beta, (sigma^alpha / (mu^2 K))^(1/alpha)},  tau = (sigma^alpha K / mu)^(1/alpha)
-                   (the accepted paper's Proposition 5.3; not dimensionally consistent, see docs/THEORY_NOTES.md,
-                   kept so the printed numbers can be regenerated as printed)
+                   (the paper's Proposition 5.3 as printed; its eta and tau forms are dimensionally unbalanced
+                   as printed, and the "consistent" schedule below is the units-consistent reading; kept so the
+                   printed numbers can be regenerated as printed)
       consistent   eta = min{1/(4 beta), 1/(beta sqrt K)},  tau = sigma K^(1/(2 alpha))
                    (the units-consistent schedule under which the in-expectation bound
                    E[Delta_K] <= Delta_0 exp(-(mu/beta) sqrt K) + c_alpha (sigma^2/mu) K^(-(alpha-1)/alpha) holds,
@@ -414,7 +415,7 @@ def clipped_sgd_head(X, y, task_of_class, tasks: Sequence[np.ndarray], *, K, eta
             me = np.isin(y_eval, seen)
             per_stage.append(Head(W, b, np.asarray(task_of_class)).accuracy(X_eval[me], y_eval[me], classes=seen))
     # clip_frac: the fraction of steps whose pre-clipping gradient norm exceeded tau (0 means the threshold never
-    # fired and the "clipped" arm ran as plain SGD); max_grad_norm / tau is the condition (G) of docs/THEORY_NOTES.md
+    # fired and the "clipped" arm ran as plain SGD); max_grad_norm / tau is the firing condition (G)
     info = dict(mode="clipped_sgd", scope=scope, K=K, eta=eta, tau=tau, clip=clip, backend=_backend.resolve_device(device),
                 clip_frac=(clipped_steps / total_steps if total_steps else None), max_grad_norm=max_norm,
                 grad_below_half_tau=bool(max_norm <= 0.5 * tau) if np.isfinite(tau) else None)
