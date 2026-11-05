@@ -4,10 +4,10 @@
     python -m experiments.scoreboard --run      # re-run every suite first (about 30 to 60 CPU-minutes)
     python -m experiments.scoreboard --run --quick
 
-Each suite (experiments/synthetic_bias.py E1-E4, synthetic_rate.py E5-E6, synthetic_margin.py EX1-EX5,
-falsification.py G1-G3, slope_fits.py S4/EX6-EX8, drift.py EX9-EX11) writes one envelope JSON per run
-under results/runs/<paper>/<experiment>/ with a list of assertion records.  The scoreboard reads them
-all and reports every assertion with its tier (core.gates.tier_of) and verdict:
+Each suite (experiments/synthetic_bias.py E1-E4, synthetic_rate.py E5-E6, and the falsification
+battery G1-G3) writes one envelope JSON per run under results/runs/<paper>/<experiment>/ with a list
+of assertion records.  The scoreboard reads them all and reports every assertion with its tier
+(core.gates.tier_of) and verdict:
 
   PASS                    the assertion held
   MECHANISM-FAIL          an algebraic or population identity failed, a finite-sample arm missed by more than
@@ -38,10 +38,11 @@ from core import gates  # noqa: E402
 SUITES = [  # (module, argv builder)
     ("experiments.synthetic_bias", lambda q: ["--suites", "E1,E2,E3,E4"]),
     ("experiments.synthetic_rate", lambda q: ["--suites", "E5,E6"] + (["--budget-s", "120"] if q else ["--full-grid"])),
-    ("experiments.synthetic_margin", lambda q: ["--suites", "EX1,EX2,EX3,EX4,EX5"]),
+    # B-only release: experiments.synthetic_margin, experiments.slope_fits and experiments.drift are
+    # Paper A suites that ship with the separate A repository and were removed from this registry.
+    # experiments.falsification is retained: its Paper A gates are importable but GATED in this
+    # repository (experiments/falsification.py prints the gate message and runs nothing under --run).
     ("experiments.falsification", lambda q: ["--suites", "G1,G2,G3"]),
-    ("experiments.slope_fits", lambda q: ["--suites", "S4,EX6,EX7,EX8"]),
-    ("experiments.drift", lambda q: (["--quick"] if q else [])),
 ]
 
 

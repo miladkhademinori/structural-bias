@@ -1,995 +1,7 @@
 {
  "assertions": [
   {
-   "run": "runs/A/drift/A_drift_EX10.json",
-   "paper": "A",
-   "experiment": "drift",
-   "provenance": "synthetic",
-   "id": "A26",
-   "arm": "",
-   "desc": "Pearson r(log|m|, log eta) over the two unsaturated rates plus the saturated secant, paper 0.998",
-   "status": "FAIL",
-   "value": null,
-   "threshold": null,
-   "diagnosis": "FINDING (flag to owner): the 3-point Pearson r on the printed slope set {0.164, 1.73, 8.20} is 0.9931 < 0.995; the paper's 0.998 is not recoverable from the printed table values. Even injecting the paper's own per-seed dispersions (0.012/0.14/0.62, 5 seeds/arm) lowers the expected 15-point r further (~0.988, within-level variance adds to the residual). Either the paper's 0.998 was computed on a different point set (e.g. per-stage slopes) or it is a rounding artifact.",
-   "tier": "CALIBRATION",
-   "verdict": "PAPER-QUESTION"
-  },
-  {
-   "run": "runs/A/drift/A_drift_EX10.json",
-   "paper": "A",
-   "experiment": "drift",
-   "provenance": "synthetic",
-   "id": "A27",
-   "arm": "",
-   "desc": "slope ratio eta=1e-4 / eta=1e-5 in [9, 11] (linear in eta, Thm 7.2)",
-   "status": "PASS",
-   "value": null,
-   "threshold": null,
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/drift/A_drift_EX11.json",
-   "paper": "A",
-   "experiment": "drift",
-   "provenance": "synthetic",
-   "id": "A28",
-   "arm": "",
-   "desc": "pure-estimation-noise arm (identical distributions, both paths unbiased for 8.30): two-sample Welch p > 0.4; intervals overlap (the TODO note's own reading)",
-   "status": "PASS",
-   "value": null,
-   "threshold": null,
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/drift/A_drift_EX11.json",
-   "paper": "A",
-   "experiment": "drift",
-   "provenance": "synthetic",
-   "id": "A29",
-   "arm": "",
-   "desc": "systematic arm: 1.2% checkpoint-mixture covariance inflation reproduces the printed gap in sign and magnitude (one-pass 8.3 band [7.9, 8.7]; harness 8.20 band [7.58, 8.82]; gap in [-0.20, -0.02] and within 0.10 of planted -0.0984)",
-   "status": "PASS",
-   "value": null,
-   "threshold": null,
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/drift/A_drift_EX11.json",
-   "paper": "A",
-   "experiment": "drift",
-   "provenance": "synthetic",
-   "id": "A30",
-   "arm": "",
-   "desc": "the drift table's secants -8.20 (w=1) / -4.10 (w=2) are the harness-path identity -gamma0_harness/w with gamma0_harness = 8.30/1.012 = 8.2016 (inflation-model prediction within 0.01 of the printed values): the two printed baselines are two estimation paths of one quantity",
-   "status": "PASS",
-   "value": null,
-   "threshold": null,
-   "diagnosis": "",
-   "tier": "MECHANISM",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/drift/A_drift_EX9.json",
-   "paper": "A",
-   "experiment": "drift",
-   "provenance": "synthetic",
-   "id": "A23a",
-   "arm": "",
-   "desc": "arm eta=1e-5: OLS slope over stages 1..10 vs paper -0.164+/-0.012",
-   "status": "FAIL",
-   "value": null,
-   "threshold": null,
-   "diagnosis": "FINDING (flag to owner): G07's arm-1 cubic reproduces its crossing (t*=14.1953 vs 14.2) and floor (19.443 vs 19.5) but its own claimed OLS over stages 1-10 of -0.164 is arithmetically -0.2191. The -0.164 is recovered from a stages-1-5 pre-acceleration window (-0.1620, inside the band) -- the same pre-floor-window reading G07 itself flagged for arm 2. A cubic refit to BOTH -0.164@1..10 and t*=14.2 is 8.30 - 0.023539 t - 0.001333 t^3 but floors at 18.08 (vs 19.5): the three anchors are overdetermined for a 2-parameter cubic through gamma0=8.30.",
-   "tier": "CALIBRATION",
-   "verdict": "PAPER-QUESTION"
-  },
-  {
-   "run": "runs/A/drift/A_drift_EX9.json",
-   "paper": "A",
-   "experiment": "drift",
-   "provenance": "synthetic",
-   "id": "A23b",
-   "arm": "",
-   "desc": "arm eta=1e-4: pre-floor OLS slope vs paper -1.73+/-0.14",
-   "status": "PASS",
-   "value": null,
-   "threshold": null,
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/drift/A_drift_EX9.json",
-   "paper": "A",
-   "experiment": "drift",
-   "provenance": "synthetic",
-   "id": "A23c1",
-   "arm": "",
-   "desc": "eta=1e-5: t* (half-threshold 4.15, linear interpolation) vs paper 14.2+/-1.1",
-   "status": "PASS",
-   "value": null,
-   "threshold": null,
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/drift/A_drift_EX9.json",
-   "paper": "A",
-   "experiment": "drift",
-   "provenance": "synthetic",
-   "id": "A23c2",
-   "arm": "",
-   "desc": "eta=1e-4: t* (half-threshold 4.15, linear interpolation) vs paper 2.35+/-0.2",
-   "status": "PASS",
-   "value": null,
-   "threshold": null,
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/drift/A_drift_EX9.json",
-   "paper": "A",
-   "experiment": "drift",
-   "provenance": "synthetic",
-   "id": "A23c3",
-   "arm": "",
-   "desc": "eta=1e-3: t* (half-threshold 4.15, linear interpolation) vs paper 0.21+/-0.03",
-   "status": "PASS",
-   "value": null,
-   "threshold": null,
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/drift/A_drift_EX9.json",
-   "paper": "A",
-   "experiment": "drift",
-   "provenance": "synthetic",
-   "id": "A23d",
-   "arm": "",
-   "desc": "arm eta=1e-3: time-to-floor vs paper 0.48+/-0.04",
-   "status": "PASS",
-   "value": null,
-   "threshold": null,
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/drift/A_drift_EX9.json",
-   "paper": "A",
-   "experiment": "drift",
-   "provenance": "synthetic",
-   "id": "A24",
-   "arm": "",
-   "desc": "secant identity -gamma0/w exact to 1e-12 (arm eta=1e-3, windows 0.480/0.845/1/2; identity holds by construction since the floored series is exactly 0 for every window >= time-to-floor)",
-   "status": "PASS",
-   "value": null,
-   "threshold": null,
-   "diagnosis": "",
-   "tier": "MECHANISM",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/drift/A_drift_EX9.json",
-   "paper": "A",
-   "experiment": "drift",
-   "provenance": "synthetic",
-   "id": "A25",
-   "arm": "",
-   "desc": "t* ratio arm1/arm2 vs 10x eta ratio (sub-linear, paper's own caveat L5051-5056)",
-   "status": "PASS",
-   "value": null,
-   "threshold": null,
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/drift/A_drift_EX9.json",
-   "paper": "A",
-   "experiment": "drift",
-   "provenance": "synthetic",
-   "id": "TRK1",
-   "arm": "",
-   "desc": "gamma_min(t) tracker (one-pass estimator on DriftStream samples, n=1200/class) vs planted trajectory, max |err|",
-   "status": "PASS",
-   "value": null,
-   "threshold": null,
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/falsification/A_falsification_synthetic.json",
-   "paper": "A",
-   "experiment": "falsification",
-   "provenance": "synthetic",
-   "id": "G1.1",
-   "arm": "homogeneous",
-   "desc": "homogeneous planted common slope -0.115: non-rejection (pooling admissible; single realization)",
-   "status": "PASS",
-   "value": "F(2,6) = 0.348, p = 0.7193",
-   "threshold": "p >= 0.05",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/falsification/A_falsification_synthetic.json",
-   "paper": "A",
-   "experiment": "falsification",
-   "provenance": "synthetic",
-   "id": "G1.2",
-   "arm": "heterogeneous",
-   "desc": "planted heterogeneity at paper-context magnitudes (-0.141/-0.099/-0.118 PLANTED, quoted never asserted; noise sd 0.02): rejection",
-   "status": "PASS",
-   "value": "F(2,6) = 55.69, p = 1.34e-04",
-   "threshold": "p < 0.05",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/falsification/A_falsification_synthetic.json",
-   "paper": "A",
-   "experiment": "falsification",
-   "provenance": "synthetic",
-   "id": "G1.3",
-   "arm": "df-check",
-   "desc": "df identity matches the spec: F(2,6) on the 12-config/3-backbone population",
-   "status": "PASS",
-   "value": "df = (2, 6)",
-   "threshold": "(2, 6)",
-   "diagnosis": "",
-   "tier": "MECHANISM",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/falsification/A_falsification_synthetic.json",
-   "paper": "A",
-   "experiment": "falsification",
-   "provenance": "synthetic",
-   "id": "G2[planted=-0.3000]",
-   "arm": "planted",
-   "desc": "planted truth -0.3000: gate decision FAIL equals expected FAIL",
-   "status": "PASS",
-   "value": "12: slope -0.2995 CI [-0.3022, -0.2968]; 16: slope -0.2995 CI [-0.3027, -0.2967]",
-   "threshold": "decision == FAIL",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/falsification/A_falsification_synthetic.json",
-   "paper": "A",
-   "experiment": "falsification",
-   "provenance": "synthetic",
-   "id": "G2[planted=-0.1250]",
-   "arm": "planted",
-   "desc": "planted truth -0.1250: gate decision PASS equals expected PASS",
-   "status": "PASS",
-   "value": "12: slope -0.1239 CI [-0.1268, -0.1213]; 16: slope -0.1239 CI [-0.1272, -0.1214]",
-   "threshold": "decision == PASS",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/falsification/A_falsification_synthetic.json",
-   "paper": "A",
-   "experiment": "falsification",
-   "provenance": "synthetic",
-   "id": "G2[planted=-0.0625]",
-   "arm": "planted",
-   "desc": "planted truth -0.0625: gate decision FAIL equals expected FAIL",
-   "status": "PASS",
-   "value": "12: slope -0.0607 CI [-0.0651, -0.0565]; 16: slope -0.0607 CI [-0.0648, -0.0563]",
-   "threshold": "decision == FAIL",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/falsification/A_falsification_synthetic.json",
-   "paper": "A",
-   "experiment": "falsification",
-   "provenance": "synthetic",
-   "id": "G2[planted=-0.0890]",
-   "arm": "planted",
-   "desc": "planted truth -0.0890: gate decision FAIL equals expected FAIL",
-   "status": "PASS",
-   "value": "12: slope -0.0899 CI [-0.0958, -0.0860]; 16: slope -0.0899 CI [-0.0960, -0.0853]",
-   "threshold": "decision == FAIL",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/falsification/A_falsification_synthetic.json",
-   "paper": "A",
-   "experiment": "falsification",
-   "provenance": "synthetic",
-   "id": "G2[trip=-1/16]",
-   "arm": "planted",
-   "desc": "planted -1/16 truth: the CI CONTAINS -0.0625 (the exclusion sub-gate is what trips)",
-   "status": "PASS",
-   "value": "12-config CI [-0.0673, -0.0596] contains -0.0625: True",
-   "threshold": "lo <= -0.0625 <= hi (containment expected)",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/falsification/A_falsification_synthetic.json",
-   "paper": "A",
-   "experiment": "falsification",
-   "provenance": "synthetic",
-   "id": "G2[trip=-1/8]",
-   "arm": "planted",
-   "desc": "planted -1/8 truth: the CI CONTAINS -0.125 and EXCLUDES -0.0625 (both sub-conditions hold)",
-   "status": "PASS",
-   "value": "12-config CI [-0.1267, -0.1218]",
-   "threshold": "contains -0.125 AND excludes -0.0625",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/falsification/A_falsification_synthetic.json",
-   "paper": "A",
-   "experiment": "falsification",
-   "provenance": "synthetic",
-   "id": "G3.1",
-   "arm": "null",
-   "desc": "BH-corrected Mardia family: Gaussian null classes false-positive rate <= 0.10",
-   "status": "PASS",
-   "value": "false-positive rate 0.033 (3/90 classes)",
-   "threshold": "<= 0.10",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/falsification/A_falsification_synthetic.json",
-   "paper": "A",
-   "experiment": "falsification",
-   "provenance": "synthetic",
-   "id": "G3.2",
-   "arm": "contaminated",
-   "desc": "lognormal-contaminated classes BH-rejected (pass-both fails) at >= 0.8",
-   "status": "PASS",
-   "value": "detection 1.00 (10/10)",
-   "threshold": ">= 0.80",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/falsification/A_falsification_synthetic.json",
-   "paper": "A",
-   "experiment": "falsification",
-   "provenance": "synthetic",
-   "id": "G3.3",
-   "arm": "family",
-   "desc": "pass-both fraction recorded in a sane synthetic band (paper typical 75-95% QUOTED context only; with 10% contaminated classes the synthetic mix cannot hit the paper band by construction)",
-   "status": "PASS",
-   "value": "fraction_pass_both 0.870 (null 0.967, contaminated 0.000)",
-   "threshold": "0.60 <= fraction <= 1.0",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/falsification/A_falsification_synthetic.json",
-   "paper": "A",
-   "experiment": "falsification",
-   "provenance": "synthetic",
-   "id": "G3.4",
-   "arm": "helper",
-   "desc": "BH helper identities: adjusted >= raw, monotone in the sorted order",
-   "status": "PASS",
-   "value": "adjusted [0.049999999999999996, 0.049999999999999996, 0.049999999999999996, 0.05, 0.5]",
-   "threshold": "adj >= raw and sorted-monotone",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "S4.1",
-   "arm": "synthetic-planted",
-   "desc": "pooled 12-config bootstrap CI contains the planted slope",
-   "status": "PASS",
-   "value": "slope -0.2996 CI [-0.3080,-0.2913] (planted -0.3000)",
-   "threshold": "ci_lo <= -0.3000 <= ci_hi",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "S4.2",
-   "arm": "synthetic-planted",
-   "desc": "pooled 16-config (anchors, own intercept D2) CI contains the planted slope",
-   "status": "PASS",
-   "value": "slope -0.2996 CI [-0.3080,-0.2915]",
-   "threshold": "ci_lo <= -0.3000 <= ci_hi",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "S4.3",
-   "arm": "synthetic-planted",
-   "desc": "pooled R2 > 0.9 at planting noise sd 0.05 (quoted-context paper values 0.97/0.96, never asserted)",
-   "status": "PASS",
-   "value": "R2(12) 0.9999, R2(16) 0.9999",
-   "threshold": "both > 0.9",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "S4.4",
-   "arm": "synthetic-planted",
-   "desc": "12-config pooled fit parameter count matches the spec (4 params, 8 resid df -- the F(2,6) denominator arm)",
-   "status": "PASS",
-   "value": "n_params 4, resid_df 8",
-   "threshold": "n_params == 4 and resid_df == 8",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "S4.5",
-   "arm": "synthetic-planted",
-   "desc": "anchor augmentation shifts the pooled slope by < 0.01 (structure: anchors add an intercept group; quoted-context paper shift 0.004, never asserted)",
-   "status": "PASS",
-   "value": "shift 0.0000 (12: -0.2996, 16: -0.2996)",
-   "threshold": "< 0.01",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "S4.6",
-   "arm": "synthetic-planted",
-   "desc": "per-backbone OLS (4 points each) recovers the planted slope within each backbone CI",
-   "status": "PASS",
-   "value": "CLIP: -0.2951 [-0.3382,-0.2749]; DINOv2: -0.3063 [-0.3185,-0.2835]; ViT-IN21K: -0.2918 [-0.3138,-0.2500]",
-   "threshold": "each point slope inside its own bootstrap CI",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "A15[a=1.32]",
-   "arm": "clipped",
-   "desc": "clipped log-log slope = -(alpha-1)/alpha +- 0.06 (theory -0.2424)",
-   "status": "PASS",
-   "value": "slope -0.2380",
-   "threshold": "|slope - (-0.2424)| <= 0.06",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "A15[a=1.45]",
-   "arm": "clipped",
-   "desc": "clipped log-log slope = -(alpha-1)/alpha +- 0.06 (theory -0.3103)",
-   "status": "PASS",
-   "value": "slope -0.3079",
-   "threshold": "|slope - (-0.3103)| <= 0.06",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "A15[a=2.0]",
-   "arm": "clipped",
-   "desc": "clipped log-log slope = -(alpha-1)/alpha +- 0.06 (theory -0.5000)",
-   "status": "PASS",
-   "value": "slope -0.4825",
-   "threshold": "|slope - (-0.5000)| <= 0.06",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "A16",
-   "arm": "clipped",
-   "desc": "alpha=1.45 anchor reproduces the -0.31 K-slope within +-0.03 (synthetic analog: paper's measured -0.31 corresponds to effective tail index ~1.45; QUOTED context)",
-   "status": "PASS",
-   "value": "slope -0.3079",
-   "threshold": "|slope - (-0.31)| <= 0.03",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "A17[a=1.32]",
-   "arm": "unclipped",
-   "desc": "unclipped slope matches clipped within 0.05 (D3: median-center; mean-center recorded alongside)",
-   "status": "PASS",
-   "value": "clipped -0.2360 unclipped -0.2356 |d| 0.0003 (mean-center: -0.2380 vs +0.6940, recorded ungated)",
-   "threshold": "|d| <= 0.05",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "A18[a=1.32]",
-   "arm": "unclipped",
-   "desc": "unclipped P99.5 loss AND cross-rep variance >= 10x clipped at largest K (D6: gated at heavy-tail alphas; alpha=2 recorded informational)",
-   "status": "PASS",
-   "value": "P99.5x 92, varx 2569736 at K=32000",
-   "threshold": "both >= 10x",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "A17[a=1.45]",
-   "arm": "unclipped",
-   "desc": "unclipped slope matches clipped within 0.05 (D3: median-center; mean-center recorded alongside)",
-   "status": "PASS",
-   "value": "clipped -0.3059 unclipped -0.3013 |d| 0.0046 (mean-center: -0.3079 vs +0.2489, recorded ungated)",
-   "threshold": "|d| <= 0.05",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "A18[a=1.45]",
-   "arm": "unclipped",
-   "desc": "unclipped P99.5 loss AND cross-rep variance >= 10x clipped at largest K (D6: gated at heavy-tail alphas; alpha=2 recorded informational)",
-   "status": "PASS",
-   "value": "P99.5x 17, varx 28923129 at K=32000",
-   "threshold": "both >= 10x",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "A17[a=2.0]",
-   "arm": "unclipped",
-   "desc": "unclipped slope matches clipped within 0.05 (D3: median-center; mean-center recorded alongside)",
-   "status": "PASS",
-   "value": "clipped -0.4819 unclipped -0.4839 |d| 0.0020 (mean-center: -0.4825 vs -0.4425, recorded ungated)",
-   "threshold": "|d| <= 0.05",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "A18[a=2.0]",
-   "arm": "unclipped",
-   "desc": "alpha=2 dispersion ratios (finite-variance regime; informational, D6)",
-   "status": "PASS",
-   "value": "P99.5x 3, varx 6313",
-   "threshold": "informational (not gated)",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "A19[a=1.32]",
-   "arm": "hill",
-   "desc": "Hill pipeline (1,000 warm-up iters, top 5%, k=50, 1,000-resample bootstrap) recovers planted alpha within +-0.25 (D4 max-abs coordinate; D5-rev eta_warm 0.05 noise-dominated; 5-seed mean per G07's 2.5-sigma gate)",
-   "status": "PASS",
-   "value": "alpha_hat mean 1.393 per-seed [1.66, 1.399, 1.357, 1.202, 1.348]",
-   "threshold": "|alpha_hat - 1.32| <= 0.25",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "A19[a=1.45]",
-   "arm": "hill",
-   "desc": "Hill pipeline (1,000 warm-up iters, top 5%, k=50, 1,000-resample bootstrap) recovers planted alpha within +-0.25 (D4 max-abs coordinate; D5-rev eta_warm 0.05 noise-dominated; 5-seed mean per G07's 2.5-sigma gate)",
-   "status": "PASS",
-   "value": "alpha_hat mean 1.662 per-seed [1.568, 1.437, 1.989, 1.442, 1.877]",
-   "threshold": "|alpha_hat - 1.45| <= 0.25",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "A19[a=2.0]",
-   "arm": "hill",
-   "desc": "Hill pipeline (1,000 warm-up iters, top 5%, k=50, 1,000-resample bootstrap) recovers planted alpha within +-0.25 (D4 max-abs coordinate; D5-rev eta_warm 0.05 noise-dominated; 5-seed mean per G07's 2.5-sigma gate)",
-   "status": "PASS",
-   "value": "alpha_hat mean 2.160 per-seed [1.961, 2.559, 2.343, 2.125, 1.814]",
-   "threshold": "|alpha_hat - 2.0| <= 0.25",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "A20",
-   "arm": "ecf",
-   "desc": "E_CF log-log slope identical within 0.03 across the two gamma plants (gamma does not enter E_CF; gates harness leakage)",
-   "status": "PASS",
-   "value": "slopes -0.3054 vs -0.3042 (|d| 0.0011)",
-   "threshold": "|d| <= 0.03",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "A21",
-   "arm": "etc",
-   "desc": "measured E_TC_hat = P_hat_shared (1+MC noise) exp(-gamma/16) flat across the fine K grid: |Pearson r| < 0.1 (D8; mirrors paper L1325 -- E_TC has no K dependence)",
-   "status": "PASS",
-   "value": "r(8.3) +0.010, r(41.5) +0.014 over 800 K points",
-   "threshold": "|r| < 0.1",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/slope_fits/A_slope_fits_synthetic.json",
-   "paper": "A",
-   "experiment": "slope_fits",
-   "provenance": "synthetic",
-   "id": "A22",
-   "arm": "total",
-   "desc": "total = E_CF + E_TC; subtracting the analytic E_TC recovers E_CF within 3 MC-SE at every K and both gamma plants (additivity gates the estimator)",
-   "status": "PASS",
-   "value": "worst |z| 2.00",
-   "threshold": "|z| <= 3",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/synthetic_margin/A_synthetic_margin_EX1.json",
-   "paper": "A",
-   "experiment": "synthetic_margin",
-   "provenance": "synthetic",
-   "id": "EX1.1",
-   "arm": "EXACT (quadratic solves)",
-   "desc": "Thm 3.1 infeasibility: TC gap > 0 strictly, 200/200 draws",
-   "status": "PASS",
-   "value": "min 6.461e+01, median 1.544e+02, max 3.045e+02 over 200 draws",
-   "threshold": "> 0 on 200/200",
-   "diagnosis": "",
-   "tier": "MECHANISM",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/synthetic_margin/A_synthetic_margin_EX1.json",
-   "paper": "A",
-   "experiment": "synthetic_margin",
-   "provenance": "synthetic",
-   "id": "EX1.2",
-   "arm": "EXACT (quadratic solves)",
-   "desc": "Thm 3.2 feasibility: diagonal-only loss matrix -> gap = 0 at solver precision",
-   "status": "PASS",
-   "value": "max gap over draws 0.00e+00",
-   "threshold": "<= 1e-14",
-   "diagnosis": "",
-   "tier": "MECHANISM",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/synthetic_margin/A_synthetic_margin_EX3.json",
-   "paper": "A",
-   "experiment": "synthetic_margin",
-   "provenance": "synthetic",
-   "id": "EX3.1",
-   "arm": "EXACT (erfc algebra)",
-   "desc": "(A4) nu=0: slope(log E_TC vs gamma) = -1/8 +- 0.01 (Bhattacharyya 1/8 tight; calibrated CF arm degenerates at nu=0, generative/joint arm gated, labeled)",
-   "status": "PASS",
-   "value": "slope -0.1295 over gamma in [16,256] (deterministic exact algebra; the ~0.0045 offset is the Gaussian-tail log-prefactor, below the 0.005 G07 budget)",
-   "threshold": "-0.125 +- 0.010",
-   "diagnosis": "",
-   "tier": "MECHANISM",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/synthetic_margin/A_synthetic_margin_EX3.json",
-   "paper": "A",
-   "experiment": "synthetic_margin",
-   "provenance": "synthetic",
-   "id": "EX3.2",
-   "arm": "EXACT (erfc algebra)",
-   "desc": "(A5) measured-nu = 2-sqrt(2) = 0.5858: slope = -1/16 +- 0.01 (1/16 TIGHT: exact-aligned -(1-nu/2)^2/8 = 1/16)",
-   "status": "PASS",
-   "value": "slope -0.0669; exact-aligned -0.0625 (offset -0.0044 is the tail log-prefactor)",
-   "threshold": "-0.0625 +- 0.010",
-   "diagnosis": "",
-   "tier": "MECHANISM",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/synthetic_margin/A_synthetic_margin_EX3.json",
-   "paper": "A",
-   "experiment": "synthetic_margin",
-   "provenance": "synthetic",
-   "id": "EX3.3",
-   "arm": "EXACT (recorded)",
-   "desc": "secondary (recorded, not gated): per-task softmax-calibrated CF head",
-   "status": "PASS",
-   "value": "slope 0.0001 at nu=2-sqrt(2); E_TC(calibrated) -> 1.0 at gamma=256 (non-decaying near-complete cross-task confusion)",
-   "threshold": "recorded (finding)",
-   "diagnosis": "",
-   "tier": "MECHANISM",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/synthetic_margin/A_synthetic_margin_EX3.json",
-   "paper": "A",
-   "experiment": "synthetic_margin",
-   "provenance": "synthetic",
-   "id": "EX3.4",
-   "arm": "EXACT",
-   "desc": "(A6) every planted nu: slope >= -(1-nu)/8 - 0.005 (G07 wording, kept as stated)",
-   "status": "FAIL",
-   "value": "8/9 nu-rows violate; violating nus [0.13, 0.23, 0.42, 0.49, 0.51, np.float64(0.586), 0.73, 0.9]",
-   "threshold": "0 violations",
-   "diagnosis": "G07 drift note 1: aligned-geometry exact exponent -(1-nu/2)^2/8 is steeper than the interpolating -(1-nu)/8 by nu^2/32, which exceeds the 0.005 tolerance for nu > 0.4 (G07's own pilots imply this). The interpolating form is still a valid UPPER bound pointwise -- see EX3.5, the corrected ratio-validity assertion.",
-   "tier": "MECHANISM",
-   "verdict": "MECHANISM-FAIL"
-  },
-  {
-   "run": "runs/A/synthetic_margin/A_synthetic_margin_EX3.json",
-   "paper": "A",
-   "experiment": "synthetic_margin",
-   "provenance": "synthetic",
-   "id": "EX3.5",
-   "arm": "EXACT",
-   "desc": "(A6b, corrected) pointwise ratio validity: E_TC(g2)/E_TC(g1) <= 1.02 exp(-(1-nu)(g2-g1)/8) on the grid for every planted nu (interpolating form is a valid bound)",
-   "status": "PASS",
-   "value": "worst ratio/exp-bound 0.9807 (2 pct slack for the tail prefactor; algebra exact)",
-   "threshold": "all consecutive-grid pairs",
-   "diagnosis": "",
-   "tier": "MECHANISM",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/synthetic_margin/A_synthetic_margin_EX3.json",
-   "paper": "A",
-   "experiment": "synthetic_margin",
-   "provenance": "synthetic",
-   "id": "EX3.6",
-   "arm": "EXACT",
-   "desc": "(A7) boundary rows: slopes within 0.012 of exact-aligned; paper's ~1/16 and ~0.034 readings conservative by 11 pct / 48 pct",
-   "status": "PASS",
-   "value": {
-    "nu=0.51": {
-     "slope": -0.07386,
-     "exact_aligned": -0.06938,
-     "paper_reading": 0.0625,
-     "conservativeness": 0.11
-    },
-    "nu=0.73": {
-     "slope": -0.0546,
-     "exact_aligned": -0.0504,
-     "paper_reading": 0.034,
-     "conservativeness": 0.482
-    }
-   },
-   "threshold": "|slope - exact-aligned| <= 0.012",
-   "diagnosis": "",
-   "tier": "MECHANISM",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/synthetic_margin/A_synthetic_margin_EX3.json",
-   "paper": "A",
-   "experiment": "synthetic_margin",
-   "provenance": "synthetic",
-   "id": "EX3.7",
-   "arm": "EXACT",
-   "desc": "(A8) doubling-margin bracket as written: E_TC(2g)/E_TC(g) in [e^{-g/8}/1.2, 1.2 e^{-g/16}] (nu <= 2-sqrt(2))",
-   "status": "FAIL",
-   "value": "36 doubling pairs; see EX3.8 for the corrected exponent bracket",
-   "threshold": "within bracket",
-   "diagnosis": "The Gaussian-tail prefactor contributes a factor ~2^{-1/4} = 0.84 per doubling (Phi(-sqrt(2)t)/Phi(-t) ~ (1/sqrt(2)) e^{-t^2/2}...), which exceeds the 1.2 lower slack at moderate/large gamma. The bracket's intended content -- WHICH EXPONENT is operative -- is gated cleanly by the local-exponent form EX3.8.",
-   "tier": "MECHANISM",
-   "verdict": "MECHANISM-FAIL"
-  },
-  {
-   "run": "runs/A/synthetic_margin/A_synthetic_margin_EX3.json",
-   "paper": "A",
-   "experiment": "synthetic_margin",
-   "provenance": "synthetic",
-   "id": "EX3.8",
-   "arm": "EXACT",
-   "desc": "(A8b, corrected) local doubling exponent c_loc = -log(E_TC(2g)/E_TC(g))/g in [1/16 x 0.85, 1/8 x 1.15] for nu <= 2-sqrt(2)",
-   "status": "PASS",
-   "value": "c_loc range [0.0650, 0.1422] over 28 pairs; boundary-nu rows recorded (c_loc < 1/16, the Cor 3.8 interpolating regime)",
-   "threshold": "[0.0531, 0.1438]",
-   "diagnosis": "",
-   "tier": "MECHANISM",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/synthetic_margin/A_synthetic_margin_EX4.json",
-   "paper": "A",
-   "experiment": "synthetic_margin",
-   "provenance": "synthetic",
-   "id": "EX4.1",
-   "arm": "EXACT (bit-identity; CRN eval)",
-   "desc": "(A9) shared-statistics LDA check: |TC gap| < 1e-10 (pilot: exactly 0.0 -- identical heads; solver-limited)",
-   "status": "PASS",
-   "value": "gap exactly 0.0 on all 30 (gamma, seed) configs; predictions bit-identical: True",
-   "threshold": "< 1e-10",
-   "diagnosis": "",
-   "tier": "MECHANISM",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/synthetic_margin/A_synthetic_margin_EX4.json",
-   "paper": "A",
-   "experiment": "synthetic_margin",
-   "provenance": "synthetic",
-   "id": "EX4.2",
-   "arm": "EMPIRICAL (5 seeds, SE in details)",
-   "desc": "(A10) independent-estimation arm: head difference ||W_A - W_B||_inf decays ~ n^{-1/2} (the estimation-noise regime printed alongside the bit-exact identity check)",
-   "status": "PASS",
-   "value": "head-diff log-log slope -0.507 over n in [250, 1000, 4000]; mean ||dW||inf 0.1859, 0.0923, 0.0456; error-gap slope -0.070 (flat, see diagnosis)",
-   "threshold": "slope in [-0.75, -0.25]",
-   "diagnosis": "",
-   "tier": "CALIBRATION",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/synthetic_margin/A_synthetic_margin_EX5.json",
-   "paper": "A",
-   "experiment": "synthetic_margin",
-   "provenance": "synthetic",
-   "id": "EX5.1",
-   "arm": "EXACT (population algebra)",
-   "desc": "(A11) nu_hat from the eq:nu-def pipeline within +-0.02 of planted (exact arm)",
-   "status": "PASS",
-   "value": "max |nu_hat - nu| = 0.00e+00",
-   "threshold": "<= 0.02",
-   "diagnosis": "",
-   "tier": "MECHANISM",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/synthetic_margin/A_synthetic_margin_EX5.json",
-   "paper": "A",
-   "experiment": "synthetic_margin",
-   "provenance": "synthetic",
-   "id": "EX5.2",
-   "arm": "EXACT",
-   "desc": "(A12) regime classification reproduces the planted partition (nu <= 1/2 operational; > 1/2 boundary)",
-   "status": "PASS",
-   "value": "9 operational / 3 boundary of 12 planted rows; boundary nus [0.51, 0.586, 0.73]",
-   "threshold": "partition exact",
-   "diagnosis": "",
-   "tier": "MECHANISM",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/synthetic_margin/A_synthetic_margin_EX5.json",
-   "paper": "A",
-   "experiment": "synthetic_margin",
-   "provenance": "synthetic",
-   "id": "EX5.3",
-   "arm": "EXACT",
-   "desc": "(A13) criterion eq:gamma-vs-spread @ 32 agrees with measured nu <= 1/2 outside the structural Cauchy-Schwarz band (0.4743, 0.5] (C=10); full agreement on the C=100 auxiliary arm (band boundary 0.4975 < 0.49)",
-   "status": "PASS",
-   "value": "C=10: 11/12 agree; in-band rows [0.49] disagree as predicted (structural: True); C=100: 12/12 agree",
-   "threshold": "agreement outside band + aux full agreement",
-   "diagnosis": "",
-   "tier": "MECHANISM",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/A/synthetic_margin/A_synthetic_margin_EX5.json",
-   "paper": "A",
-   "experiment": "synthetic_margin",
-   "provenance": "synthetic",
-   "id": "EX5.4",
-   "arm": "EXACT",
-   "desc": "(A14) sqrt(2)-slack demo: nu = 0.586 row passes the constant-16 (loose) trace criterion while failing measured nu <= 1/2",
-   "status": "PASS",
-   "value": "crit16=True, measured_ok=False (nu_hat 0.586); constant-16 bounds nu only up to sqrt(2)/2 = 0.707",
-   "threshold": "crit16 PASS and measured FAIL",
-   "diagnosis": "",
-   "tier": "MECHANISM",
-   "verdict": "PASS"
-  },
-  {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E1.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E1.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1004,7 +16,7 @@
    "verdict": "MECHANISM-FAIL [design]"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E1.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E1.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1019,7 +31,7 @@
    "verdict": "MECHANISM-FAIL [design]"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E1.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E1.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1034,7 +46,7 @@
    "verdict": "MECHANISM-FAIL [design]"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E1.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E1.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1049,7 +61,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E1.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E1.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1064,7 +76,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E1.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E1.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1079,7 +91,7 @@
    "verdict": "CALIBRATION-EXCURSION"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E1.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E1.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1094,7 +106,7 @@
    "verdict": "CALIBRATION-EXCURSION"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E1.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E1.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1109,7 +121,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E2.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E2.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1124,7 +136,7 @@
    "verdict": "CALIBRATION-EXCURSION"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E2.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E2.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1139,7 +151,7 @@
    "verdict": "CALIBRATION-EXCURSION"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E2.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E2.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1154,7 +166,7 @@
    "verdict": "CALIBRATION-EXCURSION"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E2.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E2.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1169,7 +181,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E2.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E2.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1184,7 +196,7 @@
    "verdict": "CALIBRATION-EXCURSION"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E2.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E2.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1199,7 +211,7 @@
    "verdict": "CALIBRATION-EXCURSION"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E3.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E3.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1214,7 +226,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E3.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E3.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1229,7 +241,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E3.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E3.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1244,7 +256,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E3.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E3.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1259,7 +271,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E3.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E3.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1274,7 +286,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E4.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E4.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1289,7 +301,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E4.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E4.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1304,7 +316,7 @@
    "verdict": "CALIBRATION-EXCURSION"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E4.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E4.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1323,7 +335,7 @@
    "verdict": "CALIBRATION-EXCURSION"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E4.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E4.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1338,7 +350,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E4.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E4.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1353,7 +365,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E4.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E4.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1400,7 +412,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E4.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E4.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1431,7 +443,7 @@
    "verdict": "PAPER-QUESTION"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E4.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E4.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1446,7 +458,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E4.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E4.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1461,7 +473,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_bias/B_synthetic_bias_E4.json",
+   "run": "runs\\B\\synthetic_bias\\B_synthetic_bias_E4.json",
    "paper": "B",
    "experiment": "synthetic_bias",
    "provenance": "synthetic",
@@ -1476,7 +488,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E5.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E5.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1501,7 +513,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E5.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E5.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1524,7 +536,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E5.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E5.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1543,7 +555,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E5.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E5.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1558,7 +570,7 @@
    "verdict": "MECHANISM-FAIL [design]"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E5.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E5.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1573,7 +585,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E5.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E5.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1588,7 +600,7 @@
    "verdict": "MECHANISM-FAIL [design]"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E5.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E5.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1603,7 +615,7 @@
    "verdict": "MECHANISM-FAIL [design]"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E5.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E5.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1623,7 +635,7 @@
    "verdict": "MECHANISM-FAIL [design]"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E5.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E5.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1642,7 +654,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E5.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E5.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1657,7 +669,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E5.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E5.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1672,7 +684,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E5.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E5.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1687,7 +699,7 @@
    "verdict": "CALIBRATION-EXCURSION"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E5.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E5.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1702,7 +714,7 @@
    "verdict": "CALIBRATION-EXCURSION"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E5.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E5.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1722,7 +734,7 @@
    "verdict": "CALIBRATION-EXCURSION"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E5.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E5.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1820,7 +832,7 @@
    "verdict": "CALIBRATION-EXCURSION"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E5.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E5.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1876,7 +888,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E6.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E6.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1891,7 +903,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E6.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E6.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1906,7 +918,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E6.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E6.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1921,7 +933,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E6.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E6.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1946,7 +958,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E6.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E6.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1965,7 +977,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E6.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E6.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1980,7 +992,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E6.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E6.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -1995,7 +1007,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E6.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E6.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -2010,7 +1022,7 @@
    "verdict": "PASS"
   },
   {
-   "run": "runs/B/synthetic_rate/B_synthetic_rate_E6.json",
+   "run": "runs\\B\\synthetic_rate\\B_synthetic_rate_E6.json",
    "paper": "B",
    "experiment": "synthetic_rate",
    "provenance": "synthetic",
@@ -2066,747 +1078,6 @@
   }
  ],
  "claims": [
-  {
-   "paper": "A",
-   "claim": "A15",
-   "n_arms": 3,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A15[a=1.32]",
-     "arm": "clipped",
-     "verdict": "PASS"
-    },
-    {
-     "id": "A15[a=1.45]",
-     "arm": "clipped",
-     "verdict": "PASS"
-    },
-    {
-     "id": "A15[a=2.0]",
-     "arm": "clipped",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A16",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A16",
-     "arm": "clipped",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A17",
-   "n_arms": 3,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A17[a=1.32]",
-     "arm": "unclipped",
-     "verdict": "PASS"
-    },
-    {
-     "id": "A17[a=1.45]",
-     "arm": "unclipped",
-     "verdict": "PASS"
-    },
-    {
-     "id": "A17[a=2.0]",
-     "arm": "unclipped",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A18",
-   "n_arms": 3,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A18[a=1.32]",
-     "arm": "unclipped",
-     "verdict": "PASS"
-    },
-    {
-     "id": "A18[a=1.45]",
-     "arm": "unclipped",
-     "verdict": "PASS"
-    },
-    {
-     "id": "A18[a=2.0]",
-     "arm": "unclipped",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A19",
-   "n_arms": 3,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A19[a=1.32]",
-     "arm": "hill",
-     "verdict": "PASS"
-    },
-    {
-     "id": "A19[a=1.45]",
-     "arm": "hill",
-     "verdict": "PASS"
-    },
-    {
-     "id": "A19[a=2.0]",
-     "arm": "hill",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A20",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A20",
-     "arm": "ecf",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A21",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A21",
-     "arm": "etc",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A22",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A22",
-     "arm": "total",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A23a",
-   "n_arms": 1,
-   "verdict": "PAPER-QUESTION",
-   "arms": [
-    {
-     "id": "A23a",
-     "arm": "",
-     "verdict": "PAPER-QUESTION"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A23b",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A23b",
-     "arm": "",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A23c1",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A23c1",
-     "arm": "",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A23c2",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A23c2",
-     "arm": "",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A23c3",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A23c3",
-     "arm": "",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A23d",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A23d",
-     "arm": "",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A24",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A24",
-     "arm": "",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A25",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A25",
-     "arm": "",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A26",
-   "n_arms": 1,
-   "verdict": "PAPER-QUESTION",
-   "arms": [
-    {
-     "id": "A26",
-     "arm": "",
-     "verdict": "PAPER-QUESTION"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A27",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A27",
-     "arm": "",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A28",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A28",
-     "arm": "",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A29",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A29",
-     "arm": "",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "A30",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "A30",
-     "arm": "",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "EX1.1",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "EX1.1",
-     "arm": "EXACT (quadratic solves)",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "EX1.2",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "EX1.2",
-     "arm": "EXACT (quadratic solves)",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "EX3.1",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "EX3.1",
-     "arm": "EXACT (erfc algebra)",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "EX3.2",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "EX3.2",
-     "arm": "EXACT (erfc algebra)",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "EX3.3",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "EX3.3",
-     "arm": "EXACT (recorded)",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "EX3.4",
-   "n_arms": 1,
-   "verdict": "MECHANISM-FAIL",
-   "arms": [
-    {
-     "id": "EX3.4",
-     "arm": "EXACT",
-     "verdict": "MECHANISM-FAIL"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "EX3.5",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "EX3.5",
-     "arm": "EXACT",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "EX3.6",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "EX3.6",
-     "arm": "EXACT",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "EX3.7",
-   "n_arms": 1,
-   "verdict": "MECHANISM-FAIL",
-   "arms": [
-    {
-     "id": "EX3.7",
-     "arm": "EXACT",
-     "verdict": "MECHANISM-FAIL"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "EX3.8",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "EX3.8",
-     "arm": "EXACT",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "EX4.1",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "EX4.1",
-     "arm": "EXACT (bit-identity; CRN eval)",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "EX4.2",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "EX4.2",
-     "arm": "EMPIRICAL (5 seeds, SE in details)",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "EX5.1",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "EX5.1",
-     "arm": "EXACT (population algebra)",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "EX5.2",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "EX5.2",
-     "arm": "EXACT",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "EX5.3",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "EX5.3",
-     "arm": "EXACT",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "EX5.4",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "EX5.4",
-     "arm": "EXACT",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "G1.1",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "G1.1",
-     "arm": "homogeneous",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "G1.2",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "G1.2",
-     "arm": "heterogeneous",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "G1.3",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "G1.3",
-     "arm": "df-check",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "G2",
-   "n_arms": 6,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "G2[planted=-0.3000]",
-     "arm": "planted",
-     "verdict": "PASS"
-    },
-    {
-     "id": "G2[planted=-0.1250]",
-     "arm": "planted",
-     "verdict": "PASS"
-    },
-    {
-     "id": "G2[planted=-0.0625]",
-     "arm": "planted",
-     "verdict": "PASS"
-    },
-    {
-     "id": "G2[planted=-0.0890]",
-     "arm": "planted",
-     "verdict": "PASS"
-    },
-    {
-     "id": "G2[trip=-1/16]",
-     "arm": "planted",
-     "verdict": "PASS"
-    },
-    {
-     "id": "G2[trip=-1/8]",
-     "arm": "planted",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "G3.1",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "G3.1",
-     "arm": "null",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "G3.2",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "G3.2",
-     "arm": "contaminated",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "G3.3",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "G3.3",
-     "arm": "family",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "G3.4",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "G3.4",
-     "arm": "helper",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "S4.1",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "S4.1",
-     "arm": "synthetic-planted",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "S4.2",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "S4.2",
-     "arm": "synthetic-planted",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "S4.3",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "S4.3",
-     "arm": "synthetic-planted",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "S4.4",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "S4.4",
-     "arm": "synthetic-planted",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "S4.5",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "S4.5",
-     "arm": "synthetic-planted",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "S4.6",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "S4.6",
-     "arm": "synthetic-planted",
-     "verdict": "PASS"
-    }
-   ]
-  },
-  {
-   "paper": "A",
-   "claim": "TRK1",
-   "n_arms": 1,
-   "verdict": "PASS",
-   "arms": [
-    {
-     "id": "TRK1",
-     "arm": "",
-     "verdict": "PASS"
-    }
-   ]
-  },
   {
    "paper": "B",
    "claim": "E1.1",

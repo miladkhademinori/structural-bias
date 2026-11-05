@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.ruff_cache/
+
+# Generated feature caches (large, reproducible; see README quick start)
+features/
+features_timm/
+
+# Generated figure output
+results/figures/

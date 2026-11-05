@@ -15,8 +15,18 @@ CONTEXT, never asserted.
 Modules: the fit pipeline (per-backbone OLS, pooled common-slope with
 backbone intercepts, 1,000-resample bootstrap; D1 unit = configuration
 stratified by backbone) is imported from the I05 sibling
-``experiments/slope_fits`` -- both files ship together (hard import,
-drift-recorded).
+``experiments/slope_fits``.
+
+B-ONLY RELEASE GATE (2026-11-05): ``experiments/slope_fits`` is Paper A
+machinery and ships with the separate A repository
+(github.com/miladkhademinori/mahalanobis-margin), so in this repository
+the import is guarded.  The module stays importable and ``--selfcheck``
+still runs every identity that does not need the slope-fits pipeline;
+the suites themselves (G1/G2 need the A fit pipeline, G3 belongs to the
+same A battery and writes paper-A envelopes) are GATED with a clear
+message and nothing is run or written when the gate is closed.  No
+result is ever fabricated for the gated arm: a gate is recorded as a
+gate, never as a PASS.
 
 GATES IMPLEMENTED
 -----------------
@@ -50,8 +60,11 @@ STORAGE LAW (owner): one small JSON under ``repo/results/runs/A/`` per
 run (G08-S2 envelope) + the INDEX row; markdown summary to stdout
 (embedded in ``exec/I05_log.md``). No downloads, no OneDrive paths.
 
-Self-check: ``python experiments/falsification.py --selfcheck`` (seconds).
-Full suite: ``python experiments/falsification.py`` (~1 min).
+Self-check: ``python experiments/falsification.py --selfcheck`` (seconds;
+the sf-free identities run in this B-only repository, the slope-fits
+identity reports GATED).  Full suite: ``python
+experiments/falsification.py`` (~1 min) -- A repository only; in this
+B-only repository the suite is gated with a message and nothing runs.
 """
 
 from __future__ import annotations
@@ -75,13 +88,53 @@ if str(_REPO_ROOT) not in sys.path:  # allow direct-script execution
 
 DRIFT_NOTES: List[str] = []
 
-from experiments import slope_fits as sf  # I05 sibling (hard import)
+try:  # I05 sibling; Paper A machinery -- present only in the A repository
+    from experiments import slope_fits as sf
+except ImportError:  # B-only release: the battery is gated, never faked
+    sf = None
 
-DRIFT_NOTES.append("experiments.slope_fits imported (I05 sibling; the fit "
-                   "pipeline is owned there).")
-DRIFT_NOTES.extend(sf.DRIFT_NOTES)
+if sf is not None:
+    DRIFT_NOTES.append("experiments.slope_fits imported (I05 sibling; the fit "
+                       "pipeline is owned there).")
+    DRIFT_NOTES.extend(sf.DRIFT_NOTES)
+else:
+    DRIFT_NOTES.append("experiments.slope_fits ABSENT (B-only release): the "
+                       "falsification suites are GATED; nothing runs, nothing "
+                       "is written, no verdict is produced for them here.")
 
-NEG_1_8 = sf.NEG_1_8          # -0.125, operational Cor 3.8 constant
+#: Where the gated Paper A pipeline lives (this constant is documentation).
+A_REPO_URL = "github.com/miladkhademinori/mahalanobis-margin"
+
+GATE_MESSAGE = ("GATED (B-only release): the Paper A falsification battery "
+                "needs experiments.slope_fits (and writes paper-A result "
+                "envelopes); that pipeline ships with the separate A "
+                "repository at " + A_REPO_URL + ". Nothing was run and "
+                "nothing was written for the gated suites; no result is "
+                "faked.")
+
+
+class BatteryGatedError(RuntimeError):
+    """Raised when a slope-fits-dependent gate is requested in the B-only
+    repository (the module stays importable; the battery does not run)."""
+
+
+def _require_sf():
+    if sf is None:
+        raise BatteryGatedError(GATE_MESSAGE)
+    return sf
+
+
+def _rng(purpose: str) -> np.random.Generator:
+    """Deterministic per-purpose Generator (SHA-256 derived, process-stable),
+    used by the synthetic constructions of this module.  Local equivalent of
+    the sibling's helper so the sf-free identities remain checkable with the
+    A repository absent; it seeds synthetic data, it does not produce any
+    asserted result."""
+    seed = int(hashlib.sha256(f"i05:{purpose}".encode("utf-8")).hexdigest(), 16) % (2 ** 63)
+    return np.random.default_rng(seed)
+
+
+NEG_1_8 = -0.125             # operational Cor 3.8 constant (= sf.NEG_1_8)
 NEG_1_16 = -0.0625            # Condition-(S) worst case
 SPREAD_CORRECTED = -0.089     # -(1-nu_bar)/8, quoted context
 
@@ -180,7 +233,7 @@ def make_mardia_family(n_null: int = 90, n_contam: int = 10,
     """Synthetic Mardia family: Gaussian null classes + lognormal-contaminated
     classes (5% of rows, scale 1.0). Synthetic-proxy construction; the
     paper's real per-class features come from the backbone runs (store)."""
-    rng = sf._rng(f"i05:{purpose}")
+    rng = _rng(purpose)
     samples, kinds = [], []
     for k in range(n_null + n_contam):
         X = rng.standard_normal((n, d))
@@ -205,6 +258,7 @@ def f_interaction_test(records: Sequence[sf.ConfigRecord]
     n-2g). On the canonical 12-config/3-backbone population this is the
     spec's F(2, 6). scipy.stats.f.sf; non-rejection => pooling admissible,
     with the power caveat recorded."""
+    _require_sf()
     rows = sf.pretrained_only(list(records))
     g = len({r.backbone for r in rows})
     n = len(rows)
@@ -298,6 +352,7 @@ def run_full_pipeline(records: Sequence[sf.ConfigRecord], B: int = 1000,
                       purpose: str = "fals") -> Dict[str, Dict[str, Any]]:
     """Pooled fits + bootstrap CIs for the 12 and 16 populations, the exact
     pipeline whose CIs the G2 gates consume."""
+    _require_sf()
     fit12 = sf.pooled_common_slope_fit(records, population="12")
     fit16 = sf.pooled_common_slope_fit(records, population="16",
                                        anchor_mode="own_intercept")
@@ -328,6 +383,7 @@ def run_g1_interaction(cfg: Dict[str, Any]) -> Dict[str, Any]:
     admissible (non-rejection); planted per-backbone heterogeneity
     (paper-context magnitudes -0.141/-0.099/-0.118 as PLANTS) =>
     rejection. F/df/p recorded; nothing asserts F=2.14/p=0.199."""
+    _require_sf()
     t0 = time.time()
     assertions: List[Dict[str, Any]] = []
     noise = cfg["g1_noise_sd"]
@@ -375,6 +431,7 @@ def run_g2_planted(cfg: Dict[str, Any]) -> Dict[str, Any]:
     pre-declared expected decision for each planted slope. Only a truth at
     the operational -1/8 passes; -1/16 trips the exclusion; -0.089 trips
     containment; -0.30 fails both sub-conditions."""
+    _require_sf()
     t0 = time.time()
     assertions: List[Dict[str, Any]] = []
     expected = {-0.30: "FAIL", -0.125: "PASS", -0.0625: "FAIL",
@@ -597,6 +654,15 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     args = p.parse_args(argv)
     if args.selfcheck:
         return _selfcheck()
+    if sf is None:
+        # B-only gate: closed loudly, nothing run, nothing written, nothing faked.
+        print("[i05-f] " + GATE_MESSAGE, flush=True)
+        for name in [s.strip().upper() for s in args.suites.split(",") if s.strip()]:
+            print(f"[i05-f] suite {name}: GATED (requires experiments.slope_fits; "
+                  f"see {A_REPO_URL})", flush=True)
+        print("[i05-f] the sf-free gate identities remain checkable via "
+              "`python experiments/falsification.py --selfcheck`.", flush=True)
+        return 0
     cfg = dict(DEFAULT_CFG)
     started = _utcnow()
     t_all = time.time()
@@ -638,7 +704,7 @@ def _selfcheck() -> int:  # pragma: no cover - fast identities, no writes
           f"{[round(x, 4) for x in r['adjusted']]}, "
           f"rejected {r['n_rejected']}/5")
     # 2. BH rejections == step-up k* rule
-    rng = sf._rng("i05:f-selfcheck")
+    rng = _rng("f-selfcheck")
     pv = rng.uniform(size=200)
     r2 = benjamini_hochberg(pv, alpha=0.05)
     order = np.argsort(pv)
@@ -650,14 +716,14 @@ def _selfcheck() -> int:  # pragma: no cover - fast identities, no writes
     print(f"PASS BH adjusted-p rejections == step-up k* rule "
           f"({kstar}/200 uniform nulls)")
     # 3. Mardia on exact Gaussian: p's uniform-ish, test stats finite
-    X = sf._rng("i05:f-mardia").standard_normal((500, 10))
+    X = _rng("f-mardia").standard_normal((500, 10))
     m = mardia_test(X)
     assert 0.0 < m["skew_p"] < 1.0 and 0.0 < m["kurt_p"] < 1.0
     assert m["skew_df"] == 10 * 11 * 12 // 6
     print(f"PASS Mardia test on exact Gaussian: skew p {m['skew_p']:.3f}, "
           f"kurt p {m['kurt_p']:.3f}, df {m['skew_df']} (d=10)")
     # 4. Mardia skew detects planted lognormal (d=10, n=500)
-    rngm = sf._rng("i05:f-mardia-c")
+    rngm = _rng("f-mardia-c")
     Xc = rngm.standard_normal((500, 10))
     Xc[:100] = rngm.lognormal(0, 1.0, (100, 10))
     mc = mardia_test(Xc)
@@ -665,13 +731,18 @@ def _selfcheck() -> int:  # pragma: no cover - fast identities, no writes
     print(f"PASS Mardia skew rejects contaminated class "
           f"(p {mc['skew_p']:.2e})")
     # 5. F-test closed forms: zero-noise homogeneity => F == 0; perfect
-    #    separation => huge F, tiny p; df (2, 6)
-    recs = sf.make_synthetic_population(-0.115, noise_sd=0.0,
-                                        purpose="f-selfcheck")
-    r0 = f_interaction_test(recs)
-    assert abs(r0["F"]) < 1e-9 and (r0["df1"], r0["df2"]) == (2, 6)
-    print(f"PASS F(2,6) interaction: zero-noise homogeneous F = "
-          f"{r0['F']:.1e}, df = (2, 6)")
+    #    separation => huge F, tiny p; df (2, 6).  GATED without the A
+    #    pipeline (the planted populations live in experiments.slope_fits).
+    if sf is None:
+        print(f"GATED F(2,6) closed forms: requires "
+              f"experiments.slope_fits ({A_REPO_URL}); skipped, not faked")
+    else:
+        recs = sf.make_synthetic_population(-0.115, noise_sd=0.0,
+                                            purpose="f-selfcheck")
+        r0 = f_interaction_test(recs)
+        assert abs(r0["F"]) < 1e-9 and (r0["df1"], r0["df2"]) == (2, 6)
+        print(f"PASS F(2,6) interaction: zero-noise homogeneous F = "
+              f"{r0['F']:.1e}, df = (2, 6)")
     # 6. CI gate logic table (no pipeline): direct interval probes
     probe = ci_gates({"12": dict(slope=-0.115, ci_lo=-0.128, ci_hi=-0.102),
                       "16": dict(slope=-0.119, ci_lo=-0.134, ci_hi=-0.105)})

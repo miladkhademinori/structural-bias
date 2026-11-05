@@ -50,13 +50,13 @@ The companion paper (*A Mahalanobis Margin Bound on Task Confusion in Pretrained
 | `replicate.py` | The single entry point (`selftest`, `synthetic`, `tables`, and the shared subcommands). |
 | `core/` | The mathematical core: the closed-form structural-bias expressions, the Gaussian model they are derived in, the head family, the FIX and FIX_c machinery (including the head-scale estimator), and the claim-gating logic. |
 | `benchmarks/` | The shared dataset and backbone wiring (frozen-feature protocol, the same four class-IL benchmark splits and pretrained ViT backbones as the companion paper). |
-| `pipeline/` | The B-paper driver (`paper_b.py`) and the shared pipeline: head training, the de-centering corrections, table builders, figure builders, and the TeX audit that checks every printed cell against the store. |
+| `pipeline/` | The B-paper driver (`paper_b.py`) and the shared pipeline: head training, the de-centering corrections, table builders, figure builders, and the TeX audit that checks every printed cell against the store. `pipeline/paper_a.py` is a shim carrying only the statistical helpers shared with the companion paper; the full Paper A driver is released separately (see the companion-paper note in Section 1). |
 | `experiments/` | The B experiment drivers: `synthetic_bias` (the closed-form bias verification suites), `synthetic_rate` (the rate comparison: slow versus parametric), `nonvision` (the non-vision arm), `lda_ncm_eval` (the fixed-rule head comparison), `diagnostic_controls`, `falsification` (the battery), and `scoreboard` (the claim-by-claim scorer). |
 | `tests/` | The pytest suites: `test_theory_B.py` checks every closed-form identity at machine precision; the module suites cover core, pipeline, tables, features, runtime. |
 | `configs/` | The benchmark configurations for the B protocol and the seed list. |
 | `results/` | The results store: per-run JSON payloads with configuration, outputs, and provenance; the self-test caches; the corrections ledger. No number in any table is hand-typed. |
 | `tables/` | Generated table fragments (LaTeX) emitted by `build_tables_B.py` from the store. |
-| `colab/` | The GPU notebooks: feature extraction for the B protocol (`02_features_paperB.ipynb`), the non-vision arm (`05_nonvision_paperB.ipynb`), and the shared analysis notebook (`03_analyze_tables.ipynb`). A free-tier Colab T4 suffices. |
+| `colab/` | The GPU notebooks: feature extraction for the B protocol (`02_features_paperB.ipynb`), the non-vision arm (`05_nonvision_paperB.ipynb`), and the shared analysis notebook (`03_analyze_tables.ipynb`). A free-tier Colab T4 suffices. `colab/archive_fleet/` keeps the three retired fleet skeletons (`RUN_FEATURES`, `RUN_EVALUATION`, `RUN_PREDICTOR`; never spec'd past skeleton stage), archived for provenance. |
 | `figures/` | The paper's five figures, reproduced above. |
 | `LICENSE` | MIT. |
 

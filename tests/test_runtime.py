@@ -99,40 +99,21 @@ def test_cli_parses_every_subcommand():
     import replicate
     parser = replicate.build_parser()
     for argv in (["features", "--paper", "A"], ["--device", "numpy", "analyze", "--paper", "AB", "--optimizer", "lbfgs", "--ranpac-M", "100"],
-                 ["tables"], ["drift", "--lrs", "1e-5"], ["nonvision", "--allow-download"], ["synthetic", "--run", "--quick"], ["selftest", "--skip-ecf"]):
+                 ["tables"], ["figures"], ["audit-tex", "--paper", "B", "--tex", "p.tex"], ["nonvision", "--allow-download"],
+                 ["synthetic", "--run", "--quick"], ["selftest", "--skip-ecf"]):
         a = parser.parse_args(argv)
         assert callable(a.fn)
 
 
-def test_drift_loop_end_to_end_with_tiny_vit(tmp_path, monkeypatch):
-    """The Paper A drift loop on the CPU: a one-layer ViT-B-width model stands in for the pretrained weights, a
-    100-class mock CIFAR for the data.  Exercises resume, the inside-stage gamma checkpoints, the frozen-feature
-    reference head, the summary, and the JSON schema."""
-    import transformers
-    from pipeline import drift as D, features as F
-
-    cfg = transformers.ViTConfig(hidden_size=768, num_hidden_layers=1, num_attention_heads=4, intermediate_size=128, image_size=224)
-
-    class _Proc:  # mimics AutoImageProcessor.from_pretrained(...)
-        image_mean = [0.5, 0.5, 0.5]; image_std = [0.5, 0.5, 0.5]
-
-    monkeypatch.setattr(transformers.ViTModel, "from_pretrained", classmethod(lambda cls, *a, **k: transformers.ViTModel(cfg)))
-    monkeypatch.setattr(transformers.AutoImageProcessor, "from_pretrained", classmethod(lambda cls, *a, **k: _Proc()))
-    g = np.random.default_rng(0)
-    ytr = np.repeat(np.arange(100), 2); yte = np.arange(100)
-    mk = lambda y: F.ImageList([None] * len(y), y, [str(c) for c in range(100)], in_memory=g.integers(0, 255, (len(y), 32, 32, 3)).astype(np.uint8))
-    monkeypatch.setattr(F, "build_dataset", lambda dataset, data_root, imagenet100_root=None: {"train": mk(ytr), "test": mk(yte)})
-    out = tmp_path / "drift.json"
-    res = D.run_drift(tmp_path, out, lrs=(1e-4,), seeds=(0,), iters_per_stage=2, measure_every=1, batch=4, gamma_subsample=2, device="cpu", log=lambda *a: None)
-    assert len(res["runs"]) == 1 and out.exists()
-    run = res["runs"][0]
-    assert len(run["acc_finetuned"]) == 10 == len(run["acc_frozen_head"]) and len(run["trajectory"]) == 1 + 10 * 2
-    assert all(np.isfinite(p["gamma"]) for p in run["trajectory"]) and run["trajectory"][-1]["t"] == 10.0
-    assert "1e-04" in res["summary"] or "0.0001" in res["summary"]
-    # resume: a second call with the same settings does no work and keeps the run
-    res2 = D.run_drift(tmp_path, out, lrs=(1e-4,), seeds=(0,), iters_per_stage=2, measure_every=1, batch=4, gamma_subsample=2, device="cpu", log=lambda *a: None)
-    assert len(res2["runs"]) == 1 and res2["runs"][0]["trajectory"] == run["trajectory"]
-    assert D.summarize_drift(res2["runs"])[list(res2["summary"].keys())[0]]["gamma0"]["n"] == 1
+def test_cli_rejects_the_removed_a_subcommands():
+    """B-only release: the Paper A entry points (condition-s, fingerprint, features-timm, drift,
+    drift-readback, audit-tex --paper A) are gone with their modules; argparse must say so."""
+    import replicate
+    parser = replicate.build_parser()
+    for argv in (["condition-s"], ["fingerprint"], ["features-timm"], ["drift", "--lrs", "1e-5"], ["drift-readback"],
+                 ["audit-tex", "--paper", "A", "--tex", "p.tex"]):
+        with pytest.raises(SystemExit):
+            parser.parse_args(argv)
 
 
 def test_load_backbone_forward_lambdas_on_tiny_offline_models(monkeypatch):

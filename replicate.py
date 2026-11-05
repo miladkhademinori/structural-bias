@@ -5,13 +5,8 @@
   python replicate.py features  --paper B                 # the Paper B set (adds mae_b16, resnet50; imagenet100 needs --imagenet100-root)
   python replicate.py analyze   --paper A|B|AB [--optimizer adamw|lbfgs] [--seeds 0,1,2,3,4]
   python replicate.py tables                               # LaTeX rows + DIFF.md from results/paper{A,B}_results.json
-  python replicate.py condition-s                          # Condition (S) clauses (nu, delta_ij, a_ij) from the feature caches alone
-  python replicate.py fingerprint                          # which convention reproduces the printed gamma_min / nu / RHS (caches only)
-  python replicate.py features-timm --data-root /content/data --out-root features_timm   # the recovered timm protocol, separate cache root
   python replicate.py figures                              # every figure from results/*.json, each with a .data.json sidecar
-  python replicate.py audit-tex --paper A --tex <neurips_2026.tex>   # printed-versus-regenerated ledger, cell by cell
-  python replicate.py drift     --data-root /content/data  # Paper A drift (GPU; resumable per (lr, seed))
-  python replicate.py drift-readback                        # P1..P8 and C1..C5 scored from paperA_drift.json -> DRIFT_READBACK.md
+  python replicate.py audit-tex --paper B --tex <neurips_2026.tex>   # printed-versus-regenerated ledger, cell by cell
   python replicate.py nonvision --allow-download           # Paper B 20 Newsgroups full run (Colab)
   python replicate.py synthetic                            # the synthetic verification suites + tolerance scoreboard
   python replicate.py selftest                             # end-to-end on synthetic caches (no GPU, ~minutes)
@@ -74,14 +69,6 @@ def cmd_analyze(a):
     cmd_tables(a)
 
 
-def cmd_condition_s(a):
-    from pipeline import paper_a
-    root = Path(a.features); out = Path(a.results); seeds = tuple(int(s) for s in a.seeds.split(","))
-    bb = tuple(a.backbones.split(",")) if a.backbones else R.PAPER_A_BACKBONES
-    dd = tuple(a.datasets.split(",")) if a.datasets else R.PAPER_A_DATASETS
-    paper_a.condition_S_survey(root, out / "paperA_conditionS.json", seeds=seeds, backbones=bb, datasets=dd, log=_log)
-
-
 def cmd_figures(a):
     from pipeline import figures
     out = Path(a.results)
@@ -91,29 +78,6 @@ def cmd_figures(a):
 def cmd_audit_tex(a):
     from pipeline import tex_audit
     tex_audit.run(a.paper, Path(a.tex), Path(a.results), Path(a.out) if a.out else None, log=_log)
-
-
-def cmd_fingerprint(a):
-    from pipeline import fingerprint
-    root = Path(a.features); out = Path(a.results); seeds = tuple(int(s) for s in a.seeds.split(","))
-    bb = tuple(a.backbones.split(",")) if a.backbones else R.PAPER_A_BACKBONES
-    dd = tuple(a.datasets.split(",")) if a.datasets else R.PAPER_A_DATASETS
-    fingerprint.run(root, out / "FINGERPRINT.md", seeds=seeds, backbones=bb, datasets=dd, subsample=a.subsample, log=_log)
-
-
-def cmd_features_timm(a):
-    from pipeline import features_timm as FT
-    out_root = Path(a.out_root); data_root = Path(a.data_root)
-    bb = tuple(a.backbones.split(",")) if a.backbones else tuple(list(R.PAPER_A_BACKBONES) + ["random_vit"])
-    dd = tuple(a.datasets.split(",")) if a.datasets else R.PAPER_A_DATASETS
-    dev = a.device if a.device not in (None, "auto", "numpy") else "cuda"
-    for b in bb:
-        _log(json.dumps(FT.determinism_check_timm(b, dev)))
-        for d in dd:
-            FT.extract_timm(b, d, data_root, out_root, batch_size=a.batch_size, device=dev, num_workers=a.workers,
-                            imagenet100_root=Path(a.imagenet100_root) if a.imagenet100_root else None, fp16=a.fp16,
-                            transform=a.transform, img_size=a.img_size, log=_log)
-    _log(f"[features-timm] manifest {FT.manifest(out_root)}")
 
 
 def cmd_tables(a):
@@ -192,21 +156,6 @@ def cmd_freeze_manifest(a):
     _log(f"[freeze-manifest] {len(rows)} files, tree sha256 {tree}; wrote {out} and FREEZE_MANIFEST.md")
 
 
-def cmd_drift_readback(a):
-    from pipeline.drift import readback
-    res = Path(a.results)
-    readback(Path(a.drift) if a.drift else res / "paperA_drift.json", res / "DRIFT_READBACK.md",
-             Path(a.results_json) if a.results_json else None, log=_log)
-
-
-def cmd_drift(a):
-    from pipeline.drift import run_drift
-    seeds = tuple(int(s) for s in a.seeds.split(",")); lrs = tuple(float(x) for x in a.lrs.split(","))
-    run_drift(Path(a.data_root), Path(a.results) / "paperA_drift.json", lrs=lrs, seeds=seeds, iters_per_stage=a.iters_per_stage,
-              measure_every=a.measure_every, gamma_subsample=(None if a.gamma_subsample <= 0 else a.gamma_subsample),
-              device=(a.device or "cuda"), log=_log)
-
-
 def cmd_nonvision(a):
     args = [sys.executable, str(ROOT / "experiments" / "nonvision.py"), "--mode", "full", "--allow-local-full", "--update-index",
             "--out-root", a.results]
@@ -271,27 +220,9 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("--out", default=None, help="output folder (default <results>/figures)"); s.add_argument("--drift", default=None, help="drift JSON (default <results>/paperA_drift.json)")
     s.set_defaults(fn=cmd_figures)
     s = sub.add_parser("audit-tex", help="claim ledger: every number printed in the paper's tables against the regenerated results (reads the TeX, never edits it)")
-    s.add_argument("--paper", required=True, choices=["A", "B"]); s.add_argument("--tex", required=True, help="path to the paper's neurips_2026.tex")
+    s.add_argument("--paper", required=True, choices=["B"], help="B-only release; the Paper A audit ships with the separate A repository")
+    s.add_argument("--tex", required=True, help="path to the paper's neurips_2026.tex")
     s.add_argument("--out", default=None, help="output folder (default <results>)"); s.set_defaults(fn=cmd_audit_tex)
-    s = sub.add_parser("features-timm", help="re-extract Paper A features under the recovered timm protocol into a separate cache root")
-    s.add_argument("--data-root", default="/content/data"); s.add_argument("--out-root", default="features_timm")
-    s.add_argument("--backbones", default=None); s.add_argument("--datasets", default=None); s.add_argument("--batch-size", type=int, default=128)
-    s.add_argument("--workers", type=int, default=4); s.add_argument("--imagenet100-root", default=None); s.add_argument("--fp16", action="store_true")
-    s.add_argument("--transform", default="timm", choices=["timm", "archaeology"], help="timm: the model's own eval transform (recovers the printed ViT values); archaeology: per-dataset transforms")
-    s.add_argument("--img-size", type=int, default=224, help="input size passed to timm.create_model and the transform (DINOv2 native is 518)")
-    s.set_defaults(fn=cmd_features_timm)
-    s = sub.add_parser("fingerprint", help="which estimator / formula convention reproduces the printed gamma_min, nu and RHS (feature caches only, minutes)")
-    s.add_argument("--backbones", default=None); s.add_argument("--datasets", default=None); s.add_argument("--seeds", default="0")
-    s.add_argument("--subsample", type=int, default=50, help="rows per class for the subsampled-covariance variant"); s.set_defaults(fn=cmd_fingerprint)
-    s = sub.add_parser("condition-s", help="Condition (S) clauses (nu, delta, a_ij) on every cached Paper A configuration; feature caches only, no training")
-    s.add_argument("--backbones", default=None); s.add_argument("--datasets", default=None); s.add_argument("--seeds", default="0,1,2,3,4"); s.set_defaults(fn=cmd_condition_s)
-    s = sub.add_parser("drift"); s.add_argument("--data-root", default="/content/data"); s.add_argument("--seeds", default="0,1,2,3,4"); s.add_argument("--lrs", default="1e-5,1e-4,1e-3")
-    s.add_argument("--iters-per-stage", type=int, default=1000, help="training iterations per stage (paper: 1000)")
-    s.add_argument("--measure-every", type=int, default=200, help="gamma_min checkpoints inside a stage, in iterations")
-    s.add_argument("--gamma-subsample", type=int, default=50, help="training images per class for the gamma pass; 0 = all"); s.set_defaults(fn=cmd_drift)
-    s = sub.add_parser("drift-readback", help="score the pre-registered drift predictions P1..P8 and checks C1..C5 from paperA_drift.json")
-    s.add_argument("--drift", default=None, help="drift JSON (default <results>/paperA_drift.json)")
-    s.add_argument("--results-json", default=None, help="paperA_results.json for check C3 (optional)"); s.set_defaults(fn=cmd_drift_readback)
     s = sub.add_parser("nonvision"); s.add_argument("--allow-download", action="store_true"); s.add_argument("--grouping", default=None); s.set_defaults(fn=cmd_nonvision)
     s = sub.add_parser("synthetic"); s.add_argument("--run", action="store_true", help="re-run every synthetic suite before scoring")
     s.add_argument("--quick", action="store_true", help="reduced grids"); s.set_defaults(fn=cmd_synthetic)

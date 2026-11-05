@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from pipeline import backend, heads, registry as R, stats as S  # noqa: E402
-from pipeline.paper_a import _pooled_common_slope, predictor_regression, slope_fits  # noqa: E402
+from pipeline.paper_a import _agg, _ms, _ols  # noqa: E402  (the shared-helpers shim; the full A driver is a separate repository)
 
 os.environ.setdefault("REPLICATION_DEVICE", "numpy")
 
@@ -137,7 +137,7 @@ def test_clipping_bounds_the_step():
 
 
 # ---------------------------------------------------------------------------
-# Paper A statistics
+# Statistics shared with the companion paper (the pipeline.paper_a shim)
 # ---------------------------------------------------------------------------
 
 def test_hill_estimator_on_pareto_norms():
@@ -153,31 +153,22 @@ def test_prop51_schedule_formulas():
     assert tau == pytest.approx((2.0 ** 1.5 * 1000 / 0.1) ** (1 / 1.5))
 
 
-def test_pooled_common_slope_and_interaction_recover_a_planted_model():
+def test_shim_ols_recovers_a_planted_line():
     g = np.random.default_rng(0)
-    x = g.uniform(5, 50, 12); groups = np.repeat(np.array(["a", "b", "c"]), 4)
-    inter = {"a": 0.0, "b": 1.0, "c": -1.0}
-    y = np.array([inter[k] for k in groups]) - 0.125 * x + 1e-3 * g.standard_normal(12)
-    f = _pooled_common_slope(x, y, groups)
-    assert f["slope"] == pytest.approx(-0.125, abs=1e-3) and f["df"] == 12 - 4
+    x = g.uniform(0, 10, 60); y = 0.75 - 0.125 * x + 0.01 * g.standard_normal(60)
+    f = _ols(x, y)
+    assert f["intercept"] == pytest.approx(0.75, abs=1e-2) and f["slope"] == pytest.approx(-0.125, abs=1e-3)
+    assert f["n"] == 60 and 0.99 < f["r2"] <= 1.0 and f["ss_res"] >= 0.0
 
 
-def test_predictor_regression_nested_f_identity():
-    g = np.random.default_rng(1); n = 12
-    rows = [dict(final_acc=float(0.5 + 0.01 * i + 0.01 * g.standard_normal()), gamma_min=float(i), probe_acc=float(0.6 + 0.005 * i),
-                 ncm_acc=float(0.4 + 0.004 * i + 0.01 * g.standard_normal()), dataset=["c", "i", "u", "o"][i % 4]) for i in range(n)]
-    p = predictor_regression(rows)
-    F = ((p["r2_full"] - p["r2_reduced"]) / 1) / ((1 - p["r2_full"]) / (n - 4))
-    assert p["F"] == pytest.approx(F) and p["df"] == [1, n - 4] and 0 <= p["p"] <= 1
-
-
-def test_slope_fits_handles_missing_configurations():
-    tc = {("vit_in21k", "cifar100"): dict(per_seed=[dict(gamma_min=8.0, tc_gap=0.3), dict(gamma_min=8.5, tc_gap=0.25)]),
-          ("vit_in21k", "imagenet_r"): dict(per_seed=[dict(gamma_min=5.0, tc_gap=0.5), dict(gamma_min=5.2, tc_gap=0.45)]),
-          ("dinov2_b14", "cifar100"): dict(per_seed=[dict(gamma_min=47.0, tc_gap=0.01), dict(gamma_min=46.0, tc_gap=0.012)]),
-          ("dinov2_b14", "imagenet_r"): dict(per_seed=[dict(gamma_min=39.0, tc_gap=0.02), dict(gamma_min=38.0, tc_gap=0.021)])}
-    out = slope_fits(tc, n_bootstrap=50)
-    assert set(out["per_backbone"]) == {"vit_in21k", "dinov2_b14"} and out["pooled12"]["slope"] < 0
+def test_shim_agg_and_ms_aggregate_and_drop_nonfinite():
+    rows = [dict(a=1.0, b=2.0), dict(a=3.0, b=4.0), dict(a=float("nan"), b=None), dict(a=5.0, b=float("inf"))]
+    agg = _agg(rows, ("a", "b"))
+    assert agg["a"]["mean"] == pytest.approx(2.0) and agg["a"]["sd"] == pytest.approx(np.sqrt(2.0))
+    assert agg["a"]["n"] == 2 and agg["a"]["values"] == [1.0, 3.0]      # the nan row is dropped
+    assert agg["b"]["n"] == 1 and agg["b"]["values"] == [2.0] and agg["b"]["sd"] == 0.0   # None and inf dropped; sd is 0 at n=1
+    m = _ms([2.0])
+    assert m == dict(mean=2.0, sd=0.0, n=1, values=[2.0])
 
 
 def test_registry_orderings_are_deterministic_and_cover_all_classes():
@@ -253,76 +244,3 @@ def test_schedules_and_smoothness_bound_units():
     Z = np.random.default_rng(1).standard_normal((500, 8)) * 4.0
     b1, b2 = smoothness_bound(Z, 0.0), smoothness_bound(3.0 * Z, 0.0)
     assert abs(b2 / b1 - 9.0) < 0.05
-
-
-def test_fingerprint_moments_match_classstats_and_grid_runs():
-    import numpy as np
-    from pipeline import fingerprint as F
-    from pipeline.stats import ClassStats
-    X, y, toc, mu, sigma = gaussian_tasks()
-    N = int(y.max()) + 1
-    M = F.Moments(X, y, N)
-    st = ClassStats.from_features(X, y, toc, protocol="A")
-    # the pooled Ledoit-Wolf covariance of the fingerprint moments equals ClassStats' (up to protocol A's scalar scale)
-    S_lw, rho = M.lw()
-    scale = st.gamma_min()[0]
-    gv = F.gamma_variants(M, F.Moments(X, y, N, normalize=True), F.Moments(X, y, N, subsample=20, seed_purpose="t"), np.asarray(toc))
-    assert abs(gv["lw_pooled (ours)"]["gamma_min"] - scale) / scale < 1e-6
-    assert gv["ridge_abs eps=10"]["gamma_min"] < gv["sample_pooled"]["gamma_min"]              # an additive ridge lowers gamma
-    assert gv["ridge_abs eps=1e-06"]["gamma_min"] <= gv["sample_pooled"]["gamma_min"] * (1 + 1e-6)
-    assert "_mediators" in gv and gv["_mediators"]["lw_rho"] == rho
-    G = np.array(gv["lw_pooled (ours)"]["G"])
-    cells = F.nu_rhs_variants(M, np.asarray(toc), G, 10.0, M.class_lambda_max())
-    assert any(k.startswith("nu | norm=task_within_max (paper)") for k in cells) and any(k.startswith("rhs |") for k in cells)
-    assert all(np.isfinite(v) for v in cells.values())
-
-
-def test_drift_readback_worlds(tmp_path):
-    """summarize_drift + readback: linear-in-eta synthetic trajectories land in world H; a non-collapsing largest
-    rate lands in world D; check C2 flags the accepted 14.2 against gamma0/(2|m|) = 25.6 from the accepted inputs."""
-    import json
-    import numpy as np
-    from pipeline import drift as D
-
-    def make(lr_slopes, collapse=True):
-        runs = []
-        for lr, m in lr_slopes:
-            for seed in range(3):
-                g0 = 30.0 + seed
-                ts = np.arange(0, 10.01, 0.2)
-                gs = np.maximum(g0 - m * ts + 0.1 * np.sin(7 * ts + seed), 0.5) if (collapse or lr < 1e-3) else g0 - 0.01 * ts
-                runs.append(dict(lr=lr, seed=seed, gamma0=g0, trajectory=[dict(t=float(t), gamma=float(g)) for t, g in zip(ts, gs)],
-                                 acc_finetuned=list(np.linspace(0.9, 0.6, 10) - 0.009 * (lr > 1e-5) * np.arange(10)),
-                                 acc_frozen_head=list(np.linspace(0.85, 0.55, 10))))
-        d = dict(runs=runs); d["summary"] = D.summarize_drift(runs); return d
-
-    d = make([(1e-5, 0.4), (1e-4, 3.5), (1e-3, 30.0)])
-    s = d["summary"]
-    assert abs(s["loglog_slope_abs_m_vs_lr"]["value"] - np.log10(3.5 / 0.4)) < 0.05 and s["loglog_slope_abs_m_vs_lr"]["n_points"] == 2
-    assert s["0.001"]["time_to_floor"]["mean"] < 1.0 and s["1e-05"]["t_star_observed"]["n"] == 0
-    p = tmp_path / "paperA_drift.json"; p.write_text(json.dumps(d))
-    r = D.readback(p, tmp_path / "DRIFT_READBACK.md")
-    assert r["world"] == "H" and all(x["verdict"] == "HIT" for x in r["predictions"])
-    c2 = [c for c in r["checks"] if c["id"] == "C2"][0]
-    assert c2["verdict"] == "FLAG" and abs(c2["value"]["linear_from_accepted"] - 25.62) < 0.01
-    assert (tmp_path / "DRIFT_READBACK.md").read_text().startswith("# Drift readback")
-    d2 = make([(1e-5, 0.4), (1e-4, 3.5), (1e-3, 30.0)], collapse=False)
-    p2 = tmp_path / "d2.json"; p2.write_text(json.dumps(d2))
-    assert D.readback(p2, tmp_path / "R2.md")["world"] == "D"
-
-
-def test_fingerprint_new_conventions_present():
-    """The grid carries the conventions the protocol-matrix questions need: per-row layer norm, per-class LW,
-    per-task standardization, the task-count variants; eq. 1 per-task LW sits below pooled LW on a steep spectrum."""
-    import numpy as np
-    from pipeline import fingerprint as FP
-    rng = np.random.default_rng(0); d = 32; N = 40; n_per = 60
-    A = rng.normal(size=(d, d)); L = np.linalg.cholesky(A @ A.T / d + 1e-3 * np.eye(d)); mus = rng.normal(size=(N, d)) * 1.5
-    X = np.concatenate([mus[c] + rng.normal(size=(n_per, d)) @ L.T for c in range(N)]); y = np.repeat(np.arange(N), n_per)
-    M = FP.Moments(X, y, N); Mn = FP.Moments(X, y, N, normalize=True); Ms = FP.Moments(X, y, N, subsample=10); Ml = FP.Moments(X, y, N, rowln=True)
-    order = np.arange(N); toc = np.empty(N, np.int64); toc[order] = np.arange(N) // 4
-    gv = FP.gamma_variants(M, Mn, Ms, toc, Ml=Ml, order=order, dataset="x")
-    for k in ("rowln_lw", "rowln_sample", "eq1_pair_classlw", "eq1_pair_sample_ridge1e-3", "pertask_std_scalar_eq1", "pertask_std_zscore_eq1", "lw_pooled T=5", "lw_pooled T=20"):
-        assert k in gv and np.isfinite(gv[k]["gamma_min"]) and gv[k]["gamma_min"] > 0, k
-    assert gv["eq1_pair_lw"]["gamma_min"] < gv["lw_pooled (ours)"]["gamma_min"]       # heavier per-task shrinkage lowers gamma on a steep spectrum
-    assert gv["eq1_pair_classlw"]["gamma_min"] < gv["eq1_pair_lw"]["gamma_min"]       # per-class shrinkage heavier still

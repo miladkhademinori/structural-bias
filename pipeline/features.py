@@ -450,7 +450,7 @@ def extract(backbone: str, dataset: str, data_root: Path, out_root: Path = None,
                      torch=torch.__version__, transformers=transformers.__version__,
                      device=str(torch.cuda.get_device_name(0) if device == "cuda" and torch.cuda.is_available() else device),
                      provenance="real", fp16=bool(fp16), readout=getattr(fwd, "readout", None),
-                     transform_note="HF image processor (model-specific resize and normalization; for ViT bilinear 224 without crop, which differs from timm's bicubic 248 + centre crop 224; see pipeline.features_timm)")
+                     transform_note="HF image processor (model-specific resize and normalization; for ViT bilinear 224 without crop, which differs from the timm protocol's bicubic 248 + centre crop 224)")
 
     class _DS(torch.utils.data.Dataset):
         def __init__(self, il): self.il = il

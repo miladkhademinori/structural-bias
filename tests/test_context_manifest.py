@@ -32,15 +32,13 @@ MANIFEST_PATH = Path(__file__).resolve().parent / "context_manifest.json"
 
 #: Every never-asserted printed-context dict in the store, as
 #: (import path, attribute).  Adding a new context dict means adding it here
-#: and regenerating the manifest in the same change.
+#: and regenerating the manifest in the same change.  (B-only release,
+#: 2026-11-05: the experiments.slope_fits and experiments.predictor_regression
+#: entries were removed with those absent Paper A modules.)
 CONTEXT_DICTS = (
     ("pipeline.registry", "PRINTED"),
     ("experiments.falsification", "PAPER_CONTEXT_QUOTED"),
-    ("experiments.slope_fits", "PAPER_CONTEXT_QUOTED"),
     ("experiments.nonvision", "PAPER_CONTEXT"),
-    ("experiments.predictor_regression", "GAMMA_MIN_PRINTED"),
-    ("experiments.predictor_regression", "FINAL_ACC_PRINTED"),
-    ("experiments.predictor_regression", "PRINTED_TARGETS"),
 )
 
 CANON_VERSION = "v1 (typed tags, repr floats, key-sorted dicts)"

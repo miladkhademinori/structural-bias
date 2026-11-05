@@ -314,7 +314,8 @@ def warmup_gradient_norms(X, y, N, *, k_warm=1000, batch=128, lr=0.1, seed_purpo
 
 def hill_estimate(norms, k=50, n_bootstrap=1000, seed_purpose="hill"):
     """Hill estimator of the tail index on the k largest of ``norms`` (app:alpha-estimation), with a bootstrap CI over
-    the k log-ratios.  Finite-k bias is positive and small (core/streaming.py documents it); the CI is the bootstrap one."""
+    the k log-ratios.  Finite-k bias is positive and small (documented in the A repository's streaming-model notes);
+    the CI is the bootstrap one."""
     o = np.sort(np.asarray(norms, np.float64))[::-1]
     k = int(min(k, len(o) - 1))
     top, ref = o[:k], max(float(o[k]), 1e-300)
