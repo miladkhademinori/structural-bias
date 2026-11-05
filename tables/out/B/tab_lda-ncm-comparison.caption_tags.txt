@@ -1,0 +1,5 @@
+5 random class orderings (seeds 0--4)
+shared-label domains-as-tasks runs (domains sharing one $345$-class label set) that violate the disjoint-label-set assumption
+bold marks the de-centered head
+SLDA-style discriminant vs Sigma = I specialization (caption already fixed)
+population: payload _selftest/paperB_results.json; provenance ['synthetic']; 8 of 10 benchmark rows covered; synthetic preview: NOT A PAPER NUMBER

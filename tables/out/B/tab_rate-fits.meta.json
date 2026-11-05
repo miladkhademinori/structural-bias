@@ -1,0 +1,23 @@
+{
+ "created_utc": "2026-10-22T12:30:30Z",
+ "emitter": "pipeline.tables.tab_rate_fits",
+ "g08_class": "POST-HOC",
+ "gates": [
+  {
+   "detail": "outside the local store",
+   "name": "ImageNet-R purge + DomainNet aggregation (owner ruling)",
+   "status": "pending-owner-ruling"
+  }
+ ],
+ "label": "tab:rate-fits",
+ "mode": "build",
+ "paper": "B",
+ "provenance": [
+  "synthetic"
+ ],
+ "supporting_runs": [
+  "B_synthetic_rate_E5",
+  "B_synthetic_rate_E6"
+ ],
+ "tex_sha256": "52f92f0e9d2f65ff7b9e42cb52cbf3d1044648073f10e98449b85e19e856e1ca"
+}

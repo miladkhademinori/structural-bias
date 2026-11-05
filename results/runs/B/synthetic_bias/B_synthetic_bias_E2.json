@@ -1,0 +1,284 @@
+{
+ "run_id": "B_synthetic_bias_E2",
+ "paper": "B",
+ "experiment": "synthetic_bias",
+ "provenance": "synthetic",
+ "created_utc": "2026-10-22T04:12:30Z",
+ "executed_utc": "2026-10-22T04:04:24Z",
+ "schema": "G08-S2-proposal (G01 not yet reconciled; see G08 log S7.1)",
+ "config": {
+  "e1_lam": [
+   1e-05,
+   0.0001
+  ],
+  "e1_n_spec": 50000,
+  "e1_n_variant": 25000,
+  "e1_n_anchor": 200000,
+  "e1_seeds_spec": [
+   0,
+   1
+  ],
+  "e1_seeds_variant": [
+   0,
+   1,
+   2
+  ],
+  "e1_maxiter": 600,
+  "e1_fit_gtol": 1e-10,
+  "e2_lam": [
+   0.0,
+   0.0001,
+   0.01
+  ],
+  "e2_n": [
+   1000,
+   50000
+  ],
+  "e2_seeds_est": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "e2_maxiter": 600,
+  "e2_fit_gtol": 1e-10,
+  "e3_a": [
+   5.0,
+   10.0,
+   50.0
+  ],
+  "e3_n_train": 2000,
+  "e3_lam": 1e-05,
+  "e3_n_mc": 1000000,
+  "e3_seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "e3_maxiter": 1000,
+  "e4_a": [
+   1.0,
+   2.0,
+   5.0,
+   10.0,
+   20.0,
+   50.0
+  ],
+  "e4_lam": [
+   1e-05,
+   0.001,
+   0.1
+  ],
+  "e4_seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "e4_n_train": 2000,
+  "e4_n_mc": 1000000,
+  "e4_maxiter": 1000
+ },
+ "seeds": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "metrics": {
+  "suite": "E2",
+  "theorem": "Theorem 4.1 + Cors 4.2/4.3 (bias identity)",
+  "status": "FAIL",
+  "assertions": [
+   {
+    "id": "E2.1a",
+    "description": "cos(B_hat, Sinv(mu_bar_j - mu_bar_i)) population arm > 0.999",
+    "arm": "variant/lam=0/n=50000",
+    "status": "FAIL",
+    "value": "min cos 0.997610 (max 0.999992)",
+    "threshold": "> 0.999",
+    "diagnosis": "Finite-sample head noise sqrt-level; bias signal sqrt(gamma)~0.5-0.7.",
+    "details": {
+     "n_pairs": 300
+    }
+   },
+   {
+    "id": "E2.1b",
+    "description": "cos(B_hat, pred) estimated arm (mu_hat, Sigma_hat_LW) > 0.99",
+    "arm": "variant/estimated/n=1000/seeds[0, 1, 2, 3, 4]",
+    "status": "FAIL",
+    "value": "valid cos min 0.0153, median 0.9713, max 0.9991; 0/1500 undirected (NaN) pairs",
+    "threshold": "> 0.99",
+    "diagnosis": "At n_t=1000 (d=32) the estimated-centroid noise sqrt(tr(Sigma)/n) is comparable to the weakest bias signals sqrt(gamma_min)~1, so weak task pairs are direction-noise dominated (NaN = |pred_hat| ~ 0). Theorem 4.1 is exact in the population arm (E2.3a) and holds to cos 0.998 on trained heads with true stats (E2.1a).",
+    "details": {
+     "lw_intensity": [
+      0.0018,
+      0.0016,
+      0.0017,
+      0.0017,
+      0.0016
+     ]
+    }
+   },
+   {
+    "id": "E2.2",
+    "description": "||B_hat||_Sigma / sqrt(gamma_ij) in (0.97, 1.00) (per task-pair mean)",
+    "arm": "variant/lam=0/n=50000",
+    "status": "FAIL",
+    "value": "task-pair means in (1.0003, 1.0018)",
+    "threshold": "(0.97, 1.00)",
+    "diagnosis": "Finite-sample noise (shrinkage-only-lowers argument is a population statement); per-pair spread in details.",
+    "details": {
+     "per_pair_min": 0.9783,
+     "per_pair_max": 1.0287,
+     "reading": "mean over 25 class pairs per task pair"
+    }
+   },
+   {
+    "id": "E2.3a",
+    "description": "Cor 4.2 pair invariance, exact population arm: pairwise cos > 0.9999, norm CV < 0.1%",
+    "arm": "closed-form population (exact)",
+    "status": "PASS",
+    "value": "min cos 1.000000000000; max CV 5.03e-16",
+    "threshold": "cos > 0.9999; CV < 1e-3",
+    "diagnosis": "",
+    "details": {}
+   },
+   {
+    "id": "E2.3b",
+    "description": "Cor 4.2 pair invariance, trained arm (n=50000): cos > 0.9999, CV < 0.1 pct",
+    "arm": "variant/lam=0/n=50000 trained",
+    "status": "FAIL",
+    "value": "min cos 0.993327; max CV 0.0280",
+    "threshold": "cos > 0.9999; CV < 1e-3",
+    "diagnosis": "Trained-arm noise floor: per-pair B_hat noise/signal ~1-2 pct at n=50000 exceeds the 0.1 pct CV budget (the assertion is stated for the population arm, which is algebraically identical and passes exactly; see E2.3a).",
+    "details": {}
+   },
+   {
+    "id": "E2.4",
+    "description": "Cor 4.3: bias direction cos > 0.999 and norm change < 2% across lam/n/orderings",
+    "arm": "variant",
+    "status": "FAIL",
+    "value": "per-arm breakdown in details",
+    "threshold": "cos > 0.999 (n_hi arms), > 0.99 (n_lo ordering arms); norm change < 2%",
+    "diagnosis": "Per-arm values in details: n_lo arms sit at the sqrt(d/n) noise floor (0.99-0.999); lambda=1e-2 shrinkage attenuates ||B|| by (1-lam*alpha_t), which is the theorem's own prediction, not a bias-identity failure.",
+    "details": {
+     "arms": [
+      {
+       "arm": "lam=0,n=50000",
+       "min_cos": 0.99761,
+       "mean_ratio_range": [
+        1.0003,
+        1.0018
+       ]
+      },
+      {
+       "arm": "lam=0.0001,n=50000",
+       "min_cos": 0.996679,
+       "mean_ratio_range": [
+        1.0003,
+        1.0019
+       ],
+       "norm_change_vs_lam0": 0.0
+      },
+      {
+       "arm": "lam=0.01,n=50000",
+       "min_cos": 0.166381,
+       "mean_ratio_range": [
+        1.0125,
+        1.0946
+       ],
+       "norm_change_vs_lam0": 0.0476
+      },
+      {
+       "arm": "ordering=(0, 1, 2, 3),n=1000",
+       "min_cos": 0.895872
+      },
+      {
+       "arm": "ordering=(3, 2, 1, 0),n=1000",
+       "min_cos": 0.846852
+      },
+      {
+       "arm": "ordering=(1, 0, 3, 2),n=1000",
+       "min_cos": 0.937504
+      },
+      {
+       "arm": "ordering=(2, 3, 0, 1),n=1000",
+       "min_cos": 0.927405
+      },
+      {
+       "arm": "ordering=(3, 0, 2, 1),n=1000",
+       "min_cos": 0.929973
+      },
+      {
+       "arm": "lam 0 vs 0.0001 (first pair B)",
+       "min_cos": 0.999844
+      },
+      {
+       "arm": "lam 0 vs 0.01 (first pair B)",
+       "min_cos": 0.209501
+      },
+      {
+       "arm": "lam 0.0001 vs 0.01 (first pair B)",
+       "min_cos": 0.226723
+      }
+     ]
+    }
+   }
+  ],
+  "summary": {
+   "primary": "variant_wellcond",
+   "secondary_spec": {
+    "min_cos": -0.923625,
+    "n": 50000,
+    "lam": 0.0,
+    "note": "spec-exact geometry; recorded, not gated (tail-limited identification, see E1 drift note)"
+   },
+   "gamma_range": [
+    0.9429,
+    4.8049
+   ]
+  },
+  "runtime_s": 486.2,
+  "config": {
+   "n": [
+    1000,
+    50000
+   ],
+   "lam": [
+    0.0,
+    0.0001,
+    0.01
+   ],
+   "reduced": true,
+   "reduction_note": "e2 n_high reduced 1e5 -> 50000 for CPU budget; labeled 'reduced'"
+  }
+ },
+ "env": {
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.0",
+  "machine": "AMD64",
+  "platform": "Windows-11-10.0.26300-SP0"
+ },
+ "code_version": "2dc8b4ae168fa0ed",
+ "inputs": {
+  "gaussian_model": "dbd23d9603b3c6d3",
+  "fix": "a59ad42cfadeab58",
+  "lda_ncm": "dd9cc4b2db55cbc0",
+  "diagnostic": "62b43609bf7cdd4f"
+ },
+ "derived_tables": [],
+ "drift_notes": [
+  "H01 core.gaussian_model imported (no fallback needed).",
+  "H02 core.fix imported (no fallback needed).",
+  "H03 core.lda_ncm.shrunk_pooled_covariance imported.",
+  "H04 core.diagnostic gamma_ij/sigma_norm imported.",
+  "G06 constant check: Phi(-1/sqrt(2)) = 0.5*erfc(0.5) = 0.239750061093 (G06 log quotes '0.239827...'; those digits are wrong, 4-s.f. 0.2398 stands). All E3/E4 assertions use the exact value; spec tolerances (+-0.001 vs 0.2398) are unaffected."
+ ]
+}

@@ -1,0 +1,1244 @@
+{
+ "run_id": "B_nonvision_smoke",
+ "paper": "B",
+ "experiment": "nonvision",
+ "provenance": "smoke-local-cached",
+ "created_utc": "2026-10-22T04:34:43Z",
+ "executed_utc": "2026-10-22T04:31:01Z",
+ "schema": "G08-S2-proposal envelope (H05 precedent); SPEC 9 experiment",
+ "config": {
+  "seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "grouping": "canonical",
+  "lam": 0.0001,
+  "cap_per_task": 200,
+  "dataset": "20newsgroups-by-date",
+  "remove": [
+   "headers",
+   "footers",
+   "quotes"
+  ],
+  "d_expected": 384
+ },
+ "seeds": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "metrics": {
+  "backend": "minilm-l6-v2 (offline cache, d=384)",
+  "d": 384,
+  "seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "grouping": "canonical",
+  "lam": 0.0001,
+  "cap_per_task": 200,
+  "per_seed": [
+   {
+    "seed": 0,
+    "acc_wt": 0.474,
+    "acc_fix": 0.507,
+    "acc_j": 0.598,
+    "fix_gain": 0.033,
+    "gap_j_wt": 0.124,
+    "fix_recovery": 0.266129,
+    "diagnostic": {
+     "per_pair": [
+      {
+       "i": 0,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.120162
+      },
+      {
+       "i": 0,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.194166
+      },
+      {
+       "i": 0,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.135814
+      },
+      {
+       "i": 0,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.128892
+      },
+      {
+       "i": 1,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.120162
+      },
+      {
+       "i": 1,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.198881
+      },
+      {
+       "i": 1,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.142846
+      },
+      {
+       "i": 1,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.106035
+      },
+      {
+       "i": 2,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.194166
+      },
+      {
+       "i": 2,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.198881
+      },
+      {
+       "i": 2,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.191208
+      },
+      {
+       "i": 2,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.222242
+      },
+      {
+       "i": 3,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.135814
+      },
+      {
+       "i": 3,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.142846
+      },
+      {
+       "i": 3,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.191208
+      },
+      {
+       "i": 3,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.143755
+      },
+      {
+       "i": 4,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.128892
+      },
+      {
+       "i": 4,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.106035
+      },
+      {
+       "i": 4,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.222242
+      },
+      {
+       "i": 4,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.143755
+      }
+     ],
+     "n_pairs": 20,
+     "cos_mean": 1.0,
+     "cos_min": 1.0,
+     "rel_mean": 1.0,
+     "cv_mean": 0.15840010000000002,
+     "cv_max": 0.222242
+    },
+    "lw_intensity_mean": 0.474019,
+    "n_train": 1000,
+    "n_test": 1000,
+    "fit_max_grad_wt": 1.7527e-08,
+    "fit_j_max_grad": 5.318e-09,
+    "partition": {
+     "chunks": [
+      [
+       0,
+       1,
+       2,
+       3
+      ],
+      [
+       4,
+       5,
+       6,
+       7
+      ],
+      [
+       8,
+       9,
+       10,
+       11
+      ],
+      [
+       12,
+       13,
+       14,
+       15
+      ],
+      [
+       16,
+       17,
+       18,
+       19
+      ]
+     ],
+     "order": [
+      4,
+      3,
+      1,
+      2,
+      0
+     ],
+     "note": "CANONICAL_PARTITION: consecutive 4-class chunks of the canonical class list (coordinator pin; grouping unstated in source, G03 OWNER-ASK #7). Seed permutes task training order only; evaluation is order-invariant, so the seed spread is structurally 0 under this grouping."
+    }
+   },
+   {
+    "seed": 1,
+    "acc_wt": 0.48,
+    "acc_fix": 0.541,
+    "acc_j": 0.605,
+    "fix_gain": 0.061,
+    "gap_j_wt": 0.125,
+    "fix_recovery": 0.488,
+    "diagnostic": {
+     "per_pair": [
+      {
+       "i": 0,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.130366
+      },
+      {
+       "i": 0,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.088934
+      },
+      {
+       "i": 0,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.080405
+      },
+      {
+       "i": 0,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.109716
+      },
+      {
+       "i": 1,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.130366
+      },
+      {
+       "i": 1,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.119897
+      },
+      {
+       "i": 1,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.080455
+      },
+      {
+       "i": 1,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.090411
+      },
+      {
+       "i": 2,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.088934
+      },
+      {
+       "i": 2,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.119897
+      },
+      {
+       "i": 2,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.089626
+      },
+      {
+       "i": 2,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.09604
+      },
+      {
+       "i": 3,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.080405
+      },
+      {
+       "i": 3,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.080455
+      },
+      {
+       "i": 3,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.089626
+      },
+      {
+       "i": 3,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.09747
+      },
+      {
+       "i": 4,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.109716
+      },
+      {
+       "i": 4,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.090411
+      },
+      {
+       "i": 4,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.09604
+      },
+      {
+       "i": 4,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.09747
+      }
+     ],
+     "n_pairs": 20,
+     "cos_mean": 1.0,
+     "cos_min": 1.0,
+     "rel_mean": 1.0,
+     "cv_mean": 0.09833199999999999,
+     "cv_max": 0.130366
+    },
+    "lw_intensity_mean": 0.419412,
+    "n_train": 1000,
+    "n_test": 1000,
+    "fit_max_grad_wt": 2.785e-09,
+    "fit_j_max_grad": 3.463e-09,
+    "partition": {
+     "chunks": [
+      [
+       0,
+       1,
+       2,
+       3
+      ],
+      [
+       4,
+       5,
+       6,
+       7
+      ],
+      [
+       8,
+       9,
+       10,
+       11
+      ],
+      [
+       12,
+       13,
+       14,
+       15
+      ],
+      [
+       16,
+       17,
+       18,
+       19
+      ]
+     ],
+     "order": [
+      3,
+      1,
+      0,
+      4,
+      2
+     ],
+     "note": "CANONICAL_PARTITION: consecutive 4-class chunks of the canonical class list (coordinator pin; grouping unstated in source, G03 OWNER-ASK #7). Seed permutes task training order only; evaluation is order-invariant, so the seed spread is structurally 0 under this grouping."
+    }
+   },
+   {
+    "seed": 2,
+    "acc_wt": 0.493,
+    "acc_fix": 0.518,
+    "acc_j": 0.599,
+    "fix_gain": 0.025,
+    "gap_j_wt": 0.106,
+    "fix_recovery": 0.235849,
+    "diagnostic": {
+     "per_pair": [
+      {
+       "i": 0,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.129502
+      },
+      {
+       "i": 0,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.098538
+      },
+      {
+       "i": 0,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.149411
+      },
+      {
+       "i": 0,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.141231
+      },
+      {
+       "i": 1,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.129502
+      },
+      {
+       "i": 1,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.139031
+      },
+      {
+       "i": 1,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.161237
+      },
+      {
+       "i": 1,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.133552
+      },
+      {
+       "i": 2,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.098538
+      },
+      {
+       "i": 2,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.139031
+      },
+      {
+       "i": 2,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.099377
+      },
+      {
+       "i": 2,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.11398
+      },
+      {
+       "i": 3,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.149411
+      },
+      {
+       "i": 3,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.161237
+      },
+      {
+       "i": 3,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.099377
+      },
+      {
+       "i": 3,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.127917
+      },
+      {
+       "i": 4,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.141231
+      },
+      {
+       "i": 4,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.133552
+      },
+      {
+       "i": 4,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.11398
+      },
+      {
+       "i": 4,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.127917
+      }
+     ],
+     "n_pairs": 20,
+     "cos_mean": 1.0,
+     "cos_min": 1.0,
+     "rel_mean": 1.0,
+     "cv_mean": 0.1293776,
+     "cv_max": 0.161237
+    },
+    "lw_intensity_mean": 0.484114,
+    "n_train": 1000,
+    "n_test": 1000,
+    "fit_max_grad_wt": 8.429e-09,
+    "fit_j_max_grad": 1.5706e-08,
+    "partition": {
+     "chunks": [
+      [
+       0,
+       1,
+       2,
+       3
+      ],
+      [
+       4,
+       5,
+       6,
+       7
+      ],
+      [
+       8,
+       9,
+       10,
+       11
+      ],
+      [
+       12,
+       13,
+       14,
+       15
+      ],
+      [
+       16,
+       17,
+       18,
+       19
+      ]
+     ],
+     "order": [
+      3,
+      4,
+      0,
+      1,
+      2
+     ],
+     "note": "CANONICAL_PARTITION: consecutive 4-class chunks of the canonical class list (coordinator pin; grouping unstated in source, G03 OWNER-ASK #7). Seed permutes task training order only; evaluation is order-invariant, so the seed spread is structurally 0 under this grouping."
+    }
+   },
+   {
+    "seed": 3,
+    "acc_wt": 0.496,
+    "acc_fix": 0.543,
+    "acc_j": 0.602,
+    "fix_gain": 0.047,
+    "gap_j_wt": 0.106,
+    "fix_recovery": 0.443396,
+    "diagnostic": {
+     "per_pair": [
+      {
+       "i": 0,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.094666
+      },
+      {
+       "i": 0,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.059685
+      },
+      {
+       "i": 0,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.13779
+      },
+      {
+       "i": 0,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.148793
+      },
+      {
+       "i": 1,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.094666
+      },
+      {
+       "i": 1,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.097818
+      },
+      {
+       "i": 1,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.13899
+      },
+      {
+       "i": 1,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.10532
+      },
+      {
+       "i": 2,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.059685
+      },
+      {
+       "i": 2,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.097818
+      },
+      {
+       "i": 2,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.096699
+      },
+      {
+       "i": 2,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.086736
+      },
+      {
+       "i": 3,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.13779
+      },
+      {
+       "i": 3,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.13899
+      },
+      {
+       "i": 3,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.096699
+      },
+      {
+       "i": 3,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.147982
+      },
+      {
+       "i": 4,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.148793
+      },
+      {
+       "i": 4,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.10532
+      },
+      {
+       "i": 4,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.086736
+      },
+      {
+       "i": 4,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.147982
+      }
+     ],
+     "n_pairs": 20,
+     "cos_mean": 1.0,
+     "cos_min": 1.0,
+     "rel_mean": 1.0,
+     "cv_mean": 0.1114479,
+     "cv_max": 0.148793
+    },
+    "lw_intensity_mean": 0.463485,
+    "n_train": 1000,
+    "n_test": 1000,
+    "fit_max_grad_wt": 3.084e-08,
+    "fit_j_max_grad": 1.328e-09,
+    "partition": {
+     "chunks": [
+      [
+       0,
+       1,
+       2,
+       3
+      ],
+      [
+       4,
+       5,
+       6,
+       7
+      ],
+      [
+       8,
+       9,
+       10,
+       11
+      ],
+      [
+       12,
+       13,
+       14,
+       15
+      ],
+      [
+       16,
+       17,
+       18,
+       19
+      ]
+     ],
+     "order": [
+      2,
+      3,
+      0,
+      1,
+      4
+     ],
+     "note": "CANONICAL_PARTITION: consecutive 4-class chunks of the canonical class list (coordinator pin; grouping unstated in source, G03 OWNER-ASK #7). Seed permutes task training order only; evaluation is order-invariant, so the seed spread is structurally 0 under this grouping."
+    }
+   },
+   {
+    "seed": 4,
+    "acc_wt": 0.518,
+    "acc_fix": 0.532,
+    "acc_j": 0.635,
+    "fix_gain": 0.014,
+    "gap_j_wt": 0.117,
+    "fix_recovery": 0.119658,
+    "diagnostic": {
+     "per_pair": [
+      {
+       "i": 0,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.125057
+      },
+      {
+       "i": 0,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.085811
+      },
+      {
+       "i": 0,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.12781
+      },
+      {
+       "i": 0,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.103063
+      },
+      {
+       "i": 1,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.125057
+      },
+      {
+       "i": 1,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.119015
+      },
+      {
+       "i": 1,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.136924
+      },
+      {
+       "i": 1,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.091315
+      },
+      {
+       "i": 2,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.085811
+      },
+      {
+       "i": 2,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.119015
+      },
+      {
+       "i": 2,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.124996
+      },
+      {
+       "i": 2,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.116386
+      },
+      {
+       "i": 3,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.12781
+      },
+      {
+       "i": 3,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.136924
+      },
+      {
+       "i": 3,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.124996
+      },
+      {
+       "i": 3,
+       "j": 4,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.124886
+      },
+      {
+       "i": 4,
+       "j": 0,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.103063
+      },
+      {
+       "i": 4,
+       "j": 1,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.091315
+      },
+      {
+       "i": 4,
+       "j": 2,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.116386
+      },
+      {
+       "i": 4,
+       "j": 3,
+       "cos": 1.0,
+       "rel": 1.0,
+       "cv": 0.124886
+      }
+     ],
+     "n_pairs": 20,
+     "cos_mean": 1.0,
+     "cos_min": 1.0,
+     "rel_mean": 1.0,
+     "cv_mean": 0.1155263,
+     "cv_max": 0.136924
+    },
+    "lw_intensity_mean": 0.46001,
+    "n_train": 1000,
+    "n_test": 1000,
+    "fit_max_grad_wt": 3.1024e-08,
+    "fit_j_max_grad": 2.843e-09,
+    "partition": {
+     "chunks": [
+      [
+       0,
+       1,
+       2,
+       3
+      ],
+      [
+       4,
+       5,
+       6,
+       7
+      ],
+      [
+       8,
+       9,
+       10,
+       11
+      ],
+      [
+       12,
+       13,
+       14,
+       15
+      ],
+      [
+       16,
+       17,
+       18,
+       19
+      ]
+     ],
+     "order": [
+      4,
+      0,
+      1,
+      2,
+      3
+     ],
+     "note": "CANONICAL_PARTITION: consecutive 4-class chunks of the canonical class list (coordinator pin; grouping unstated in source, G03 OWNER-ASK #7). Seed permutes task training order only; evaluation is order-invariant, so the seed spread is structurally 0 under this grouping."
+    }
+   }
+  ],
+  "aggregate": {
+   "acc_wt": {
+    "mean": 0.4922,
+    "sd": 0.017035,
+    "per_seed": [
+     0.474,
+     0.48,
+     0.493,
+     0.496,
+     0.518
+    ]
+   },
+   "acc_fix": {
+    "mean": 0.5282,
+    "sd": 0.015418,
+    "per_seed": [
+     0.507,
+     0.541,
+     0.518,
+     0.543,
+     0.532
+    ]
+   },
+   "acc_j": {
+    "mean": 0.6078,
+    "sd": 0.01545,
+    "per_seed": [
+     0.598,
+     0.605,
+     0.599,
+     0.602,
+     0.635
+    ]
+   },
+   "fix_gain": {
+    "mean": 0.036,
+    "sd": 0.018439,
+    "per_seed": [
+     0.033,
+     0.061,
+     0.025,
+     0.047,
+     0.014
+    ]
+   },
+   "gap_j_wt": {
+    "mean": 0.1156,
+    "sd": 0.00929,
+    "per_seed": [
+     0.124,
+     0.125,
+     0.106,
+     0.106,
+     0.117
+    ]
+   },
+   "fix_recovery": {
+    "mean": 0.310606,
+    "sd": 0.152586,
+    "per_seed": [
+     0.266129,
+     0.488,
+     0.235849,
+     0.443396,
+     0.119658
+    ]
+   },
+   "cos_mean": {
+    "mean": 1.0,
+    "sd": 0.0,
+    "per_seed": [
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "rel_mean": {
+    "mean": 1.0,
+    "sd": 0.0,
+    "per_seed": [
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "cv_mean": {
+    "mean": 0.122617,
+    "sd": 0.022863,
+    "per_seed": [
+     0.1584,
+     0.098332,
+     0.129378,
+     0.111448,
+     0.115526
+    ]
+   }
+  },
+  "gates": {
+   "cos_ge_090": true,
+   "cv_le_020": true,
+   "criteria": "pre-declared falsification (SPEC 9): fails if cosine < 0.90 or CV > 0.20 -- verdicts attach to the FULL run; a smoke records them without claiming the verdict"
+  },
+  "paper_context": {
+   "never_asserted": true,
+   "source": "G03_log.md SPEC 9 (tab:nonvision L2729-2751)",
+   "WT_acc_pct": 64.2,
+   "WT_sd": 0.98,
+   "FIX_acc_pct": 71.5,
+   "FIX_sd": 0.95,
+   "FIX_gain": 7.3,
+   "FIX_gain_ci95": [
+    7.21,
+    7.39
+   ],
+   "J_acc_pct": 73.84,
+   "J_sd": 1.0,
+   "gap_J_minus_WT": 9.64,
+   "fix_recovery_pct": 76.0,
+   "cosine": 0.93,
+   "cv": 0.12
+  },
+  "runtime_s": 210.8
+ },
+ "paper_context": {
+  "never_asserted": true,
+  "source": "G03_log.md SPEC 9 (tab:nonvision L2729-2751)",
+  "WT_acc_pct": 64.2,
+  "WT_sd": 0.98,
+  "FIX_acc_pct": 71.5,
+  "FIX_sd": 0.95,
+  "FIX_gain": 7.3,
+  "FIX_gain_ci95": [
+   7.21,
+   7.39
+  ],
+  "J_acc_pct": 73.84,
+  "J_sd": 1.0,
+  "gap_J_minus_WT": 9.64,
+  "fix_recovery_pct": 76.0,
+  "cosine": 0.93,
+  "cv": 0.12
+ },
+ "env": {
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.0",
+  "platform": "Windows-11-10.0.26300-SP0"
+ },
+ "code_version": "e7eeeec1bd5b8251",
+ "inputs": {
+  "fix": "a59ad42cfadeab58",
+  "lda_ncm": "dd9cc4b2db55cbc0",
+  "diagnostic": "62b43609bf7cdd4f"
+ },
+ "drift_notes": [
+  "H02 core.fix imported (de_center / TaskStats).",
+  "H03 core.lda_ncm.shrunk_pooled_covariance imported (returns (cov, intensity)).",
+  "H04 core.diagnostic bias-direction API imported.",
+  "H01 seed policy (derive_seed) imported."
+ ]
+}

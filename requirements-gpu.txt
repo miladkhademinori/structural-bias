@@ -1,0 +1,25 @@
+# requirements-gpu.txt -- Google Colab (T4) environment for feature extraction
+# Agent G05, 2026-10-21. Verified-combo sources: colabtools issue #5925
+# (2026-03: Colab default torch 2.11.0 / torchvision 0.26.0, CUDA 13) and the
+# owner's local pip-current CPU mirror (torch 2.14.0 / torchvision 0.29.0,
+# timm 1.0.29). See ENVIRONMENTS.md section 4.
+#
+# RULE: do NOT reinstall torch/torchvision on Colab. The preinstalled CUDA
+# build matches the runtime driver; a pip install of torch pulls CPU or
+# mismatched-CUDA wheels and silently kills GPU acceleration. The notebook
+# asserts the ranges below and records the exact runtime versions into every
+# results JSON instead.
+
+# timm is the only package we add (backbone zoo: ViT-B/16-IN21K, DINOv2
+# ViT-B/14, CLIP ViT-B/16, ResNet-50, MAE ViT-B).
+timm==1.0.29
+
+# Satisfied by the Colab preinstall; assert at notebook start (colab/*.ipynb):
+#   torch >= 2.11, < 3
+#   torchvision >= 0.26, < 1
+# torch==2.14.0 / torchvision==0.29.0 is the CPU mirror combo verified locally
+# (identical model-loading API), so local CPU smoke runs and Colab GPU runs
+# share one code path.
+
+# numpy / scipy / scikit-learn / pandas / matplotlib ship on Colab already and
+# are covered by requirements.txt; installing that file first is safe there.

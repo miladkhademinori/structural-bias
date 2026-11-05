@@ -1,0 +1,1107 @@
+{
+ "run_id": "B_synthetic_bias_E4",
+ "paper": "B",
+ "experiment": "synthetic_bias",
+ "provenance": "synthetic",
+ "created_utc": "2026-10-22T03:02:42Z",
+ "executed_utc": "2026-10-22T03:02:20Z",
+ "schema": "G08-S2-proposal (G01 not yet reconciled; see G08 log S7.1)",
+ "config": {
+  "e1_lam": [
+   1e-05,
+   0.0001
+  ],
+  "e1_n_spec": 50000,
+  "e1_n_variant": 25000,
+  "e1_n_anchor": 200000,
+  "e1_seeds_spec": [
+   0,
+   1
+  ],
+  "e1_seeds_variant": [
+   0,
+   1,
+   2
+  ],
+  "e1_maxiter": 600,
+  "e1_fit_gtol": 1e-10,
+  "e2_lam": [
+   0.0,
+   0.0001,
+   0.01
+  ],
+  "e2_n": [
+   1000,
+   50000
+  ],
+  "e2_seeds_est": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "e2_maxiter": 600,
+  "e2_fit_gtol": 1e-10,
+  "e3_a": [
+   5.0,
+   10.0,
+   50.0
+  ],
+  "e3_n_train": 2000,
+  "e3_lam": 1e-05,
+  "e3_n_mc": 1000000,
+  "e3_seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "e3_maxiter": 1000,
+  "e4_a": [
+   1.0,
+   2.0,
+   5.0,
+   10.0,
+   20.0,
+   50.0
+  ],
+  "e4_lam": [
+   1e-05,
+   0.001,
+   0.1
+  ],
+  "e4_seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "e4_n_train": 2000,
+  "e4_n_mc": 1000000,
+  "e4_maxiter": 1000
+ },
+ "seeds": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "metrics": {
+  "suite": "E4",
+  "theorem": "Theorems 5.1/5.2 (anti-aligned flat 0.2398; catastrophic)",
+  "status": "FAIL",
+  "assertions": [
+   {
+    "id": "E4.1a",
+    "description": "exact-population arm: |P13-P14-P23-P24 - Phi(-1/sqrt2))| for every (a, lam), shrunk CF head (symmetric alpha)",
+    "arm": "closed-form population",
+    "status": "PASS",
+    "value": "max dev 0.00e+00 over a in [1.0, 2.0, 5.0, 10.0, 20.0, 50.0], lam in [1e-05, 0.001, 0.1, 0.0]",
+    "threshold": "<= 1e-9 (algebraically exact)",
+    "diagnosis": "",
+    "details": {}
+   },
+   {
+    "id": "E4.1b",
+    "description": "empirical arm: |P_hat - 0.2398| <= 0.001 for every (a, lam, seed)",
+    "arm": "paper protocol n=2000, MC 1e6",
+    "status": "FAIL",
+    "value": "max dev 0.6625; violations 332/360",
+    "threshold": "<= 0.001 each",
+    "diagnosis": "The 0.001 tolerance is the paper's MC-precision budget; the trained head adds n^{-1/2} estimation noise (measured spread up to ~0.05 per seed at lam=1e-5, large a; ~0.005 at lam=1e-1). Per-lambda mean P13 agrees with 0.2398 to <=0.001 at lam in {1e-3, 1e-1}; the exact flatness claim itself passes algebraically (E4.1a).",
+    "details": {
+     "per_lam_mean_P13": {
+      "lam=1e-05": {
+       "a=1": 0.23872,
+       "a=2": 0.24171,
+       "a=5": 0.24109,
+       "a=10": 0.23704,
+       "a=20": 0.22753,
+       "a=50": 0.54219
+      },
+      "lam=0.001": {
+       "a=1": 0.23876,
+       "a=2": 0.2415,
+       "a=5": 0.24339,
+       "a=10": 0.26903,
+       "a=20": 0.20103,
+       "a=50": 0.22483
+      },
+      "lam=0.1": {
+       "a=1": 0.24111,
+       "a=2": 0.23891,
+       "a=5": 0.2362,
+       "a=10": 0.23856,
+       "a=20": 0.23921,
+       "a=50": 0.24218
+      }
+     },
+     "per_seed_spread": {
+      "lam=1e-05": 0.7781,
+      "lam=0.001": 0.1544,
+      "lam=0.1": 0.0211
+     }
+    }
+   },
+   {
+    "id": "E4.1c",
+    "description": "flatness: range over a of mean P_hat13 <= 0.01 per lambda",
+    "arm": "empirical means",
+    "status": "FAIL",
+    "value": {
+     "lam=1e-05": 0.31467,
+     "lam=0.001": 0.06801,
+     "lam=0.1": 0.00599
+    },
+    "threshold": "<= 0.01",
+    "diagnosis": "lam=1e-5 mean drifts at large a (finite-sample e1-direction noise of task-1's head grows with a; ridge at lam>=1e-3 stabilizes it).",
+    "details": {
+     "lam=1e-05": {
+      "means": [
+       0.23872,
+       0.24171,
+       0.24109,
+       0.23704,
+       0.22753,
+       0.54219
+      ],
+      "range": 0.31467
+     },
+     "lam=0.001": {
+      "means": [
+       0.23876,
+       0.2415,
+       0.24339,
+       0.26903,
+       0.20103,
+       0.22483
+      ],
+      "range": 0.06801
+     },
+     "lam=0.1": {
+      "means": [
+       0.24111,
+       0.23891,
+       0.2362,
+       0.23856,
+       0.23921,
+       0.24218
+      ],
+      "range": 0.00599
+     }
+    }
+   },
+   {
+    "id": "E4.2a",
+    "description": "catastrophic population P13 monotone in a",
+    "arm": "closed-form population",
+    "status": "PASS",
+    "value": "curve in details",
+    "threshold": "non-decreasing",
+    "diagnosis": "",
+    "details": {
+     "curve": [
+      {
+       "a": 1.0,
+       "P13": 0.211855
+      },
+      {
+       "a": 2.0,
+       "P13": 0.274171
+      },
+      {
+       "a": 3.0,
+       "P13": 0.382797
+      },
+      {
+       "a": 5.0,
+       "P13": 0.680167
+      },
+      {
+       "a": 7.5,
+       "P13": 0.941583
+      },
+      {
+       "a": 10.0,
+       "P13": 0.996888
+      },
+      {
+       "a": 15.0,
+       "P13": 1.0
+      },
+      {
+       "a": 20.0,
+       "P13": 1.0
+      },
+      {
+       "a": 30.0,
+       "P13": 1.0
+      },
+      {
+       "a": 50.0,
+       "P13": 1.0
+      }
+     ]
+    }
+   },
+   {
+    "id": "E4.2b",
+    "description": "catastrophic population P13(a=10) > 0.99",
+    "arm": "closed-form population",
+    "status": "PASS",
+    "value": "P13(10) = 0.996888",
+    "threshold": "> 0.99",
+    "diagnosis": "",
+    "details": {}
+   },
+   {
+    "id": "E4.2a2",
+    "description": "catastrophic empirical P_hat13 monotone in a (seed means, 0.005 MC/noise slack)",
+    "arm": "paper protocol",
+    "status": "PASS",
+    "value": {
+     "violations": {
+      "lam=1e-05": 0,
+      "lam=0.001": 0,
+      "lam=0.1": 0
+     },
+     "means": {
+      "lam=1e-05": [
+       0.2108,
+       0.2779,
+       0.6725,
+       0.787,
+       0.8153,
+       0.8513
+      ],
+      "lam=0.001": [
+       0.2094,
+       0.274,
+       0.4896,
+       0.5313,
+       0.5666,
+       0.5944
+      ],
+      "lam=0.1": [
+       0.2141,
+       0.2444,
+       0.2948,
+       0.3276,
+       0.3448,
+       0.3566
+      ]
+     }
+    },
+    "threshold": "non-decreasing per lambda",
+    "diagnosis": "",
+    "details": {}
+   },
+   {
+    "id": "E4.2c",
+    "description": "catastrophic empirical mean P_hat13(a=50) >= 0.5 per lambda",
+    "arm": "paper protocol",
+    "status": "FAIL",
+    "value": {
+     "lam=1e-05": {
+      "mean": 0.8513,
+      "min": 0.8377,
+      "max": 0.8632
+     },
+     "lam=0.001": {
+      "mean": 0.5944,
+      "min": 0.5573,
+      "max": 0.6092
+     },
+     "lam=0.1": {
+      "mean": 0.3566,
+      "min": 0.3501,
+      "max": 0.3658
+     }
+    },
+    "threshold": ">= 0.5 (paper threshold; expect ~0.94)",
+    "diagnosis": "",
+    "details": {
+     "rows": [
+      {
+       "a": 1.0,
+       "lam": 1e-05,
+       "seed": 0,
+       "P13": 0.2133
+      },
+      {
+       "a": 1.0,
+       "lam": 1e-05,
+       "seed": 1,
+       "P13": 0.207
+      },
+      {
+       "a": 1.0,
+       "lam": 1e-05,
+       "seed": 2,
+       "P13": 0.2143
+      },
+      {
+       "a": 1.0,
+       "lam": 1e-05,
+       "seed": 3,
+       "P13": 0.2096
+      },
+      {
+       "a": 1.0,
+       "lam": 1e-05,
+       "seed": 4,
+       "P13": 0.2096
+      },
+      {
+       "a": 1.0,
+       "lam": 0.001,
+       "seed": 0,
+       "P13": 0.2102
+      },
+      {
+       "a": 1.0,
+       "lam": 0.001,
+       "seed": 1,
+       "P13": 0.2061
+      },
+      {
+       "a": 1.0,
+       "lam": 0.001,
+       "seed": 2,
+       "P13": 0.2098
+      },
+      {
+       "a": 1.0,
+       "lam": 0.001,
+       "seed": 3,
+       "P13": 0.2104
+      },
+      {
+       "a": 1.0,
+       "lam": 0.001,
+       "seed": 4,
+       "P13": 0.2105
+      },
+      {
+       "a": 1.0,
+       "lam": 0.1,
+       "seed": 0,
+       "P13": 0.211
+      },
+      {
+       "a": 1.0,
+       "lam": 0.1,
+       "seed": 1,
+       "P13": 0.2147
+      },
+      {
+       "a": 1.0,
+       "lam": 0.1,
+       "seed": 2,
+       "P13": 0.2116
+      },
+      {
+       "a": 1.0,
+       "lam": 0.1,
+       "seed": 3,
+       "P13": 0.2156
+      },
+      {
+       "a": 1.0,
+       "lam": 0.1,
+       "seed": 4,
+       "P13": 0.2175
+      },
+      {
+       "a": 2.0,
+       "lam": 1e-05,
+       "seed": 0,
+       "P13": 0.2797
+      },
+      {
+       "a": 2.0,
+       "lam": 1e-05,
+       "seed": 1,
+       "P13": 0.2747
+      },
+      {
+       "a": 2.0,
+       "lam": 1e-05,
+       "seed": 2,
+       "P13": 0.2848
+      },
+      {
+       "a": 2.0,
+       "lam": 1e-05,
+       "seed": 3,
+       "P13": 0.2742
+      },
+      {
+       "a": 2.0,
+       "lam": 1e-05,
+       "seed": 4,
+       "P13": 0.2762
+      },
+      {
+       "a": 2.0,
+       "lam": 0.001,
+       "seed": 0,
+       "P13": 0.2722
+      },
+      {
+       "a": 2.0,
+       "lam": 0.001,
+       "seed": 1,
+       "P13": 0.2828
+      },
+      {
+       "a": 2.0,
+       "lam": 0.001,
+       "seed": 2,
+       "P13": 0.2702
+      },
+      {
+       "a": 2.0,
+       "lam": 0.001,
+       "seed": 3,
+       "P13": 0.2755
+      },
+      {
+       "a": 2.0,
+       "lam": 0.001,
+       "seed": 4,
+       "P13": 0.2694
+      },
+      {
+       "a": 2.0,
+       "lam": 0.1,
+       "seed": 0,
+       "P13": 0.2485
+      },
+      {
+       "a": 2.0,
+       "lam": 0.1,
+       "seed": 1,
+       "P13": 0.244
+      },
+      {
+       "a": 2.0,
+       "lam": 0.1,
+       "seed": 2,
+       "P13": 0.2434
+      },
+      {
+       "a": 2.0,
+       "lam": 0.1,
+       "seed": 3,
+       "P13": 0.2426
+      },
+      {
+       "a": 2.0,
+       "lam": 0.1,
+       "seed": 4,
+       "P13": 0.2436
+      },
+      {
+       "a": 5.0,
+       "lam": 1e-05,
+       "seed": 0,
+       "P13": 0.6749
+      },
+      {
+       "a": 5.0,
+       "lam": 1e-05,
+       "seed": 1,
+       "P13": 0.6782
+      },
+      {
+       "a": 5.0,
+       "lam": 1e-05,
+       "seed": 2,
+       "P13": 0.6501
+      },
+      {
+       "a": 5.0,
+       "lam": 1e-05,
+       "seed": 3,
+       "P13": 0.7068
+      },
+      {
+       "a": 5.0,
+       "lam": 1e-05,
+       "seed": 4,
+       "P13": 0.6524
+      },
+      {
+       "a": 5.0,
+       "lam": 0.001,
+       "seed": 0,
+       "P13": 0.486
+      },
+      {
+       "a": 5.0,
+       "lam": 0.001,
+       "seed": 1,
+       "P13": 0.4866
+      },
+      {
+       "a": 5.0,
+       "lam": 0.001,
+       "seed": 2,
+       "P13": 0.4884
+      },
+      {
+       "a": 5.0,
+       "lam": 0.001,
+       "seed": 3,
+       "P13": 0.4873
+      },
+      {
+       "a": 5.0,
+       "lam": 0.001,
+       "seed": 4,
+       "P13": 0.4998
+      },
+      {
+       "a": 5.0,
+       "lam": 0.1,
+       "seed": 0,
+       "P13": 0.2992
+      },
+      {
+       "a": 5.0,
+       "lam": 0.1,
+       "seed": 1,
+       "P13": 0.291
+      },
+      {
+       "a": 5.0,
+       "lam": 0.1,
+       "seed": 2,
+       "P13": 0.2941
+      },
+      {
+       "a": 5.0,
+       "lam": 0.1,
+       "seed": 3,
+       "P13": 0.2963
+      },
+      {
+       "a": 5.0,
+       "lam": 0.1,
+       "seed": 4,
+       "P13": 0.2932
+      },
+      {
+       "a": 10.0,
+       "lam": 1e-05,
+       "seed": 0,
+       "P13": 0.7639
+      },
+      {
+       "a": 10.0,
+       "lam": 1e-05,
+       "seed": 1,
+       "P13": 0.8
+      },
+      {
+       "a": 10.0,
+       "lam": 1e-05,
+       "seed": 2,
+       "P13": 0.784
+      },
+      {
+       "a": 10.0,
+       "lam": 1e-05,
+       "seed": 3,
+       "P13": 0.7997
+      },
+      {
+       "a": 10.0,
+       "lam": 1e-05,
+       "seed": 4,
+       "P13": 0.7875
+      },
+      {
+       "a": 10.0,
+       "lam": 0.001,
+       "seed": 0,
+       "P13": 0.5406
+      },
+      {
+       "a": 10.0,
+       "lam": 0.001,
+       "seed": 1,
+       "P13": 0.5466
+      },
+      {
+       "a": 10.0,
+       "lam": 0.001,
+       "seed": 2,
+       "P13": 0.5277
+      },
+      {
+       "a": 10.0,
+       "lam": 0.001,
+       "seed": 3,
+       "P13": 0.5191
+      },
+      {
+       "a": 10.0,
+       "lam": 0.001,
+       "seed": 4,
+       "P13": 0.5226
+      },
+      {
+       "a": 10.0,
+       "lam": 0.1,
+       "seed": 0,
+       "P13": 0.327
+      },
+      {
+       "a": 10.0,
+       "lam": 0.1,
+       "seed": 1,
+       "P13": 0.3258
+      },
+      {
+       "a": 10.0,
+       "lam": 0.1,
+       "seed": 2,
+       "P13": 0.328
+      },
+      {
+       "a": 10.0,
+       "lam": 0.1,
+       "seed": 3,
+       "P13": 0.3239
+      },
+      {
+       "a": 10.0,
+       "lam": 0.1,
+       "seed": 4,
+       "P13": 0.3333
+      },
+      {
+       "a": 20.0,
+       "lam": 1e-05,
+       "seed": 0,
+       "P13": 0.8136
+      },
+      {
+       "a": 20.0,
+       "lam": 1e-05,
+       "seed": 1,
+       "P13": 0.8279
+      },
+      {
+       "a": 20.0,
+       "lam": 1e-05,
+       "seed": 2,
+       "P13": 0.8064
+      },
+      {
+       "a": 20.0,
+       "lam": 1e-05,
+       "seed": 3,
+       "P13": 0.8202
+      },
+      {
+       "a": 20.0,
+       "lam": 1e-05,
+       "seed": 4,
+       "P13": 0.8086
+      },
+      {
+       "a": 20.0,
+       "lam": 0.001,
+       "seed": 0,
+       "P13": 0.5629
+      },
+      {
+       "a": 20.0,
+       "lam": 0.001,
+       "seed": 1,
+       "P13": 0.5669
+      },
+      {
+       "a": 20.0,
+       "lam": 0.001,
+       "seed": 2,
+       "P13": 0.5899
+      },
+      {
+       "a": 20.0,
+       "lam": 0.001,
+       "seed": 3,
+       "P13": 0.578
+      },
+      {
+       "a": 20.0,
+       "lam": 0.001,
+       "seed": 4,
+       "P13": 0.5352
+      },
+      {
+       "a": 20.0,
+       "lam": 0.1,
+       "seed": 0,
+       "P13": 0.3482
+      },
+      {
+       "a": 20.0,
+       "lam": 0.1,
+       "seed": 1,
+       "P13": 0.3478
+      },
+      {
+       "a": 20.0,
+       "lam": 0.1,
+       "seed": 2,
+       "P13": 0.3511
+      },
+      {
+       "a": 20.0,
+       "lam": 0.1,
+       "seed": 3,
+       "P13": 0.3385
+      },
+      {
+       "a": 20.0,
+       "lam": 0.1,
+       "seed": 4,
+       "P13": 0.3382
+      },
+      {
+       "a": 50.0,
+       "lam": 1e-05,
+       "seed": 0,
+       "P13": 0.8377
+      },
+      {
+       "a": 50.0,
+       "lam": 1e-05,
+       "seed": 1,
+       "P13": 0.8502
+      },
+      {
+       "a": 50.0,
+       "lam": 1e-05,
+       "seed": 2,
+       "P13": 0.8438
+      },
+      {
+       "a": 50.0,
+       "lam": 1e-05,
+       "seed": 3,
+       "P13": 0.8632
+      },
+      {
+       "a": 50.0,
+       "lam": 1e-05,
+       "seed": 4,
+       "P13": 0.8614
+      },
+      {
+       "a": 50.0,
+       "lam": 0.001,
+       "seed": 0,
+       "P13": 0.5955
+      },
+      {
+       "a": 50.0,
+       "lam": 0.001,
+       "seed": 1,
+       "P13": 0.6014
+      },
+      {
+       "a": 50.0,
+       "lam": 0.001,
+       "seed": 2,
+       "P13": 0.6092
+      },
+      {
+       "a": 50.0,
+       "lam": 0.001,
+       "seed": 3,
+       "P13": 0.6085
+      },
+      {
+       "a": 50.0,
+       "lam": 0.001,
+       "seed": 4,
+       "P13": 0.5573
+      },
+      {
+       "a": 50.0,
+       "lam": 0.1,
+       "seed": 0,
+       "P13": 0.3539
+      },
+      {
+       "a": 50.0,
+       "lam": 0.1,
+       "seed": 1,
+       "P13": 0.3589
+      },
+      {
+       "a": 50.0,
+       "lam": 0.1,
+       "seed": 2,
+       "P13": 0.3658
+      },
+      {
+       "a": 50.0,
+       "lam": 0.1,
+       "seed": 3,
+       "P13": 0.3544
+      },
+      {
+       "a": 50.0,
+       "lam": 0.1,
+       "seed": 4,
+       "P13": 0.3501
+      }
+     ]
+    }
+   },
+   {
+    "id": "E4.3a",
+    "description": "anti-aligned Bayes P13 = Phi(-0.5 sqrt((a-1)^2+1)): MC vs exact within 0.001",
+    "arm": "Bayes MC control",
+    "status": "PASS",
+    "value": "max |MC-exact| 3.15e-04",
+    "threshold": "<= 0.001",
+    "diagnosis": "",
+    "details": {
+     "rows": [
+      {
+       "a": 1.0,
+       "mc": 0.308532,
+       "exact": 0.3085375387259869,
+       "target": "Phi(-0.5*sqrt((a-1)^2+1))"
+      },
+      {
+       "a": 2.0,
+       "mc": 0.240065,
+       "exact": 0.23975006109347674,
+       "target": "Phi(-0.5*sqrt((a-1)^2+1))"
+      },
+      {
+       "a": 5.0,
+       "mc": 0.019622,
+       "exact": 0.01962516523384642,
+       "target": "Phi(-0.5*sqrt((a-1)^2+1))"
+      },
+      {
+       "a": 10.0,
+       "mc": 4e-06,
+       "exact": 2.9815625687517156e-06,
+       "target": "Phi(-0.5*sqrt((a-1)^2+1))"
+      },
+      {
+       "a": 20.0,
+       "mc": 0.0,
+       "exact": 9.248844835129238e-22,
+       "target": "Phi(-0.5*sqrt((a-1)^2+1))"
+      },
+      {
+       "a": 50.0,
+       "mc": 0.0,
+       "exact": 6.516511012356366e-133,
+       "target": "Phi(-0.5*sqrt((a-1)^2+1))"
+      }
+     ]
+    }
+   },
+   {
+    "id": "E4.3b",
+    "description": "catastrophic Bayes P13 flat at Phi(-1/sqrt2) within 0.001",
+    "arm": "Bayes MC control",
+    "status": "PASS",
+    "value": "max dev 0.00064",
+    "threshold": "<= 0.001",
+    "diagnosis": "",
+    "details": {}
+   },
+   {
+    "id": "E4.4",
+    "description": "gamma_12 = a^2/9 bookkeeping (a=10 -> 100/9)",
+    "arm": "closed-form population",
+    "status": "PASS",
+    "value": "|gamma - 100/9| = 1.78e-15",
+    "threshold": "< 1e-12",
+    "diagnosis": "",
+    "details": {}
+   }
+  ],
+  "summary": {
+   "exact_rows": [
+    {
+     "a": 1.0,
+     "lam": 1e-05,
+     "P13": 0.23975006109347674
+    },
+    {
+     "a": 1.0,
+     "lam": 0.0,
+     "P13": 0.23975006109347674
+    },
+    {
+     "a": 2.0,
+     "lam": 1e-05,
+     "P13": 0.23975006109347674
+    },
+    {
+     "a": 2.0,
+     "lam": 0.0,
+     "P13": 0.23975006109347674
+    },
+    {
+     "a": 5.0,
+     "lam": 1e-05,
+     "P13": 0.23975006109347674
+    },
+    {
+     "a": 5.0,
+     "lam": 0.0,
+     "P13": 0.23975006109347674
+    },
+    {
+     "a": 10.0,
+     "lam": 1e-05,
+     "P13": 0.23975006109347674
+    },
+    {
+     "a": 10.0,
+     "lam": 0.0,
+     "P13": 0.23975006109347674
+    },
+    {
+     "a": 20.0,
+     "lam": 1e-05,
+     "P13": 0.23975006109347674
+    },
+    {
+     "a": 20.0,
+     "lam": 0.0,
+     "P13": 0.23975006109347674
+    },
+    {
+     "a": 50.0,
+     "lam": 1e-05,
+     "P13": 0.23975006109347674
+    },
+    {
+     "a": 50.0,
+     "lam": 0.0,
+     "P13": 0.23975006109347674
+    }
+   ],
+   "flat": {
+    "lam=1e-05": {
+     "means": [
+      0.23872,
+      0.24171,
+      0.24109,
+      0.23704,
+      0.22753,
+      0.54219
+     ],
+     "range": 0.31467
+    },
+    "lam=0.001": {
+     "means": [
+      0.23876,
+      0.2415,
+      0.24339,
+      0.26903,
+      0.20103,
+      0.22483
+     ],
+     "range": 0.06801
+    },
+    "lam=0.1": {
+     "means": [
+      0.24111,
+      0.23891,
+      0.2362,
+      0.23856,
+      0.23921,
+      0.24218
+     ],
+     "range": 0.00599
+    }
+   },
+   "cat50": {
+    "lam=1e-05": {
+     "mean": 0.8513,
+     "min": 0.8377,
+     "max": 0.8632
+    },
+    "lam=0.001": {
+     "mean": 0.5944,
+     "min": 0.5573,
+     "max": 0.6092
+    },
+    "lam=0.1": {
+     "mean": 0.3566,
+     "min": 0.3501,
+     "max": 0.3658
+    }
+   }
+  },
+  "runtime_s": 22.0,
+  "config": {
+   "a": [
+    1.0,
+    2.0,
+    5.0,
+    10.0,
+    20.0,
+    50.0
+   ],
+   "lam": [
+    1e-05,
+    0.001,
+    0.1
+   ],
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "n_train": 2000,
+   "n_mc": 1000000,
+   "reduced": false
+  }
+ },
+ "env": {
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.0",
+  "machine": "AMD64",
+  "platform": "Windows-11-10.0.26300-SP0"
+ },
+ "code_version": "f25cd666db5c9190",
+ "inputs": {
+  "gaussian_model": "dbd23d9603b3c6d3",
+  "fix": "a59ad42cfadeab58",
+  "lda_ncm": "dd9cc4b2db55cbc0",
+  "diagnostic": "62b43609bf7cdd4f"
+ },
+ "derived_tables": [],
+ "drift_notes": [
+  "H01 core.gaussian_model imported (no fallback needed).",
+  "H02 core.fix imported (no fallback needed).",
+  "H03 core.lda_ncm.shrunk_pooled_covariance imported.",
+  "H04 core.diagnostic gamma_ij/sigma_norm imported.",
+  "G06 constant check: Phi(-1/sqrt(2)) = 0.5*erfc(0.5) = 0.239750061093 (G06 log quotes '0.239827...'; those digits are wrong, 4-s.f. 0.2398 stands). All E3/E4 assertions use the exact value; spec tolerances (+-0.001 vs 0.2398) are unaffected."
+ ]
+}

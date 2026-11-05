@@ -1,0 +1,292 @@
+{
+ "test1:pcg64": {
+  "label": "TEST1 ordering arm pcg64",
+  "g_match": 0,
+  "n": 6,
+  "nu_match": 0,
+  "rank": 2,
+  "anchor": 0,
+  "per_cfg": {
+   "vit_in21k|cifar100": {
+    "variant": 3.2350263774787407,
+    "printed": 8.3,
+    "printed_sd": 0.4,
+    "inside": false,
+    "nu": 6.553098349387197,
+    "nu_ok": false
+   },
+   "vit_in21k|imagenet_r": {
+    "variant": 1.3884730145113964,
+    "printed": 5.2,
+    "printed_sd": 0.3,
+    "inside": false,
+    "nu": 10.95108772331941,
+    "nu_ok": false
+   },
+   "dinov2_b14|cifar100": {
+    "variant": 10.886156797326716,
+    "printed": 47.2,
+    "printed_sd": 1.2,
+    "inside": false,
+    "nu": 6.91181233711667,
+    "nu_ok": false
+   },
+   "dinov2_b14|imagenet_r": {
+    "variant": 5.488513126528032,
+    "printed": 39.1,
+    "printed_sd": 1.0,
+    "inside": false,
+    "nu": 10.416945289148423,
+    "nu_ok": false
+   },
+   "clip_b16|cifar100": {
+    "variant": 5.293382720597292,
+    "printed": 23.1,
+    "printed_sd": 0.8,
+    "inside": false,
+    "nu": 6.64764463153657,
+    "nu_ok": false
+   },
+   "clip_b16|imagenet_r": {
+    "variant": 2.741963940869719,
+    "printed": 18.9,
+    "printed_sd": 0.6,
+    "inside": false,
+    "nu": 10.749988204827709,
+    "nu_ok": false
+   }
+  }
+ },
+ "test1:bankrs": {
+  "label": "TEST1 ordering arm bankrs",
+  "g_match": 0,
+  "n": 6,
+  "nu_match": 0,
+  "rank": 2,
+  "anchor": 0,
+  "per_cfg": {
+   "vit_in21k|cifar100": {
+    "variant": 3.0351847833705357,
+    "printed": 8.3,
+    "printed_sd": 0.4,
+    "inside": false,
+    "nu": 6.663715535029428,
+    "nu_ok": false
+   },
+   "vit_in21k|imagenet_r": {
+    "variant": 1.2134978157913938,
+    "printed": 5.2,
+    "printed_sd": 0.3,
+    "inside": false,
+    "nu": 11.651335480693394,
+    "nu_ok": false
+   },
+   "dinov2_b14|cifar100": {
+    "variant": 8.94783306971004,
+    "printed": 47.2,
+    "printed_sd": 1.2,
+    "inside": false,
+    "nu": 7.239950404189384,
+    "nu_ok": false
+   },
+   "dinov2_b14|imagenet_r": {
+    "variant": 5.834392772665545,
+    "printed": 39.1,
+    "printed_sd": 1.0,
+    "inside": false,
+    "nu": 9.917957815167929,
+    "nu_ok": false
+   },
+   "clip_b16|cifar100": {
+    "variant": 5.375165911361421,
+    "printed": 23.1,
+    "printed_sd": 0.8,
+    "inside": false,
+    "nu": 6.599316416740516,
+    "nu_ok": false
+   },
+   "clip_b16|imagenet_r": {
+    "variant": 2.7613717770434967,
+    "printed": 18.9,
+    "printed_sd": 0.6,
+    "inside": false,
+    "nu": 10.22585852124719,
+    "nu_ok": false
+   }
+  }
+ },
+ "test1:canon": {
+  "label": "TEST1 ordering arm canon",
+  "g_match": 0,
+  "n": 6,
+  "nu_match": 0,
+  "rank": 1,
+  "anchor": 0,
+  "per_cfg": {
+   "vit_in21k|cifar100": {
+    "variant": 3.036855493126466,
+    "printed": 8.3,
+    "printed_sd": 0.4,
+    "inside": false,
+    "nu": 7.372279315947145,
+    "nu_ok": false
+   },
+   "vit_in21k|imagenet_r": {
+    "variant": 1.5343312214409512,
+    "printed": 5.2,
+    "printed_sd": 0.3,
+    "inside": false,
+    "nu": 10.629412334131784,
+    "nu_ok": false
+   },
+   "dinov2_b14|cifar100": {
+    "variant": 9.336919441140164,
+    "printed": 47.2,
+    "printed_sd": 1.2,
+    "inside": false,
+    "nu": 7.432929867032681,
+    "nu_ok": false
+   },
+   "dinov2_b14|imagenet_r": {
+    "variant": 3.623091275649659,
+    "printed": 39.1,
+    "printed_sd": 1.0,
+    "inside": false,
+    "nu": 12.365543496388291,
+    "nu_ok": false
+   },
+   "clip_b16|cifar100": {
+    "variant": 2.7845272001632484,
+    "printed": 23.1,
+    "printed_sd": 0.8,
+    "inside": false,
+    "nu": 9.233135907574976,
+    "nu_ok": false
+   },
+   "clip_b16|imagenet_r": {
+    "variant": 2.671188798718827,
+    "printed": 18.9,
+    "printed_sd": 0.6,
+    "inside": false,
+    "nu": 10.172947477919083,
+    "nu_ok": false
+   }
+  }
+ },
+ "test2:scalar": {
+  "label": "TEST2 standardization arm scalar",
+  "g_match": 0,
+  "n": 6,
+  "nu_match": 0,
+  "rank": 2,
+  "anchor": 0,
+  "per_cfg": {
+   "vit_in21k|cifar100": {
+    "variant": 3.2350263774787407,
+    "printed": 8.3,
+    "printed_sd": 0.4,
+    "inside": false,
+    "nu": 6.553098349387197,
+    "nu_ok": false
+   },
+   "vit_in21k|imagenet_r": {
+    "variant": 1.3884730145113964,
+    "printed": 5.2,
+    "printed_sd": 0.3,
+    "inside": false,
+    "nu": 10.95108772331941,
+    "nu_ok": false
+   },
+   "dinov2_b14|cifar100": {
+    "variant": 10.886156797326716,
+    "printed": 47.2,
+    "printed_sd": 1.2,
+    "inside": false,
+    "nu": 6.91181233711667,
+    "nu_ok": false
+   },
+   "dinov2_b14|imagenet_r": {
+    "variant": 5.488513126528032,
+    "printed": 39.1,
+    "printed_sd": 1.0,
+    "inside": false,
+    "nu": 10.416945289148423,
+    "nu_ok": false
+   },
+   "clip_b16|cifar100": {
+    "variant": 5.293382720597292,
+    "printed": 23.1,
+    "printed_sd": 0.8,
+    "inside": false,
+    "nu": 6.64764463153657,
+    "nu_ok": false
+   },
+   "clip_b16|imagenet_r": {
+    "variant": 2.741963940869719,
+    "printed": 18.9,
+    "printed_sd": 0.6,
+    "inside": false,
+    "nu": 10.749988204827709,
+    "nu_ok": false
+   }
+  }
+ },
+ "test2:percoord": {
+  "label": "TEST2 standardization arm percoord",
+  "g_match": 0,
+  "n": 6,
+  "nu_match": 0,
+  "rank": 2,
+  "anchor": 0,
+  "per_cfg": {
+   "vit_in21k|cifar100": {
+    "variant": 3.234020953953235,
+    "printed": 8.3,
+    "printed_sd": 0.4,
+    "inside": false,
+    "nu": 6.719113815873426,
+    "nu_ok": false
+   },
+   "vit_in21k|imagenet_r": {
+    "variant": 1.388159847595481,
+    "printed": 5.2,
+    "printed_sd": 0.3,
+    "inside": false,
+    "nu": 11.150547500224995,
+    "nu_ok": false
+   },
+   "dinov2_b14|cifar100": {
+    "variant": 10.888178063741808,
+    "printed": 47.2,
+    "printed_sd": 1.2,
+    "inside": false,
+    "nu": 6.83267635948265,
+    "nu_ok": false
+   },
+   "dinov2_b14|imagenet_r": {
+    "variant": 5.489459843941403,
+    "printed": 39.1,
+    "printed_sd": 1.0,
+    "inside": false,
+    "nu": 10.555090466009997,
+    "nu_ok": false
+   },
+   "clip_b16|cifar100": {
+    "variant": 5.2880925359524396,
+    "printed": 23.1,
+    "printed_sd": 0.8,
+    "inside": false,
+    "nu": 6.7490175867859366,
+    "nu_ok": false
+   },
+   "clip_b16|imagenet_r": {
+    "variant": 2.742200826896369,
+    "printed": 18.9,
+    "printed_sd": 0.6,
+    "inside": false,
+    "nu": 10.912603910850118,
+    "nu_ok": false
+   }
+  }
+ }
+}

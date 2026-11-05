@@ -1,0 +1,503 @@
+{
+ "caption_tags": [
+  "5 random class orderings (seeds 0--4)",
+  "bold marks the de-centered head",
+  "DomainNet rows are shared-label domains-as-tasks runs (domains sharing one $345$-class label set) that violate the disjoint-label-set assumption"
+ ],
+ "cells_complete": 4,
+ "cells_missing": 16,
+ "code_version": "da09dc8a2a902dadf0f077d03300d501aee01333bbe0e443ba0cfa23e9d0d927",
+ "covariance": "Ledoit-Wolf (analytical 2004) shrunk within-class covariance per task, equal-weight pooled across tasks -- DELEGATED to core/lda_ncm.py (H03) bridge exports",
+ "created_utc": "2026-10-22T04:21:57Z",
+ "cross_check": {
+  "checked": 1,
+  "entries": {
+   "C:\\Users\\milad\\AppData\\Local\\Temp\\lda_ncm_demo-9a2dbuav\\runs\\B\\fix_benchmark\\dinov2b14\\cifar100\\wt.json": {
+    "canonical_tex": 82.3,
+    "delta": 0.6,
+    "stored": 82.9,
+    "verdict": "GATE-FAIL"
+   }
+  },
+  "gate_fail": [
+   "DINOv2-B/14/CIFAR-100/wt: stored 82.9 vs tex 82.3 (delta +0.60)"
+  ],
+  "store_root": "C:\\Users\\milad\\AppData\\Local\\Temp\\lda_ncm_demo-9a2dbuav\\runs"
+ },
+ "demo": {
+  "features_via": "tests/conftest.make_gaussian_task (GaussianTask, d=24, T=4, C=5, n_train=80/class, n_test=30/class, separation=2.0)",
+  "fix_benchmark_entry": "synthetic, delta deliberately +0.6 to prove GATE-FAIL reporting",
+  "partial_row": [
+   "ResNet-50",
+   "ImageNet-100",
+   "seeds 0-2 only"
+  ],
+  "roster_rows": [
+   [
+    "DINOv2-B/14",
+    "CIFAR-100"
+   ],
+   [
+    "ResNet-50",
+    "ImageNet-100"
+   ],
+   [
+    "CLIP ViT-B/16",
+    "DomainNet"
+   ]
+  ]
+ },
+ "derived_tables": [
+  "tab:lda-ncm-comparison"
+ ],
+ "env": {
+  "gpu": "cpu",
+  "numpy": "2.5.2",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.12.10",
+  "scikit-learn": "1.9.0"
+ },
+ "executed_utc": "2026-10-22T04:21:57Z",
+ "experiment": "lda_ncm",
+ "inputs": {
+  "synthetic": "generated in-run; see demo block"
+ },
+ "mode": "demo",
+ "paper": "B",
+ "provenance": "synthetic",
+ "rows": [
+  {
+   "backbone": "DINOv2-B/14",
+   "dataset": "CIFAR-100",
+   "fix": {
+    "mean": 86.5,
+    "sd": 0.3
+   },
+   "inputs_sha256": {
+    "C:\\Users\\milad\\AppData\\Local\\Temp\\lda_ncm_demo-9a2dbuav\\features\\DINOv2-B-14\\CIFAR-100\\seed0.npz": "db31c4b8a289613616b9e5ddfffe4fd98ab2fc690f3237db504c7023f76e66ad",
+    "C:\\Users\\milad\\AppData\\Local\\Temp\\lda_ncm_demo-9a2dbuav\\features\\DINOv2-B-14\\CIFAR-100\\seed1.npz": "e08f2b70e2c9340774d9860d22d9336d9372587a8c4b849d55d90e9cde3a4fdd",
+    "C:\\Users\\milad\\AppData\\Local\\Temp\\lda_ncm_demo-9a2dbuav\\features\\DINOv2-B-14\\CIFAR-100\\seed2.npz": "ad0099bd3fe141fcae2d3623ccfaebeec893a6ae1db3efe0bf76f839014a1a46",
+    "C:\\Users\\milad\\AppData\\Local\\Temp\\lda_ncm_demo-9a2dbuav\\features\\DINOv2-B-14\\CIFAR-100\\seed3.npz": "4f3f8b4442997f86b98649a1100fb7d3aa7d8e7d81ba7e0704fef94f0d906abb",
+    "C:\\Users\\milad\\AppData\\Local\\Temp\\lda_ncm_demo-9a2dbuav\\features\\DINOv2-B-14\\CIFAR-100\\seed4.npz": "3c6a645fe9e4debca9878f574981d5d027835bbb78baeac70a818d57177af81d"
+   },
+   "lda": {
+    "ddof": 1,
+    "mean": 91.2667,
+    "per_seed": [
+     91.1667,
+     91.1667,
+     91.0,
+     94.3333,
+     88.6667
+    ],
+    "sd": 2.0159
+   },
+   "missing_reason": null,
+   "ncm": {
+    "ddof": 1,
+    "mean": 53.8333,
+    "per_seed": [
+     55.8333,
+     55.0,
+     51.3333,
+     55.5,
+     51.5
+    ],
+    "sd": 2.2267
+   },
+   "per_seed": {
+    "0": {
+     "T": 4,
+     "d": 24,
+     "lda": 91.16666666666666,
+     "n_classes": 20,
+     "n_test": 600,
+     "ncm": 55.833333333333336
+    },
+    "1": {
+     "T": 4,
+     "d": 24,
+     "lda": 91.16666666666666,
+     "n_classes": 20,
+     "n_test": 600,
+     "ncm": 55.00000000000001
+    },
+    "2": {
+     "T": 4,
+     "d": 24,
+     "lda": 91.0,
+     "n_classes": 20,
+     "n_test": 600,
+     "ncm": 51.33333333333333
+    },
+    "3": {
+     "T": 4,
+     "d": 24,
+     "lda": 94.33333333333334,
+     "n_classes": 20,
+     "n_test": 600,
+     "ncm": 55.50000000000001
+    },
+    "4": {
+     "T": 4,
+     "d": 24,
+     "lda": 88.66666666666667,
+     "n_classes": 20,
+     "n_test": 600,
+     "ncm": 51.5
+    }
+   },
+   "seeds_missing": [],
+   "seeds_present": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "stress_test": false,
+   "wt": {
+    "mean": 82.3,
+    "sd": 0.4
+   }
+  },
+  {
+   "backbone": "DINOv2-B/14",
+   "dataset": "ImageNet-100",
+   "fix": {
+    "mean": 84.7,
+    "sd": 0.3
+   },
+   "inputs_sha256": {},
+   "lda": null,
+   "missing_reason": "no feature directory / no seed files",
+   "ncm": null,
+   "seeds_missing": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "seeds_present": [],
+   "stress_test": false,
+   "wt": {
+    "mean": 80.5,
+    "sd": 0.4
+   }
+  },
+  {
+   "backbone": "DINOv2-B/14",
+   "dataset": "ImageNet-1K",
+   "fix": {
+    "mean": 81.8,
+    "sd": 0.3
+   },
+   "inputs_sha256": {},
+   "lda": null,
+   "missing_reason": "no feature directory / no seed files",
+   "ncm": null,
+   "seeds_missing": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "seeds_present": [],
+   "stress_test": false,
+   "wt": {
+    "mean": 76.8,
+    "sd": 0.4
+   }
+  },
+  {
+   "backbone": "CLIP ViT-B/16",
+   "dataset": "CIFAR-100",
+   "fix": {
+    "mean": 85.7,
+    "sd": 0.4
+   },
+   "inputs_sha256": {},
+   "lda": null,
+   "missing_reason": "no feature directory / no seed files",
+   "ncm": null,
+   "seeds_missing": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "seeds_present": [],
+   "stress_test": false,
+   "wt": {
+    "mean": 81.5,
+    "sd": 0.5
+   }
+  },
+  {
+   "backbone": "CLIP ViT-B/16",
+   "dataset": "ImageNet-100",
+   "fix": {
+    "mean": 83.5,
+    "sd": 0.4
+   },
+   "inputs_sha256": {},
+   "lda": null,
+   "missing_reason": "no feature directory / no seed files",
+   "ncm": null,
+   "seeds_missing": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "seeds_present": [],
+   "stress_test": false,
+   "wt": {
+    "mean": 79.2,
+    "sd": 0.5
+   }
+  },
+  {
+   "backbone": "MAE ViT-B/16",
+   "dataset": "ImageNet-100",
+   "fix": {
+    "mean": 77.2,
+    "sd": 0.5
+   },
+   "inputs_sha256": {},
+   "lda": null,
+   "missing_reason": "no feature directory / no seed files",
+   "ncm": null,
+   "seeds_missing": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "seeds_present": [],
+   "stress_test": false,
+   "wt": {
+    "mean": 65.3,
+    "sd": 0.6
+   }
+  },
+  {
+   "backbone": "ResNet-50",
+   "dataset": "ImageNet-100",
+   "fix": {
+    "mean": 73.8,
+    "sd": 0.5
+   },
+   "inputs_sha256": {
+    "C:\\Users\\milad\\AppData\\Local\\Temp\\lda_ncm_demo-9a2dbuav\\features\\ResNet-50\\ImageNet-100\\seed0.npz": "ea5b2c64c7ba55b6cfd1231884c645d1d991802602381857b49efce1772f7eb2",
+    "C:\\Users\\milad\\AppData\\Local\\Temp\\lda_ncm_demo-9a2dbuav\\features\\ResNet-50\\ImageNet-100\\seed1.npz": "60cd80813c8ec8834ba660b12e20eeea88f2ebf023ecafc8fa3d8685664df29d",
+    "C:\\Users\\milad\\AppData\\Local\\Temp\\lda_ncm_demo-9a2dbuav\\features\\ResNet-50\\ImageNet-100\\seed2.npz": "e80bc05aa7196d336088db8a9d11c1a20425c26ba85365d2a5cab2fa1e3acc23"
+   },
+   "lda": null,
+   "missing_reason": "seeds [3, 4] absent or invalid; cell requires all of [0, 1, 2, 3, 4] (MISSING is never estimated)",
+   "ncm": null,
+   "per_seed": {
+    "0": {
+     "T": 4,
+     "d": 24,
+     "lda": 84.33333333333334,
+     "n_classes": 20,
+     "n_test": 600,
+     "ncm": 48.16666666666667
+    },
+    "1": {
+     "T": 4,
+     "d": 24,
+     "lda": 91.83333333333333,
+     "n_classes": 20,
+     "n_test": 600,
+     "ncm": 49.333333333333336
+    },
+    "2": {
+     "T": 4,
+     "d": 24,
+     "lda": 89.16666666666667,
+     "n_classes": 20,
+     "n_test": 600,
+     "ncm": 48.0
+    }
+   },
+   "seeds_missing": [
+    3,
+    4
+   ],
+   "seeds_present": [
+    0,
+    1,
+    2
+   ],
+   "stress_test": false,
+   "wt": {
+    "mean": 62.1,
+    "sd": 0.6
+   }
+  },
+  {
+   "backbone": "ViT-B/16",
+   "dataset": "ImageNet-1K",
+   "fix": {
+    "mean": 83.2,
+    "sd": 0.3
+   },
+   "inputs_sha256": {},
+   "lda": null,
+   "missing_reason": "no feature directory / no seed files",
+   "ncm": null,
+   "seeds_missing": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "seeds_present": [],
+   "stress_test": false,
+   "wt": {
+    "mean": 78.5,
+    "sd": 0.4
+   }
+  },
+  {
+   "backbone": "DINOv2-B/14",
+   "dataset": "DomainNet",
+   "fix": {
+    "mean": 68.5,
+    "sd": 0.6
+   },
+   "inputs_sha256": {},
+   "lda": null,
+   "missing_reason": "no feature directory / no seed files",
+   "ncm": null,
+   "seeds_missing": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "seeds_present": [],
+   "stress_test": true,
+   "wt": {
+    "mean": 58.2,
+    "sd": 0.8
+   }
+  },
+  {
+   "backbone": "CLIP ViT-B/16",
+   "dataset": "DomainNet",
+   "fix": {
+    "mean": 66.8,
+    "sd": 0.6
+   },
+   "inputs_sha256": {
+    "C:\\Users\\milad\\AppData\\Local\\Temp\\lda_ncm_demo-9a2dbuav\\features\\CLIP ViT-B-16\\DomainNet\\seed0.npz": "59ef9fcb795590d181200af38152c2be9169ac958b6fbbdfc778c2faee689697",
+    "C:\\Users\\milad\\AppData\\Local\\Temp\\lda_ncm_demo-9a2dbuav\\features\\CLIP ViT-B-16\\DomainNet\\seed1.npz": "a2b4e870b3298d311d2f2245c333d2b510256b4072e2e1fdff315a4b69b59996",
+    "C:\\Users\\milad\\AppData\\Local\\Temp\\lda_ncm_demo-9a2dbuav\\features\\CLIP ViT-B-16\\DomainNet\\seed2.npz": "4a81202865838c5ad2cd344ad430bca40c6f6a7a96369a64834327e5f7b52888",
+    "C:\\Users\\milad\\AppData\\Local\\Temp\\lda_ncm_demo-9a2dbuav\\features\\CLIP ViT-B-16\\DomainNet\\seed3.npz": "de3058a4c16d5b75af29ee9a80fbf684d2b180234e6fd3a0d1c2b4ca4b45b734",
+    "C:\\Users\\milad\\AppData\\Local\\Temp\\lda_ncm_demo-9a2dbuav\\features\\CLIP ViT-B-16\\DomainNet\\seed4.npz": "88affabca3f2e4b06b84f1e0d8fdade3243b62af0b61a7f50400ea4f401cfabe"
+   },
+   "lda": {
+    "ddof": 1,
+    "mean": 91.4333,
+    "per_seed": [
+     93.0,
+     91.3333,
+     88.6667,
+     93.0,
+     91.1667
+    ],
+    "sd": 1.778
+   },
+   "missing_reason": null,
+   "ncm": {
+    "ddof": 1,
+    "mean": 53.9667,
+    "per_seed": [
+     56.1667,
+     56.1667,
+     50.5,
+     51.5,
+     55.5
+    ],
+    "sd": 2.7447
+   },
+   "per_seed": {
+    "0": {
+     "T": 4,
+     "d": 24,
+     "lda": 93.0,
+     "n_classes": 20,
+     "n_test": 600,
+     "ncm": 56.166666666666664
+    },
+    "1": {
+     "T": 4,
+     "d": 24,
+     "lda": 91.33333333333333,
+     "n_classes": 20,
+     "n_test": 600,
+     "ncm": 56.166666666666664
+    },
+    "2": {
+     "T": 4,
+     "d": 24,
+     "lda": 88.66666666666667,
+     "n_classes": 20,
+     "n_test": 600,
+     "ncm": 50.5
+    },
+    "3": {
+     "T": 4,
+     "d": 24,
+     "lda": 93.0,
+     "n_classes": 20,
+     "n_test": 600,
+     "ncm": 51.5
+    },
+    "4": {
+     "T": 4,
+     "d": 24,
+     "lda": 91.16666666666666,
+     "n_classes": 20,
+     "n_test": 600,
+     "ncm": 55.50000000000001
+    }
+   },
+   "seeds_missing": [],
+   "seeds_present": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "stress_test": true,
+   "wt": {
+    "mean": 56.8,
+    "sd": 0.8
+   }
+  }
+ ],
+ "run_id": "B_lda_ncm_demo",
+ "sd_ddof": 1,
+ "seeds": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "tex_fragment": "% tab:lda-ncm-comparison -- generated by experiments/lda_ncm_eval.py\n% provenance: synthetic; population: 10 benchmark rows, 5 random class orderings (seeds 0--4)\n% WT/FIX columns are byte-copies of tab:fix-benchmark (owner facts); LDA/NCM are closed-form from cached features\n\\begin{tabular}{llcccc}\n\\toprule\nBackbone & Dataset & WT $\\bar A$ & FIX $\\bar A$ (ours) & LDA $\\bar A$ & NCM $\\bar A$ \\\\\n\\midrule\nDINOv2-B/14    & CIFAR-100    & $82.3 \\pm 0.4$ & $\\mathbf{86.5 \\pm 0.3}$ & $91.3 \\pm 2.0$ & $53.8 \\pm 2.2$ \\\\\nDINOv2-B/14    & ImageNet-100 & $80.5 \\pm 0.4$ & $\\mathbf{84.7 \\pm 0.3}$ & -- & -- \\\\\n% MISSING: no feature directory / no seed files\nDINOv2-B/14    & ImageNet-1K  & $76.8 \\pm 0.4$ & $\\mathbf{81.8 \\pm 0.3}$ & -- & -- \\\\\n% MISSING: no feature directory / no seed files\nCLIP ViT-B/16  & CIFAR-100    & $81.5 \\pm 0.5$ & $\\mathbf{85.7 \\pm 0.4}$ & -- & -- \\\\\n% MISSING: no feature directory / no seed files\nCLIP ViT-B/16  & ImageNet-100 & $79.2 \\pm 0.5$ & $\\mathbf{83.5 \\pm 0.4}$ & -- & -- \\\\\n% MISSING: no feature directory / no seed files\nMAE ViT-B/16   & ImageNet-100 & $65.3 \\pm 0.6$ & $\\mathbf{77.2 \\pm 0.5}$ & -- & -- \\\\\n% MISSING: no feature directory / no seed files\nResNet-50      & ImageNet-100 & $62.1 \\pm 0.6$ & $\\mathbf{73.8 \\pm 0.5}$ & -- & -- \\\\\n% MISSING: seeds [3, 4] absent or invalid; cell requires all of [0, 1, 2, 3, 4] (MISSING is never estimated)\nViT-B/16       & ImageNet-1K  & $78.5 \\pm 0.4$ & $\\mathbf{83.2 \\pm 0.3}$ & -- & -- \\\\\n% MISSING: no feature directory / no seed files\nDINOv2-B/14    & DomainNet    & $58.2 \\pm 0.8$ & $\\mathbf{68.5 \\pm 0.6}$ & -- & -- \\\\\n% MISSING: no feature directory / no seed files\n% stress test: DomainNet rows are shared-label domains-as-tasks runs (domains sharing one $345$-class label set) that violate the disjoint-label-set assumption\nCLIP ViT-B/16  & DomainNet    & $56.8 \\pm 0.8$ & $\\mathbf{66.8 \\pm 0.6}$ & $91.4 \\pm 1.8$ & $54.0 \\pm 2.7$ \\\\\n% stress test: DomainNet rows are shared-label domains-as-tasks runs (domains sharing one $345$-class label set) that violate the disjoint-label-set assumption\n\\bottomrule\n\\end{tabular}\n",
+ "unmatched_feature_dirs": [],
+ "variant_b_escalation": true
+}

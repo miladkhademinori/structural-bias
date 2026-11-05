@@ -1,0 +1,161 @@
+{
+ "runs": [
+  {
+   "run_id": "B_synthetic_bias_E3",
+   "path": "runs\\B\\synthetic_bias\\B_synthetic_bias_E3.json",
+   "provenance": "synthetic",
+   "paper": "B",
+   "experiment": "synthetic_bias",
+   "suite_status": "PASS",
+   "created_utc": "2026-10-22T02:59:54Z"
+  },
+  {
+   "run_id": "B_synthetic_bias_E4",
+   "path": "runs\\B\\synthetic_bias\\B_synthetic_bias_E4.json",
+   "provenance": "synthetic",
+   "paper": "B",
+   "experiment": "synthetic_bias",
+   "suite_status": "FAIL",
+   "created_utc": "2026-10-22T03:02:42Z"
+  },
+  {
+   "run_id": "B_synthetic_bias_E1",
+   "path": "runs\\B\\synthetic_bias\\B_synthetic_bias_E1.json",
+   "provenance": "synthetic",
+   "paper": "B",
+   "experiment": "synthetic_bias",
+   "suite_status": "FAIL",
+   "created_utc": "2026-10-22T03:21:24Z"
+  },
+  {
+   "run_id": "B_synthetic_bias_E2",
+   "path": "runs\\B\\synthetic_bias\\B_synthetic_bias_E2.json",
+   "provenance": "synthetic",
+   "paper": "B",
+   "experiment": "synthetic_bias",
+   "suite_status": "FAIL",
+   "created_utc": "2026-10-22T04:12:30Z"
+  },
+  {
+   "run_id": "B_synthetic_rate_E6",
+   "path": "runs\\B\\synthetic_rate\\B_synthetic_rate_E6.json",
+   "provenance": "synthetic",
+   "paper": "B",
+   "experiment": "synthetic_rate",
+   "suite_status": "PASS",
+   "created_utc": "2026-10-22T04:55:38Z"
+  },
+  {
+   "run_id": "B_synthetic_rate_E5",
+   "path": "runs\\B\\synthetic_rate\\B_synthetic_rate_E5.json",
+   "provenance": "synthetic",
+   "paper": "B",
+   "experiment": "synthetic_rate",
+   "suite_status": "FAIL",
+   "created_utc": "2026-10-22T04:57:03Z"
+  },
+  {
+   "run_id": "A_synthetic_margin_EX1",
+   "path": "runs\\A\\synthetic_margin\\A_synthetic_margin_EX1.json",
+   "provenance": "synthetic",
+   "paper": "A",
+   "experiment": "synthetic_margin",
+   "suite_status": "PASS",
+   "created_utc": "2026-10-22T05:30:30Z"
+  },
+  {
+   "run_id": "A_synthetic_margin_EX3",
+   "path": "runs\\A\\synthetic_margin\\A_synthetic_margin_EX3.json",
+   "provenance": "synthetic",
+   "paper": "A",
+   "experiment": "synthetic_margin",
+   "suite_status": "FAIL",
+   "created_utc": "2026-10-22T05:30:40Z",
+   "ledger_close": "LEDGER CLOSE (CI5, 2026-10-22): letter fleet row \"I03-I04 ... logs pending\" closed for the margin arm. Status: run record final and authoritative; suite FAIL on 2 of 8 sub-assertions (EX3.4 interpolating-vs-aligned exponent, nu^2/32 steeper beyond tolerance for nu>0.4; EX3.7 Gaussian-tail prefactor 2^-0.25 per doubling exceeds the 1.2 bracket slack), both exact-arm with diagnoses in this record; 6 of 8 PASS including the 1/8 and 1/16 tightness anchors. Only the I03 exec-log narrative is owed (J-wave); no computation is missing."
+  },
+  {
+   "run_id": "A_synthetic_margin_EX5",
+   "path": "runs\\A\\synthetic_margin\\A_synthetic_margin_EX5.json",
+   "provenance": "synthetic",
+   "paper": "A",
+   "experiment": "synthetic_margin",
+   "suite_status": "PASS",
+   "created_utc": "2026-10-22T05:42:31Z"
+  },
+  {
+   "run_id": "A_synthetic_margin_EX4",
+   "path": "runs\\A\\synthetic_margin\\A_synthetic_margin_EX4.json",
+   "provenance": "synthetic",
+   "paper": "A",
+   "experiment": "synthetic_margin",
+   "suite_status": "PASS",
+   "created_utc": "2026-10-22T05:46:26Z"
+  },
+  {
+   "run_id": "A_slope_fits_synthetic",
+   "path": "runs\\A\\slope_fits\\A_slope_fits_synthetic.json",
+   "provenance": "synthetic",
+   "paper": "A",
+   "experiment": "slope_fits",
+   "suite_status": "PASS",
+   "created_utc": "2026-10-22T05:46:55Z"
+  },
+  {
+   "run_id": "A_falsification_synthetic",
+   "path": "runs\\A\\falsification\\A_falsification_synthetic.json",
+   "provenance": "synthetic",
+   "paper": "A",
+   "experiment": "falsification",
+   "suite_status": "PASS",
+   "created_utc": "2026-10-22T05:47:42Z"
+  },
+  {
+   "run_id": "A_drift_EX9",
+   "path": "runs\\A\\drift\\A_drift_EX9.json",
+   "provenance": "synthetic",
+   "paper": "A",
+   "experiment": "drift",
+   "suite_status": "FAIL",
+   "created_utc": "2026-10-22T05:56:25Z",
+   "ledger_close": "LEDGER CLOSE (CI5, 2026-10-22): letter row \"EX9-EX11 stored; log pending\" superseded. Status: run record final and authoritative (assertions A23a-A25, TRK1; 8 of 9 PASS). FAIL A23a stands with diagnosis in this record: the printed -0.164 is a stages-1-5 window fit, not the stated stages-1-10 OLS (-0.2191); t*=14.1953 and floor 19.443 reproduce the printed 14.2/19.5. Only the I04 exec-log narrative is owed (J-wave missing-log recovery); no computation is missing."
+  },
+  {
+   "run_id": "A_drift_EX10",
+   "path": "runs\\A\\drift\\A_drift_EX10.json",
+   "provenance": "synthetic",
+   "paper": "A",
+   "experiment": "drift",
+   "suite_status": "FAIL",
+   "created_utc": "2026-10-22T05:56:25Z",
+   "ledger_close": "LEDGER CLOSE (CI5, 2026-10-22): letter row \"Store rows only so far (EX11 PASS); log pending\" superseded. Status: run record final and authoritative (A27 ratio 10.5488 PASS in [9,11]). FAIL A26 stands with diagnosis in this record: measured 3-point r=0.9931 vs printed 0.998, not recoverable from the printed table values even with the printed per-seed dispersions; owner-flag, not a missing run. Only the I04 exec-log narrative is owed (J-wave); no computation is missing."
+  },
+  {
+   "run_id": "A_drift_EX11",
+   "path": "runs\\A\\drift\\A_drift_EX11.json",
+   "provenance": "synthetic",
+   "paper": "A",
+   "experiment": "drift",
+   "suite_status": "PASS",
+   "created_utc": "2026-10-22T05:56:25Z"
+  },
+  {
+   "run_id": "A_predictor_regression_CI1",
+   "path": "runs\\A\\predictor_regression\\A_predictor_regression_CI1.json",
+   "provenance": "printed_inputs_partial",
+   "paper": "A",
+   "experiment": "predictor_regression",
+   "suite_status": "INPUTS_MISSING",
+   "created_utc": "2026-10-22T06:05:00Z"
+  },
+  {
+   "run_id": "CI3_diagnostic_controls",
+   "path": "runs\\B\\nonvision\\CI3_diagnostic_controls.json",
+   "provenance": "ci3-controls-local-cached (Claude Q7; H07 machinery, H04 algebra, smoke scale)",
+   "paper": "B",
+   "experiment": "diagnostic_controls",
+   "suite_status": "PASS",
+   "created_utc": "2026-10-22T07:13:22Z",
+   "note": "W3-R1 union row (2026-10-22): Claude Q7 controls battery; verdict identity=True -- the H07 smoke cos=1.0000 is an algebraic gauge identity (per-task-centered random head also gives cos 1), see the record's verdict block."
+  }
+ ]
+}

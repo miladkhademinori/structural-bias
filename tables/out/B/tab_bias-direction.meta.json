@@ -1,0 +1,19 @@
+{
+ "created_utc": "2026-10-22T12:30:30Z",
+ "emitter": "pipeline.tables.tab_bias_direction",
+ "g08_class": "POST-HOC",
+ "gates": [],
+ "label": "tab:bias-direction",
+ "mode": "build",
+ "paper": "B",
+ "provenance": [
+  "synthetic"
+ ],
+ "supporting_runs": [
+  "B_synthetic_bias_E1",
+  "B_synthetic_bias_E2",
+  "B_synthetic_bias_E3",
+  "B_synthetic_bias_E4"
+ ],
+ "tex_sha256": "222ae5a40da784472e204c46e8d4d281ba30da0c29cf29a020df3d2af656ecd9"
+}

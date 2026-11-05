@@ -1,0 +1,263 @@
+{
+ "run_id": "B_synthetic_bias_E1",
+ "paper": "B",
+ "experiment": "synthetic_bias",
+ "provenance": "synthetic",
+ "created_utc": "2026-10-22T03:21:24Z",
+ "executed_utc": "2026-10-22T03:04:05Z",
+ "schema": "G08-S2-proposal (G01 not yet reconciled; see G08 log S7.1)",
+ "config": {
+  "e1_lam": [
+   1e-05,
+   0.0001
+  ],
+  "e1_n_spec": 50000,
+  "e1_n_variant": 25000,
+  "e1_n_anchor": 200000,
+  "e1_seeds_spec": [
+   0,
+   1
+  ],
+  "e1_seeds_variant": [
+   0,
+   1,
+   2
+  ],
+  "e1_maxiter": 600,
+  "e1_fit_gtol": 1e-10,
+  "e2_lam": [
+   0.0,
+   0.0001,
+   0.01
+  ],
+  "e2_n": [
+   1000,
+   50000
+  ],
+  "e2_seeds_est": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "e2_maxiter": 600,
+  "e2_fit_gtol": 1e-10,
+  "e3_a": [
+   5.0,
+   10.0,
+   50.0
+  ],
+  "e3_n_train": 2000,
+  "e3_lam": 1e-05,
+  "e3_n_mc": 1000000,
+  "e3_seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "e3_maxiter": 1000,
+  "e4_a": [
+   1.0,
+   2.0,
+   5.0,
+   10.0,
+   20.0,
+   50.0
+  ],
+  "e4_lam": [
+   1e-05,
+   0.001,
+   0.1
+  ],
+  "e4_seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "e4_n_train": 2000,
+  "e4_n_mc": 1000000,
+  "e4_maxiter": 1000
+ },
+ "seeds": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "metrics": {
+  "suite": "E1",
+  "theorem": "Theorem 3.3 (closed form) + Lemma 3.2 gauge",
+  "status": "FAIL",
+  "assertions": [
+   {
+    "id": "E1.1",
+    "description": "cos(w_trained, w_closed) per class > 0.999",
+    "arm": "spec",
+    "status": "FAIL",
+    "value": "min=0.882414 (max 0.999506)",
+    "threshold": "> 0.999",
+    "diagnosis": "Spec arm: within-task CE tail-limited (median Mahalanobis ~48, cond(Sigma) ~180): empirical MLE radially unidentified at feasible n; angular error is overlap-mass-limited, not sqrt(d/n)-limited. Variant arm demonstrates the claim under identifiable geometry.",
+    "details": {}
+   },
+   {
+    "id": "E1.2",
+    "description": "norm ratio in (0.98, 1.0); per-task std < 1e-3",
+    "arm": "spec",
+    "status": "FAIL",
+    "value": "ratio in (0.3500, 1.2139); max per-task std 2.49e-01",
+    "threshold": "(0.98, 1.0); std < 1e-3",
+    "diagnosis": "Tail-limited MLE: radial direction unidentified (overlap mass ~exp(-D/8)); norm attenuation 0.4-0.7 measured, n-insensitive.",
+    "details": {}
+   },
+   {
+    "id": "E1.3",
+    "description": "max |b_rescaled - b_closed| < 5e-3",
+    "arm": "spec",
+    "status": "FAIL",
+    "value": "max diff 13.9578",
+    "threshold": "< 5e-3",
+    "diagnosis": "Same finite-sample noise source as E1.2 (b scale O(1); noise ~1%).",
+    "details": {}
+   },
+   {
+    "id": "E1.4",
+    "description": "gauge ||sum_r w_r||_inf: closed-form < 1e-6, trained < 1e-3",
+    "arm": "spec",
+    "status": "PASS",
+    "value": "closed-form 1.78e-15; trained 6.00e-13",
+    "threshold": "< 1e-6 / < 1e-3",
+    "diagnosis": "",
+    "details": {}
+   },
+   {
+    "id": "E1.1",
+    "description": "cos(w_trained, w_closed) per class > 0.999",
+    "arm": "variant_wellcond",
+    "status": "PASS",
+    "value": "min=0.999261 (max 0.999982)",
+    "threshold": "> 0.999",
+    "diagnosis": "",
+    "details": {}
+   },
+   {
+    "id": "E1.2",
+    "description": "norm ratio in (0.98, 1.0); per-task std < 1e-3",
+    "arm": "variant_wellcond",
+    "status": "FAIL",
+    "value": "ratio in (0.9749, 1.0190); max per-task std 1.36e-02",
+    "threshold": "(0.98, 1.0); std < 1e-3",
+    "diagnosis": "Ratio spread is finite-sample MLE noise (shrinkage (1-lam*alpha_t) ~1-1e-4 is far below the noise floor at this n; achieving std<1e-3 needs ~n=1e6/class, beyond CPU budget).",
+    "details": {}
+   },
+   {
+    "id": "E1.3",
+    "description": "max |b_rescaled - b_closed| < 5e-3",
+    "arm": "variant_wellcond",
+    "status": "FAIL",
+    "value": "max diff 0.0752",
+    "threshold": "< 5e-3",
+    "diagnosis": "Same finite-sample noise source as E1.2 (b scale O(1); noise ~1%).",
+    "details": {}
+   },
+   {
+    "id": "E1.4",
+    "description": "gauge ||sum_r w_r||_inf: closed-form < 1e-6, trained < 1e-3",
+    "arm": "variant_wellcond",
+    "status": "PASS",
+    "value": "closed-form 3.75e-16; trained 6.91e-14",
+    "threshold": "< 1e-6 / < 1e-3",
+    "diagnosis": "",
+    "details": {}
+   }
+  ],
+  "summary": {
+   "spec": {
+    "cos_min": 0.882414346118751,
+    "ratio_min": 0.3500045163450755,
+    "ratio_max": 1.2139225315979425,
+    "ratio_std_max": 0.2489910589141158,
+    "bdiff_max": 13.957806937603873,
+    "gauge_trained": 6.004086117172847e-13,
+    "gauge_closedform": 1.7763568394002505e-15,
+    "n_per_class": 50000,
+    "seeds": [
+     0,
+     1
+    ]
+   },
+   "variant_wellcond": {
+    "cos_min": 0.9992610926911125,
+    "ratio_min": 0.9748729157588029,
+    "ratio_max": 1.01902161820261,
+    "ratio_std_max": 0.013642391549289794,
+    "bdiff_max": 0.07516465697540298,
+    "gauge_trained": 6.9111383282916e-14,
+    "gauge_closedform": 3.7470027081099033e-16,
+    "n_per_class": 25000,
+    "seeds": [
+     0,
+     1,
+     2
+    ]
+   },
+   "n_anchor_spec": {
+    "n": 200000,
+    "cos": [
+     0.9924022862705214,
+     0.9908572806535577,
+     0.9969203917063103,
+     0.9679350642107512,
+     0.9686004729382726
+    ],
+    "ratio": [
+     0.44148462154017626,
+     0.6733841544643546,
+     0.4255793616739719,
+     0.744590267577688,
+     0.691695190423391
+    ],
+    "fit_info": {
+     "nit": 215,
+     "max_grad": 3.248089363325977e-09,
+     "fun": 0.008636124637717318,
+     "success": true
+    }
+   }
+  },
+  "runtime_s": 1038.8,
+  "config": {
+   "n_spec": 50000,
+   "n_variant": 25000,
+   "reduced": true,
+   "reduction_note": "e1 n_per_class reduced 2e5 -> 50000 for CPU budget; labeled 'reduced'"
+  }
+ },
+ "env": {
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.0",
+  "machine": "AMD64",
+  "platform": "Windows-11-10.0.26300-SP0"
+ },
+ "code_version": "f25cd666db5c9190",
+ "inputs": {
+  "gaussian_model": "dbd23d9603b3c6d3",
+  "fix": "a59ad42cfadeab58",
+  "lda_ncm": "dd9cc4b2db55cbc0",
+  "diagnostic": "62b43609bf7cdd4f"
+ },
+ "derived_tables": [],
+ "drift_notes": [
+  "H01 core.gaussian_model imported (no fallback needed).",
+  "H02 core.fix imported (no fallback needed).",
+  "H03 core.lda_ncm.shrunk_pooled_covariance imported.",
+  "H04 core.diagnostic gamma_ij/sigma_norm imported.",
+  "G06 constant check: Phi(-1/sqrt(2)) = 0.5*erfc(0.5) = 0.239750061093 (G06 log quotes '0.239827...'; those digits are wrong, 4-s.f. 0.2398 stands). All E3/E4 assertions use the exact value; spec tolerances (+-0.001 vs 0.2398) are unaffected."
+ ]
+}

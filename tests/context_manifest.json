@@ -1,0 +1,13 @@
+{
+ "_comment": "sha256 of every never-asserted printed-context dict; regenerate deliberately via REPLICATION_REGEN_CONTEXT_MANIFEST=1 and re-review alongside the edit that changed a paper number",
+ "canonicalization": "v1 (typed tags, repr floats, key-sorted dicts)",
+ "dicts": {
+  "experiments.falsification.PAPER_CONTEXT_QUOTED": "7c2c615614614b599ca457a1d25f70702c419f3a5490e71a99112d561da053dc",
+  "experiments.nonvision.PAPER_CONTEXT": "ead8b075ac7c11a7a665948c3a59c1e67f93dd16d9577b338054a9c42e8fdbc5",
+  "experiments.predictor_regression.FINAL_ACC_PRINTED": "a2fd20e4fb866172f2f1e90389f37aa5aebc276e5320cde93fcc85ff8d4bdbf6",
+  "experiments.predictor_regression.GAMMA_MIN_PRINTED": "87f2f2d4c09a4cad2a6338935d9bfe80f51fdab527636ed0d5e82b399526f7b8",
+  "experiments.predictor_regression.PRINTED_TARGETS": "189f0060e8caea18168ddd85da07db195d16b1209db984f7f65e7c2fe57977cd",
+  "experiments.slope_fits.PAPER_CONTEXT_QUOTED": "e189763fdf6947340e25e12bf0bed118e8ceb817fa6e205c521b2599bee7d7b0",
+  "pipeline.registry.PRINTED": "d119dfff67578df271b4bfb13379cd2cd7ad9b114de3f6c1261fcd197656e477"
+ }
+}

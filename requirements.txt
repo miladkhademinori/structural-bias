@@ -1,0 +1,33 @@
+# requirements.txt -- local CPU environment (Windows/Python 3.12)
+# Agent G05, 2026-10-21. Pins = versions probed and verified on the owner's
+# machine (see ENVIRONMENTS.md section 1). Looser floors are acceptable for
+# readers (numpy>=1.26, scipy>=1.11, scikit-learn>=1.4); the exact pins below
+# are the combo the smoke tests ran against.
+#
+# DESIGN LAW (graceful degradation): the pipeline runs end-to-end on the three
+# core packages below. torch/torchvision/timm are NEVER hard dependencies --
+# every GPU-side module imports them behind a guard and falls back to the
+# synthetic backbone when absent. Do not add torch here; it lives in
+# requirements-gpu.txt (Colab).
+
+# --- core (required; the whole repo runs on these) ---
+numpy==2.5.2
+scipy==1.18.0
+scikit-learn==1.9.0
+
+# --- present locally and used by plotting/table/IO paths ---
+matplotlib==3.11.1
+pandas==3.0.5
+pillow==12.2.0
+tqdm==4.70.0
+joblib==1.5.3
+
+# --- optional, absent on the owner machine at probe time (2026-10-21) ---
+# Uncomment after an owner-approved install; the test suite can also be run
+# with plain `python -m pytest`-free discovery via tests/conftest.py.
+# pytest>=8.0
+
+# --- deliberately absent (guarded imports; see requirements-gpu.txt) ---
+# torch, torchvision, timm: real pretrained backbones. If a CPU build happens
+# to be installed (the owner machine has torch 2.14.0+cpu), the guard picks it
+# up automatically for slow smoke extraction; nothing breaks when it is gone.

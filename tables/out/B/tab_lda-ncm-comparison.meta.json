@@ -1,0 +1,16 @@
+{
+ "created_utc": "2026-10-22T12:30:30Z",
+ "emitter": "pipeline.tables.tab_lda_ncm",
+ "g08_class": "POST-HOC",
+ "gates": [],
+ "label": "tab:lda-ncm-comparison",
+ "mode": "build",
+ "paper": "B",
+ "provenance": [
+  "synthetic"
+ ],
+ "supporting_runs": [
+  "B_lda_ncm_demo"
+ ],
+ "tex_sha256": "d39fa2f3b158fc25d6357e56c2654e7c790c30310c6555f16bac9ce1753748f7"
+}

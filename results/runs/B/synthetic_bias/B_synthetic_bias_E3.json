@@ -1,0 +1,402 @@
+{
+ "run_id": "B_synthetic_bias_E3",
+ "paper": "B",
+ "experiment": "synthetic_bias",
+ "provenance": "synthetic",
+ "created_utc": "2026-10-22T02:59:54Z",
+ "executed_utc": "2026-10-22T02:59:52Z",
+ "schema": "G08-S2-proposal (G01 not yet reconciled; see G08 log S7.1)",
+ "config": {
+  "e1_lam": [
+   1e-05,
+   0.0001
+  ],
+  "e1_n_spec": 50000,
+  "e1_n_variant": 25000,
+  "e1_n_anchor": 200000,
+  "e1_seeds_spec": [
+   0,
+   1
+  ],
+  "e1_seeds_variant": [
+   0,
+   1,
+   2
+  ],
+  "e1_maxiter": 600,
+  "e1_fit_gtol": 1e-10,
+  "e2_lam": [
+   0.0,
+   0.0001,
+   0.01
+  ],
+  "e2_n": [
+   1000,
+   50000
+  ],
+  "e2_seeds_est": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "e2_maxiter": 600,
+  "e2_fit_gtol": 1e-10,
+  "e3_a": [
+   5.0,
+   10.0,
+   50.0
+  ],
+  "e3_n_train": 2000,
+  "e3_lam": 1e-05,
+  "e3_n_mc": 1000000,
+  "e3_seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "e3_maxiter": 1000,
+  "e4_a": [
+   1.0,
+   2.0,
+   5.0,
+   10.0,
+   20.0,
+   50.0
+  ],
+  "e4_lam": [
+   1e-05,
+   0.001,
+   0.1
+  ],
+  "e4_seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "e4_n_train": 2000,
+  "e4_n_mc": 1000000,
+  "e4_maxiter": 1000
+ },
+ "seeds": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "metrics": {
+  "suite": "E3",
+  "theorem": "Definition 7.1 / Theorem 7.2 (de-centering = exact Bayes)",
+  "status": "PASS",
+  "assertions": [
+   {
+    "id": "E3.1",
+    "description": "population arm: max |w_fix - w_bayes|, |b_fix - b_bayes| < 1e-10",
+    "arm": "population (H02 de_center vs H01 bayes_head)",
+    "status": "PASS",
+    "value": "max diffs: spec 2.49e-14, variant 3.55e-15",
+    "threshold": "< 1e-10",
+    "diagnosis": "",
+    "details": {}
+   },
+   {
+    "id": "E3.2a",
+    "description": "population recovery R = 1 +- 0.01 (anti-aligned a in [5.0, 10.0, 50.0])",
+    "arm": "population exact",
+    "status": "PASS",
+    "value": "max |R-1| = 1.11e-16",
+    "threshold": "|R-1| <= 0.01",
+    "diagnosis": "",
+    "details": {
+     "rows": [
+      {
+       "a": 5.0,
+       "P13_WT": 0.239750061093,
+       "P13_FIX": 0.019625165234,
+       "P13_Bayes": 0.019625165234,
+       "R": 1.0
+      },
+      {
+       "a": 10.0,
+       "P13_WT": 0.239750061093,
+       "P13_FIX": 2.981563e-06,
+       "P13_Bayes": 2.981563e-06,
+       "R": 1.0
+      },
+      {
+       "a": 50.0,
+       "P13_WT": 0.239750061093,
+       "P13_FIX": 0.0,
+       "P13_Bayes": 0.0,
+       "R": 1.0
+      }
+     ]
+    }
+   },
+   {
+    "id": "E3.3a",
+    "description": "population |P13_FIX - P13_Bayes| <= 0.003",
+    "arm": "population exact",
+    "status": "PASS",
+    "value": "max gap 1.04e-17",
+    "threshold": "<= 0.003",
+    "diagnosis": "",
+    "details": {}
+   },
+   {
+    "id": "E3.2b",
+    "description": "finite-sample recovery R >= 0.95 at a=10 (n_t=2000, seeds [0, 1, 2, 3, 4])",
+    "arm": "finite-sample a=10",
+    "status": "PASS",
+    "value": "min R = 1.0000, max R = 1.0000",
+    "threshold": ">= 0.95",
+    "diagnosis": "",
+    "details": {
+     "rows": [
+      {
+       "a": 10.0,
+       "seed": 0,
+       "P13_WT": 0.195421,
+       "P13_FIX": 6e-06,
+       "P13_Bayes_mc": 1e-06,
+       "P13_Bayes_exact": 2.9815625687517156e-06,
+       "R": 0.999985
+      },
+      {
+       "a": 10.0,
+       "seed": 1,
+       "P13_WT": 0.297954,
+       "P13_FIX": 5e-06,
+       "P13_Bayes_mc": 4e-06,
+       "P13_Bayes_exact": 2.9815625687517156e-06,
+       "R": 0.999993
+      },
+      {
+       "a": 10.0,
+       "seed": 2,
+       "P13_WT": 0.20817,
+       "P13_FIX": 2e-06,
+       "P13_Bayes_mc": 4e-06,
+       "P13_Bayes_exact": 2.9815625687517156e-06,
+       "R": 1.000005
+      },
+      {
+       "a": 10.0,
+       "seed": 3,
+       "P13_WT": 0.318135,
+       "P13_FIX": 3e-06,
+       "P13_Bayes_mc": 0.0,
+       "P13_Bayes_exact": 2.9815625687517156e-06,
+       "R": 1.0
+      },
+      {
+       "a": 10.0,
+       "seed": 4,
+       "P13_WT": 0.207348,
+       "P13_FIX": 3e-06,
+       "P13_Bayes_mc": 1e-06,
+       "P13_Bayes_exact": 2.9815625687517156e-06,
+       "R": 1.0
+      }
+     ]
+    }
+   },
+   {
+    "id": "E3.3b",
+    "description": "|P13_FIX - P13_Bayes_MC| <= 0.003 after fix (all a, seeds)",
+    "arm": "finite-sample",
+    "status": "PASS",
+    "value": "max gap 0.00123",
+    "threshold": "<= 0.003",
+    "diagnosis": "",
+    "details": {}
+   }
+  ],
+  "summary": {
+   "finite_rows": [
+    {
+     "a": 5.0,
+     "seed": 0,
+     "P13_WT": 0.228369,
+     "P13_FIX": 0.019261,
+     "P13_Bayes_mc": 0.019722,
+     "P13_Bayes_exact": 0.01962516523384642,
+     "R": 1.001745
+    },
+    {
+     "a": 5.0,
+     "seed": 1,
+     "P13_WT": 0.232878,
+     "P13_FIX": 0.018375,
+     "P13_Bayes_mc": 0.019609,
+     "P13_Bayes_exact": 0.01962516523384642,
+     "R": 1.005862
+    },
+    {
+     "a": 5.0,
+     "seed": 2,
+     "P13_WT": 0.251995,
+     "P13_FIX": 0.020802,
+     "P13_Bayes_mc": 0.019703,
+     "P13_Bayes_exact": 0.01962516523384642,
+     "R": 0.994936
+    },
+    {
+     "a": 5.0,
+     "seed": 3,
+     "P13_WT": 0.230202,
+     "P13_FIX": 0.018608,
+     "P13_Bayes_mc": 0.019438,
+     "P13_Bayes_exact": 0.01962516523384642,
+     "R": 1.00483
+    },
+    {
+     "a": 5.0,
+     "seed": 4,
+     "P13_WT": 0.207181,
+     "P13_FIX": 0.020149,
+     "P13_Bayes_mc": 0.019815,
+     "P13_Bayes_exact": 0.01962516523384642,
+     "R": 0.997207
+    },
+    {
+     "a": 10.0,
+     "seed": 0,
+     "P13_WT": 0.195421,
+     "P13_FIX": 6e-06,
+     "P13_Bayes_mc": 1e-06,
+     "P13_Bayes_exact": 2.9815625687517156e-06,
+     "R": 0.999985
+    },
+    {
+     "a": 10.0,
+     "seed": 1,
+     "P13_WT": 0.297954,
+     "P13_FIX": 5e-06,
+     "P13_Bayes_mc": 4e-06,
+     "P13_Bayes_exact": 2.9815625687517156e-06,
+     "R": 0.999993
+    },
+    {
+     "a": 10.0,
+     "seed": 2,
+     "P13_WT": 0.20817,
+     "P13_FIX": 2e-06,
+     "P13_Bayes_mc": 4e-06,
+     "P13_Bayes_exact": 2.9815625687517156e-06,
+     "R": 1.000005
+    },
+    {
+     "a": 10.0,
+     "seed": 3,
+     "P13_WT": 0.318135,
+     "P13_FIX": 3e-06,
+     "P13_Bayes_mc": 0.0,
+     "P13_Bayes_exact": 2.9815625687517156e-06,
+     "R": 1.0
+    },
+    {
+     "a": 10.0,
+     "seed": 4,
+     "P13_WT": 0.207348,
+     "P13_FIX": 3e-06,
+     "P13_Bayes_mc": 1e-06,
+     "P13_Bayes_exact": 2.9815625687517156e-06,
+     "R": 1.0
+    },
+    {
+     "a": 50.0,
+     "seed": 0,
+     "P13_WT": 0.101505,
+     "P13_FIX": 0.0,
+     "P13_Bayes_mc": 0.0,
+     "P13_Bayes_exact": 6.516511012356366e-133,
+     "R": 1.0
+    },
+    {
+     "a": 50.0,
+     "seed": 1,
+     "P13_WT": 0.064119,
+     "P13_FIX": 0.0,
+     "P13_Bayes_mc": 0.0,
+     "P13_Bayes_exact": 6.516511012356366e-133,
+     "R": 1.0
+    },
+    {
+     "a": 50.0,
+     "seed": 2,
+     "P13_WT": 0.405518,
+     "P13_FIX": 0.0,
+     "P13_Bayes_mc": 0.0,
+     "P13_Bayes_exact": 6.516511012356366e-133,
+     "R": 1.0
+    },
+    {
+     "a": 50.0,
+     "seed": 3,
+     "P13_WT": 0.863132,
+     "P13_FIX": 0.0,
+     "P13_Bayes_mc": 0.0,
+     "P13_Bayes_exact": 6.516511012356366e-133,
+     "R": 1.0
+    },
+    {
+     "a": 50.0,
+     "seed": 4,
+     "P13_WT": 0.023338,
+     "P13_FIX": 0.0,
+     "P13_Bayes_mc": 0.0,
+     "P13_Bayes_exact": 6.516511012356366e-133,
+     "R": 1.0
+    }
+   ]
+  },
+  "runtime_s": 1.7,
+  "config": {
+   "a": [
+    5.0,
+    10.0,
+    50.0
+   ],
+   "n_train": 2000,
+   "lam": 1e-05,
+   "n_mc": 1000000,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "reduced": false
+  }
+ },
+ "env": {
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.0",
+  "machine": "AMD64",
+  "platform": "Windows-11-10.0.26300-SP0"
+ },
+ "code_version": "2c255f0f60da7ae2",
+ "inputs": {
+  "gaussian_model": "dbd23d9603b3c6d3",
+  "fix": "a59ad42cfadeab58",
+  "lda_ncm": "dd9cc4b2db55cbc0",
+  "diagnostic": "62b43609bf7cdd4f"
+ },
+ "derived_tables": [],
+ "drift_notes": [
+  "H01 core.gaussian_model imported (no fallback needed).",
+  "H02 core.fix imported (no fallback needed).",
+  "H03 core.lda_ncm.shrunk_pooled_covariance imported.",
+  "H04 core.diagnostic gamma_ij/sigma_norm imported.",
+  "G06 constant check: Phi(-1/sqrt(2)) = 0.5*erfc(0.5) = 0.239750061093 (G06 log quotes '0.239827...'; those digits are wrong, 4-s.f. 0.2398 stands). All E3/E4 assertions use the exact value; spec tolerances (+-0.001 vs 0.2398) are unaffected."
+ ]
+}

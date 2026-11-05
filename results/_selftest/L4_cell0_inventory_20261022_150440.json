@@ -1,0 +1,42 @@
+{
+ "vit_in21k|cifar100": {
+  "n_train": 3000,
+  "d": 32,
+  "provenance": "synthetic"
+ },
+ "vit_in21k|imagenet_r": {
+  "n_train": 6000,
+  "d": 32,
+  "provenance": "synthetic"
+ },
+ "dinov2_b14|cifar100": {
+  "n_train": 3000,
+  "d": 32,
+  "provenance": "synthetic"
+ },
+ "dinov2_b14|imagenet_r": {
+  "n_train": 6000,
+  "d": 32,
+  "provenance": "synthetic"
+ },
+ "clip_b16|cifar100": {
+  "n_train": 3000,
+  "d": 32,
+  "provenance": "synthetic"
+ },
+ "clip_b16|imagenet_r": {
+  "n_train": 6000,
+  "d": 32,
+  "provenance": "synthetic"
+ },
+ "random_vit|cifar100": {
+  "n_train": 3000,
+  "d": 32,
+  "provenance": "synthetic"
+ },
+ "random_vit|imagenet_r": {
+  "n_train": 6000,
+  "d": 32,
+  "provenance": "synthetic"
+ }
+}
